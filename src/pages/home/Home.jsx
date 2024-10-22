@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react'
 import { button as buttonStyles, Link, Image, Card, CardBody } from '@nextui-org/react'
-import AppFooter from '../../components/AppFooter/AppFooter'
 import { title, subtitle, normal } from '../../components/primitives'
 import { contentHome } from './contentHome'
 import { DownloadIcon, GithubIcon } from '../../components/Icons'
 import { siteConfig } from '../../config/dirConfit'
-import PREVIEW_IMG from '../../assets/images/preview.webp'
-import LK_IMG from '../../assets/images/lk.webp'
-import CAT_IMG from '../../assets/images/cata.webp'
-import PANDA_IMG from '../../assets/images/panda.webp'
+import PREVIEW_IMG from '/preview.webp'
+import LK_IMG from '/lk.webp'
+import CAT_IMG from '/cata.webp'
+import PANDA_IMG from '/panda.webp'
 
 function Home() {
     const [downloadUrl, setDownloadUrl] = useState('')
