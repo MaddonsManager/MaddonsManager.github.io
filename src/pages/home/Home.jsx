@@ -93,32 +93,32 @@ function Home() {
                 </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-2 lg:grid-cols-4">
                 {contentHome.cardTitles.map((card, index) => (
                     <Card
                         key={`${card.title}-${index}`}
                         isBlurred
-                        className="bg-background/60 dark:bg-default-100/40 max-w-[500px]"
+                        className="bg-background/60 dark:bg-default-100/40 max-w-[300px]"
                         shadow="lg"
                     >
                         <CardBody className="w-full h-full " color="Primary">
                             <div>
-                                <h3 className="z-10 flex items-center justify-start w-full gap-2 p-3 pb-0 text-2xl subpixel-antialiased font-extrabold shrink-0 rounded-t-large">
+                                <h3 className="z-10 flex items-center justify-start w-full gap-2 p-3 pb-0 text-lg subpixel-antialiased font-semibold shrink-0 rounded-t-large">
                                     <div className="flex items-center justify-center p-2 rounded-full text-primary-400 bg-primary-100/80">
                                         {card.icon}
                                     </div>{' '}
                                     {card.title}
                                 </h3>
-                                <p className="relative flex flex-col flex-auto w-full h-auto p-3 overflow-y-auto text-xl subpixel-antialiased text-left break-words text-default-500 place-content-inherit align-items-inherit">
-                                    {card.description}
-                                </p>
+                                <div className="relative flex flex-col flex-auto w-full h-auto p-3 overflow-y-auto subpixel-antialiased text-left break-words place-content-inherit align-items-inherit">
+                                    <p className="text-base font-normal text-default-500">
+                                        {card.description}
+                                    </p>
+                                </div>
                             </div>
                         </CardBody>
                     </Card>
                 ))}
             </div>
-
-            <AppFooter />
         </section>
     )
 }
