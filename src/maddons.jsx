@@ -5,6 +5,12 @@ import AppNavbar from './components/AppNavbar/AppNavbar'
 import { BrowserRouter as Router, useNavigate, useHref, useLocation } from 'react-router-dom'
 import { NextUIProvider } from '@nextui-org/react'
 import AppFooter from './components/AppFooter/AppFooter'
+import '/logo.png'
+import '/apple-touch-icon.png'
+import '/favicon-16x16.png'
+import '/favicon-32x32.png'
+import '/android-chrome-192x192.png'
+import '/android-chrome-512x512.png'
 
 const Maddons = () => {
     const navigate = useNavigate()
