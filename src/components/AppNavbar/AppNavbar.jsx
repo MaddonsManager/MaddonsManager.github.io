@@ -47,7 +47,7 @@ export default function AppNavbar() {
                             color={location.pathname === item.href ? 'primary' : 'foreground'}
                             href={item.href}
                             className={`${
-                                location.pathname === item.href ? 'text-primary font-medium' : ''
+                                location.pathname === item.href ? 'text-primary font-semibold' : ''
                             }`}
                         >
                             {item.label}

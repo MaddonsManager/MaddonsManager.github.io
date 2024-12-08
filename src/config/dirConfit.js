@@ -8,7 +8,7 @@ export const siteConfig = {
         },
         {
             label: 'How many addons?',
-            href: '/login'
+            href: '/Addons'
         },
         {
             label: 'How to use?',
