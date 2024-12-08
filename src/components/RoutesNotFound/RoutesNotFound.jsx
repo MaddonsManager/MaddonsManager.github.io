@@ -1,3 +1,9 @@
-export const RoutesNotFound = () => {
-    return <h1>404 Page Not Found</h1>
+const RoutesNotFound = () => {
+    return (
+        <div>
+            <h1>404 - Page Not Found</h1>
+        </div>
+    )
 }
+
+export default RoutesNotFound

@@ -1,34 +1,15 @@
-import { useState, useEffect } from 'react'
 import { button as buttonStyles, Link, Image, Card, CardBody } from '@nextui-org/react'
-import { title, subtitle, normal } from '../../components/primitives'
+import { title, subtitle, normal, DownloadIcon, GithubIcon } from '@/components'
 import { contentHome } from './contentHome'
-import { DownloadIcon, GithubIcon } from '../../components/Icons'
 import { siteConfig } from '../../config/dirConfit'
 import PREVIEW_IMG from '/preview.webp'
 import LK_IMG from '/lk.webp'
 import CAT_IMG from '/cata.webp'
 import PANDA_IMG from '/panda.webp'
+import useDownloadM from '../../hook/useDownloadM'
 
 function Home() {
-    const [downloadUrl, setDownloadUrl] = useState('')
-
-    useEffect(() => {
-        async function fetchLatestRelease() {
-            try {
-                const response = await fetch(
-                    'https://api.github.com/repos/pentsec/maddonsmanager/releases/latest'
-                )
-                const data = await response.json()
-                const asset = data.assets.find((a) => a.name.endsWith('.exe'))
-                setDownloadUrl(asset ? asset.browser_download_url : '#')
-            } catch (error) {
-                console.error('Error fetching the latest release:', error)
-                setDownloadUrl('#')
-            }
-        }
-
-        fetchLatestRelease()
-    }, [])
+    const { downloadFile, downloadUrl } = useDownloadM()
 
     return (
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -36,9 +17,8 @@ function Home() {
                 <h1 className={title({ color: 'blue', size: 'lg' })}>
                     {contentHome.maddonsTitleWebPage}
                 </h1>
-                <p className={subtitle()}>
-                    {contentHome.maddonsDescriptionWebpage}
-                    <p></p>
+                <div className={subtitle()}>
+                    <p>{contentHome.maddonsDescriptionWebpage}</p>
                     <strong>
                         <img src={LK_IMG} alt="Lichking" className="inline w-12 h-6 m-2" />
                         <span className={normal({ color: 'blue' })}>Lichking 3.3.5</span>
@@ -54,7 +34,7 @@ function Home() {
                         <span className={normal({ color: 'green' })}>Pandarian 5.4.8</span>
                     </strong>
                     .
-                </p>
+                </div>
             </div>
             <div className="lg:m-5 animate-[levitate_13s_ease_infinite_1s_reverse]">
                 <Image isZoomed isBlurred width={800} src={PREVIEW_IMG} alt="Maddons Preview" />
@@ -66,7 +46,7 @@ function Home() {
                         radius: 'full',
                         variant: 'shadow'
                     })}
-                    onClick={() => window.open(downloadUrl, '_blank')}
+                    onClick={() => downloadFile(downloadUrl)}
                     underline
                     color="primary"
                     radius="full"

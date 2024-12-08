@@ -1,7 +1,7 @@
 // components/ThemeSwitcher.tsx
 import useDarkMode from 'use-dark-mode'
 
-export const ThemeSwitcher = () => {
+const ThemeSwitcher = () => {
     const darkMode = useDarkMode(false)
 
     return (
@@ -11,3 +11,5 @@ export const ThemeSwitcher = () => {
         </div>
     )
 }
+
+export default ThemeSwitcher
