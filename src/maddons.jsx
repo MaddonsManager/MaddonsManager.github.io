@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import './assets/css/tailwind.css'
-import AppRoutes from './routes/routes'
+import AppRoutes from './Routes/Routes'
 import AppNavbar from './components/AppNavbar/AppNavbar'
 import { BrowserRouter as Router, useNavigate, useHref, useLocation } from 'react-router-dom'
 import { NextUIProvider } from '@nextui-org/react'
