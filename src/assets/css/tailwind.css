@@ -621,6 +621,40 @@ code {
   font-weight: 400;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -955,6 +989,10 @@ code {
   margin-bottom: 1.25rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
 .mb-px {
   margin-bottom: 1px;
 }
@@ -985,6 +1023,10 @@ code {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .mt-8 {
@@ -1122,6 +1164,10 @@ code {
   height: 100dvh;
 }
 
+.h-\[200px\] {
+  height: 200px;
+}
+
 .h-\[2px\] {
   height: 2px;
 }
@@ -1132,6 +1178,10 @@ code {
 
 .h-\[calc\(100dvh_-_var\(--navbar-height\)\)\] {
   height: calc(100dvh - var(--navbar-height));
+}
+
+.h-\[calc\(95vh-32px\)\] {
+  height: calc(95vh - 32px);
 }
 
 .h-\[var\(--navbar-height\)\] {
@@ -1165,6 +1215,10 @@ code {
 
 .h-screen {
   height: 100vh;
+}
+
+.h-\[calc\(93vh-32px\)\] {
+  height: calc(93vh - 32px);
 }
 
 .max-h-\[20rem\] {
@@ -1329,6 +1383,10 @@ code {
 
 .w-9 {
   width: 2.25rem;
+}
+
+.w-\[200px\] {
+  width: 200px;
 }
 
 .w-\[80\%\] {
@@ -1883,6 +1941,10 @@ code {
   place-content: center;
 }
 
+.content-center {
+  align-content: center;
+}
+
 .items-start {
   align-items: flex-start;
 }
@@ -2230,6 +2292,10 @@ code {
   border-bottom-width: var(--nextui-border-width-medium);
 }
 
+.border-t-1 {
+  border-top-width: 1px;
+}
+
 .border-solid {
   border-style: solid;
 }
@@ -2280,6 +2346,11 @@ code {
 .border-default-300 {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nextui-default-300) / var(--nextui-default-300-opacity, var(--tw-border-opacity)));
+}
+
+.border-default-600 {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--nextui-default-600) / var(--nextui-default-600-opacity, var(--tw-border-opacity)));
 }
 
 .border-divider {
@@ -2490,6 +2561,10 @@ code {
 
 .bg-background\/80 {
   background-color: hsl(var(--nextui-background) / 0.8);
+}
+
+.bg-black\/70 {
+  background-color: rgb(0 0 0 / 0.7);
 }
 
 .bg-content1 {
@@ -3369,6 +3444,15 @@ code {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-white\/60 {
+  color: rgb(255 255 255 / 0.6);
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -3756,6 +3840,10 @@ code {
   transition-duration: 150ms;
 }
 
+.duration-300 {
+  transition-duration: 300ms;
+}
+
 .\!ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1) !important;
 }
@@ -3766,6 +3854,10 @@ code {
 
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ease-out {
@@ -5150,6 +5242,12 @@ code {
 
 .hover\:-translate-x-0:hover {
   --tw-translate-x: -0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -8242,6 +8340,11 @@ code {
   border-color: hsl(var(--nextui-danger-100) / var(--nextui-danger-100-opacity, var(--tw-border-opacity)));
 }
 
+.dark\:border-default-100:is(.dark *) {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--nextui-default-100) / var(--nextui-default-100-opacity, var(--tw-border-opacity)));
+}
+
 .dark\:border-default-200:is(.dark *) {
   --tw-border-opacity: 1;
   border-color: hsl(var(--nextui-default-200) / var(--nextui-default-200-opacity, var(--tw-border-opacity)));
@@ -8657,6 +8760,11 @@ code {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
   }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -8666,6 +8774,10 @@ code {
 
   .lg\:flex {
     display: flex;
+  }
+
+  .lg\:w-36 {
+    width: 9rem;
   }
 
   .lg\:grid-cols-4 {
