@@ -9,7 +9,7 @@ const useAddonsData = (version) => {
     const urls = {
         lich: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
         cata: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Cata/cataclysm.json',
-        panta: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Panda/pandaria.json'
+        panda: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Panda/pandaria.json'
     }
 
     useEffect(() => {

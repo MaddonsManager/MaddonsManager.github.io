@@ -1,26 +1,20 @@
 import React, { useState } from 'react'
 import useAddonsData from '@/hook/useAddonsData'
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Button,
-    Image,
-    Chip,
-    Divider,
-    Link,
-    Tooltip
-} from '@nextui-org/react'
+import { Card, CardBody, CardFooter, Button, Image, Tooltip, Spinner } from '@nextui-org/react'
+import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { motion, AnimatePresence } from 'framer-motion'
-import { DeleteIcon, DownloadIcon } from '@/utils/icons'
+import { DownloadIcon } from '@/utils/icons'
 import SelectType from './SelectType'
+import SelectVersion from './SelectVersion'
+import SearchAddons from './SearchAddons'
+import { title } from '@/components'
+import { i } from 'framer-motion/client'
 
 const Addon = () => {
     const [version, setVersion] = useState('lich')
     const { data, isLoading, error } = useAddonsData(version)
-
+    const [itemToShow, setItemToShow] = useState(20)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('')
 
@@ -30,7 +24,7 @@ const Addon = () => {
     const filteredData = data
         ? data.filter(
               (addon) =>
-                  addon.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                  (!searchTerm || addon.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
                   (!selectedType || addon.addonType === selectedType)
           )
         : []
@@ -55,39 +49,46 @@ const Addon = () => {
         }
     }
 
+    const loadMore = () => {
+        setItemToShow((prev) => prev + 10)
+    }
+
+    const hasMore = itemToShow < filteredData.length
+
+    const [loadRef, scrollerRef] = useInfiniteScroll({
+        hasMore,
+        onLoadMore: loadMore
+    })
+
     return (
-        <div>
-            <h1>World of Warcraft Addons</h1>
-
-            <div>
-                <label>Selecciona una versión:</label>
-                <select value={version} onChange={(e) => setVersion(e.target.value)}>
-                    <option value="lich">Lich King</option>
-                    <option value="cata">Cataclysm</option>
-                    <option value="panta">Pandaria</option>
-                </select>
-            </div>
-
-            <div>
-                <label>Buscar por nombre:</label>
-                <input
-                    type="text"
-                    placeholder="Buscar addon"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+        <div className="justify-center inline-block max-w-7xl text-center py-8">
+            <h1 className={title({ color: 'blue', size: 'lg' })}>
+                {data && data.length > 0
+                    ? `${data.length} Addons available in Maddons`
+                    : 'No Addons available in Maddons'}
+            </h1>
+            <div className="container flex flex-shrink gap-4 lg:flex-col w-auto p-4 mx-auto">
+                <SearchAddons
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    addonNames={data ? data.map((addon) => addon.name) : []}
+                />
+                <SelectVersion version={version} setVersion={setVersion} />
+                <SelectType
+                    selectedType={selectedType}
+                    setSelectedType={setSelectedType}
+                    addonTypes={addonTypes}
                 />
             </div>
 
-            <SelectType
-                selectedType={selectedType}
-                setSelectedType={setSelectedType}
-                addonTypes={addonTypes}
-            />
-
             <div className="h-[calc(95vh-32px)]">
                 <div className="container h-full p-1 mx-auto mb-4">
-                    <ScrollShadow hideScrollBar className="h-[calc(93vh-32px)] overflow-auto mb-4">
-                        {isLoading && <p>Cargando datos...</p>}
+                    <ScrollShadow
+                        ref={scrollerRef}
+                        hideScrollBar
+                        className="h-[calc(93vh-32px)] overflow-auto mb-4"
+                    >
+                        {isLoading && <p>Loading Addons...</p>}
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredData.length > 0 ? (
                             <div className="flex flex-wrap gap-4 content-center items-center justify-center">
@@ -96,7 +97,6 @@ const Addon = () => {
                                         <div className="transition-transform duration-300 ease-in-out hover:scale-105">
                                             <MotionCard
                                                 isPressable={true}
-                                                // onPress={openModal}
                                                 isFooterBlurred
                                                 variants={cardVariants}
                                                 initial="hidden"
@@ -152,6 +152,8 @@ const Addon = () => {
                         ) : (
                             <p>No se encontraron addons que coincidan con los filtros.</p>
                         )}
+                        {(hasMore && <Spinner ref={loadRef} color="primary" className="mt-4" />) ||
+                            null}
                     </ScrollShadow>
                 </div>
             </div>

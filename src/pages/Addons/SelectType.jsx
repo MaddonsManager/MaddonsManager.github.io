@@ -5,18 +5,16 @@ const SelectType = ({ selectedType, setSelectedType, addonTypes }) => {
         <Autocomplete
             label="Filtrar por tipo"
             isVirtualized
-            placeholder="Selecciona un tipo"
             selectedKey={selectedType}
-            onSelectionChange={(key) => {
-                setSelectedType(key)
-            }}
+            onSelectionChange={(key) => setSelectedType(key)}
             defaultItems={addonTypes.map((type) => ({ key: type, name: type }))}
-            radius="sm"
-            size="sm"
-            className="w-full lg:w-36"
+            size="md"
+            className="w-full font-bold"
+            variant="underlined"
+            color="primary"
         >
             {(item) => (
-                <AutocompleteItem key={item.key} value={item.key} textValue={item.name}>
+                <AutocompleteItem key={item.key} textValue={item.name}>
                     {item.name}
                 </AutocompleteItem>
             )}
