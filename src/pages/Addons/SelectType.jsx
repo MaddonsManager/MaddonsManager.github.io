@@ -4,6 +4,7 @@ const SelectType = ({ selectedType, setSelectedType, addonTypes }) => {
     return (
         <Autocomplete
             label="Filtrar por tipo"
+            isVirtualized
             placeholder="Selecciona un tipo"
             selectedKey={selectedType}
             onSelectionChange={(key) => {
