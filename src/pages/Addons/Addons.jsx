@@ -67,7 +67,7 @@ const Addon = () => {
                     ? `${data.length} Addons available in Maddons`
                     : 'No Addons available in Maddons'}
             </h1>
-            <div className="container flex flex-shrink gap-4 lg:flex-col w-auto p-4 mx-auto">
+            <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row">
                 <SearchAddons
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
@@ -82,7 +82,7 @@ const Addon = () => {
             </div>
 
             <div className="h-[calc(95vh-32px)]">
-                <div className="container h-full p-1 mx-auto mb-4">
+                <div className=" h-full mx-auto mb-4">
                     <ScrollShadow
                         ref={scrollerRef}
                         hideScrollBar
@@ -112,7 +112,7 @@ const Addon = () => {
                                                         alt={addon.name}
                                                         radius="sm"
                                                         src={addon.imageUrl}
-                                                        className="object-cover w-full h-full"
+                                                        className="object-contain w-full h-full"
                                                     />
                                                 </CardBody>
                                                 <CardFooter className="absolute bottom-0 z-10 flex items-center justify-between bg-black/70 border-t-1 border-default-600 dark:border-default-100">
