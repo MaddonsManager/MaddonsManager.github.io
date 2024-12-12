@@ -18,7 +18,7 @@ const Maddons = () => {
 
     return (
         <NextUIProvider navigate={navigate} useHref={useHref}>
-            <main className="relative flex-grow mx-auto dark text-foreground">
+            <main className="relative flex-grow mx-auto">
                 <div className="center-gradient"></div>
                 {!isLoadingRoute && <AppNavbar />}
                 <div className="content">
