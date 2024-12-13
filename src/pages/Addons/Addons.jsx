@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import useAddonsData from '@/hook/useAddonsData'
-import { Card, CardBody, CardFooter, Button, Image, Tooltip, Spinner } from '@nextui-org/react'
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    Button,
+    Image,
+    Tooltip,
+    Spinner,
+    useDisclosure
+} from '@nextui-org/react'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/utils/icons'
+import { title } from '@/components'
 import SelectType from './SelectType'
 import SelectVersion from './SelectVersion'
 import SearchAddons from './SearchAddons'
-import { title } from '@/components'
-import { i } from 'framer-motion/client'
+import AddonsDetails from './AddonsDetails'
 
 const Addon = () => {
     const [version, setVersion] = useState('lich')
@@ -17,36 +26,35 @@ const Addon = () => {
     const [itemToShow, setItemToShow] = useState(20)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('')
+    const [isSelectAddon, setIsSelectAddon] = useState(null)
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
-    const addonTypes =
-        data && data.length > 0 ? Array.from(new Set(data.map((addon) => addon.addonType))) : []
+    const addonTypes = useMemo(() => {
+        return data && data.length > 0
+            ? Array.from(new Set(data.map((addon) => addon.addonType)))
+            : []
+    }, [data])
 
-    const filteredData = data
-        ? data.filter(
-              (addon) =>
-                  (!searchTerm || addon.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
-                  (!selectedType || addon.addonType === selectedType)
-          )
-        : []
+    const filteredData = useMemo(() => {
+        return (
+            data?.filter((addon) => {
+                const matchesSearch = searchTerm
+                    ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
+                    : true
+                const matchesType = selectedType ? addon.addonType === selectedType : true
+                return matchesSearch && matchesType
+            }) || []
+        )
+    }, [data, searchTerm, selectedType])
 
     const handleDownload = async (githubRepo) => {
         const mainUrl = `${githubRepo}/archive/refs/heads/main.zip`
-        const masterUrl = `${githubRepo}/archive/refs/heads/master.zip`
         window.open(mainUrl)
     }
 
-    const MotionCard = motion.create(Card)
-
-    const cardVariants = {
-        hidden: { opacity: 1, scale: 0 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            transition: {
-                delayChildren: 0.2,
-                staggerChildren: 0.1
-            }
-        }
+    const handleOpenDetails = (addon) => {
+        setIsSelectAddon(addon)
+        onOpen(true)
     }
 
     const loadMore = () => {
@@ -62,6 +70,9 @@ const Addon = () => {
 
     return (
         <div className="justify-center inline-block max-w-7xl text-center py-8">
+            {isSelectAddon && (
+                <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
+            )}
             <h1 className={title({ color: 'blue', size: 'lg' })}>
                 {data && data.length > 0
                     ? `${data.length} Addons available in Maddons`
@@ -85,7 +96,6 @@ const Addon = () => {
                 <div className=" h-full mx-auto mb-4">
                     <ScrollShadow
                         ref={scrollerRef}
-                        hideScrollBar
                         className="h-[calc(93vh-32px)] overflow-auto mb-4"
                     >
                         {isLoading && <p>Loading Addons...</p>}
@@ -95,10 +105,10 @@ const Addon = () => {
                                 {filteredData.map((addon, index) => (
                                     <AnimatePresence>
                                         <div className="transition-transform duration-300 ease-in-out hover:scale-105">
-                                            <MotionCard
+                                            <Card
                                                 isPressable={true}
+                                                onPress={() => handleOpenDetails(addon)}
                                                 isFooterBlurred
-                                                variants={cardVariants}
                                                 initial="hidden"
                                                 animate="visible"
                                                 transition={{ duration: 0.2, delay: index * 0.1 }}
@@ -144,7 +154,7 @@ const Addon = () => {
                                                         </Tooltip>
                                                     </div>
                                                 </CardFooter>
-                                            </MotionCard>
+                                            </Card>
                                         </div>
                                     </AnimatePresence>
                                 ))}
@@ -152,8 +162,8 @@ const Addon = () => {
                         ) : (
                             <p>No se encontraron addons que coincidan con los filtros.</p>
                         )}
-                        {(hasMore && <Spinner ref={loadRef} color="primary" className="mt-4" />) ||
-                            null}
+                        {hasMore &&
+                            (<Spinner ref={loadRef} color="primary" className="mt-4" /> || null)}
                     </ScrollShadow>
                 </div>
             </div>
