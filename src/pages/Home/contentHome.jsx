@@ -3,7 +3,7 @@ import { EditDocumentIcon, DeleteIcon, SearchIcon, MonitorMobileIcon } from '@/c
 export const contentHome = {
     maddonsTitleWebPage: 'Maddons Manager',
     maddonsDescriptionWebpage:
-        'With this application, you can easily manage addons for World of Warcraft',
+        'Effortlessly manage your World of Warcraft addons for Private servers with advanced search, easy configuration, and one-click removal.',
     cardTitles: [
         {
             title: 'Addons Manager',

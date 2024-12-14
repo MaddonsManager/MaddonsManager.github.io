@@ -1,5 +1,5 @@
 import { Link } from '@nextui-org/react'
-import { siteConfig } from '../../config/dirConfit'
+import { siteConfig } from '@/config/dirConfit'
 
 export default function AppFooter() {
     return (

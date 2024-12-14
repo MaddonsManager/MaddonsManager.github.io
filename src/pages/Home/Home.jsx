@@ -1,12 +1,12 @@
 import { button as buttonStyles, Link, Image, Card, CardBody } from '@nextui-org/react'
 import { title, subtitle, normal, DownloadIcon, GithubIcon } from '@/components'
 import { contentHome } from './contentHome'
-import { siteConfig } from '../../config/dirConfit'
+import { siteConfig } from '@/config/dirConfit'
 import PREVIEW_IMG from '/preview.webp'
 import LK_IMG from '/lk.webp'
 import CAT_IMG from '/cata.webp'
 import PANDA_IMG from '/panda.webp'
-import useDownloadM from '../../hook/useDownloadM'
+import useDownloadM from '@/hook/useDownloadM'
 
 function Home() {
     const { downloadFile, downloadUrl } = useDownloadM()
@@ -89,7 +89,7 @@ function Home() {
                                     {card.title}
                                 </h3>
                                 <div className="relative flex flex-col flex-auto w-full h-auto p-3 overflow-y-auto subpixel-antialiased text-left break-words place-content-inherit align-items-inherit">
-                                    <p className="text-base font-normal text-default-500">
+                                    <p className="text-base font-normal text-default-500 prose">
                                         {card.description}
                                     </p>
                                 </div>

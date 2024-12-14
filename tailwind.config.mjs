@@ -55,17 +55,40 @@ module.exports = {
                 'code-highlighted-word3-bg-active':
                     'rgb(var(--code-highlighted-word3-bg-active) / <alpha-value>)',
                 'code-highlighted-word3-text':
-                    'rgb(var(--code-highlighted-word3-text) / <alpha-value>)'
+                    'rgb(var(--code-highlighted-word3-text) / <alpha-value>)',
+                customPink: '#ff005d',
+                customDark: '#12000a',
+                customBg: '#240015',
+                customGradient: '#12000b'
             },
             boxShadow: {
                 highlighted: `${commonColors.purple[500]} 1px 0 0, ${commonColors.purple[500]} -1px 0 0`
             },
+            backgroundImage: {
+                'maddons-bg': 'url(/background5.png)',
+                'custom-radial':
+                    'radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.6) 100%, rgba(0, 0, 0, 0.6) 100%)'
+            },
             fontFamily: {
                 sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
                 serif: defaultTheme.fontFamily.serif,
-                mono: defaultTheme.fontFamily.mono
+                mono: defaultTheme.fontFamily.mono,
+                audiowide: ["'Audiowide'", 'sans-serif']
             },
             keyframes: {
+                fadeInText: {
+                    '0%': { color: '#12000a', 'text-shadow': '0px 0px 4px #12000a' },
+                    '70%': { color: '#ff005d', 'text-shadow': '0px 0px 14px #ff005d' },
+                    '100%': { color: '#ff005d', 'text-shadow': '0px 0px 4px #ff005d' }
+                },
+                flicker4: {
+                    '0%': { color: '#ff005d', 'text-shadow': '0px 0px 4px #ff005d' }
+                },
+                hueRotate: {
+                    '0%': { filter: 'hue-rotate(0deg)' },
+                    '50%': { filter: 'hue-rotate(-120deg)' },
+                    '100%': { filter: 'hue-rotate(0deg)' }
+                },
                 heartbeat: {
                     '0%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.2)' },
@@ -118,7 +141,10 @@ module.exports = {
                 levitate: 'levitate 5s ease infinite',
                 expand: 'expand 6s ease-out infinite both',
                 'expand-opacity': 'expand-opacity 6s linear infinite both',
-                'text-gradient': 'text-gradient 4s linear 0s infinite normal forwards running'
+                'text-gradient': 'text-gradient 4s linear 0s infinite normal forwards running',
+                fadeInText: 'fadeInText 3s ease-in 3.5s forwards',
+                flicker4: 'flicker4 5s linear 7.5s infinite',
+                hueRotate: 'hueRotate 6s ease-in-out 3s infinite'
             },
             typography: (theme) => ({
                 DEFAULT: {
