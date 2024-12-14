@@ -24,8 +24,9 @@ export default function AppNavbar() {
     return (
         <Navbar
             size="sm"
+            isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
-            className=" w-auto min-w-[1080px] h-full rounded-full border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md"
+            className=" w-full max-w-[1080px] h-full rounded-full border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md"
         >
             <NavbarContent>
                 <NavbarMenuToggle
@@ -79,7 +80,7 @@ export default function AppNavbar() {
                     </Link>
                 </NavbarItem>
             </NavbarContent>
-            <NavbarMenu className="z-30 px-6 fixed flex inset-x-0 bottom-0 w-screen flex-col gap-2 overflow-y-auto top-[calc(var(--navbar-height)/2)] mx-auto mt-16 max-h-[40vh] max-w-[80vw] rounded-large border-small border-default-200/20 bg-background/60 py-6 shadow-medium backdrop-blur-md backdrop-saturate-150 dark:bg-default-100/50">
+            <NavbarMenu className="top-[calc(var(--navbar-height)/2)] mx-auto mt-9 max-h-[40vh] max-w-[80vw] rounded-large border-small border-primary-200/20 bg-background/60 py-6 shadow-medium backdrop-blur-md">
                 {siteConfig.navMenuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
@@ -89,6 +90,7 @@ export default function AppNavbar() {
                             }`}
                             href={item.href}
                             size="lg"
+                            onPress={() => setIsMenuOpen(false)}
                         >
                             {item.label}
                         </Link>

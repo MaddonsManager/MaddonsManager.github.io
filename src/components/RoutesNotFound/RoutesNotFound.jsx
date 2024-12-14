@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const RoutesNotFound = () => {
     return (
-        <div class="w-full h-full m-0 bg-gradient-radial from-[#240015] to-[#12000b] overflow-hidden animate-hue-rotate">
+        <div className="w-full h-full m-0 bg-gradient-radial from-[#240015] to-[#12000b] overflow-hidden animate-hue-rotate">
             <h2 className="  mt-[150px] text-[32px] uppercase text-[#12000a] font-light font-[Audiowide] text-shadow-[0px_0px_4px_#12000a]  animate-[flicker4_5s_linear_7.5s_infinite,_hueRotate_6s_ease-in-out_3s_infinite]">
                 404 PAGE NOT FOUND
             </h2>

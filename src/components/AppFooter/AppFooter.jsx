@@ -33,15 +33,6 @@ export default function AppFooter() {
                     </span>
                     <p className="text-primary">PentSec</p>
                 </Link>
-                <Link
-                    isExternal
-                    className="flex items-center gap-1 text-current"
-                    href={siteConfig.links.nextui}
-                    title="nextui.org homepage"
-                >
-                    <span className="text-default-600">Powered by</span>
-                    <p className="text-primary">NextUI</p>
-                </Link>
             </div>
         </footer>
     )
