@@ -10,15 +10,6 @@
         scroll-padding-top: 64px;
     }
 
-    code {
-        font-weight: 600;
-        padding: 3px 5px;
-        border-radius: 2px;
-        background-color: var(--color-background-mute);
-        font-family: 'Poppins', sans-serif;
-        font-size: 85%;
-    }
-
     :root {
         font-family: 'Poppins', sans-serif;
         line-height: 1.5;

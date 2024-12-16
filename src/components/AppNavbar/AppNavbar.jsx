@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Navbar,
     NavbarBrand,
@@ -16,6 +16,7 @@ import { DiscordIcon, GithubIcon, TwitterIcon } from '@/components/Icons'
 import { useLocation } from 'react-router-dom'
 import MADDONS_LOGO from '@/assets/images/logo.svg'
 import { siteConfig } from '@/config/dirConfit'
+import ThemeSwitch from './ThemeSwitch'
 
 export default function AppNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,9 +25,10 @@ export default function AppNavbar() {
     return (
         <Navbar
             size="sm"
+            shouldHideOnScroll
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}
-            className=" w-full max-w-[1080px] h-full rounded-full border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md"
+            className="w-full max-w-[1080px] h-full rounded-full border-small dark:border-primary-200/40 dark:bg-background/60 shadow-medium backdrop-blur-md mt-2"
         >
             <NavbarContent>
                 <NavbarMenuToggle
@@ -78,6 +80,7 @@ export default function AppNavbar() {
                     <Link isExternal aria-label="Github" href={siteConfig.links.github}>
                         <GithubIcon className="text-default-500" />
                     </Link>
+                    <ThemeSwitch />
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu className="top-[calc(var(--navbar-height)/2)] mx-auto mt-9 max-h-[40vh] max-w-[80vw] rounded-large border-small border-primary-200/20 bg-background/60 py-6 shadow-medium backdrop-blur-md">

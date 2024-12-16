@@ -3,7 +3,7 @@ import { siteConfig } from '@/config/dirConfit'
 
 export default function AppFooter() {
     return (
-        <footer className="bottom-0 left-0 right-0 p-2 dark:bg-black/80 text-default-500">
+        <>
             <div className="mt-8 text-center">
                 <h2 className="text-xl font-bold">Need Help?</h2>
                 <p className="mt-2">
@@ -34,6 +34,6 @@ export default function AppFooter() {
                     <p className="text-primary">PentSec</p>
                 </Link>
             </div>
-        </footer>
+        </>
     )
 }
