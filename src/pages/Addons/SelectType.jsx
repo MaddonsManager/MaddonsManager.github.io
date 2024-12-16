@@ -9,7 +9,7 @@ const SelectType = ({ selectedType, setSelectedType, addonTypes }) => {
             onSelectionChange={(key) => setSelectedType(key)}
             defaultItems={addonTypes.map((type) => ({ key: type, name: type }))}
             size="md"
-            className="w-full font-bold"
+            className="w-full font-bold text-default-900"
             variant="underlined"
             color="primary"
             listboxProps={{

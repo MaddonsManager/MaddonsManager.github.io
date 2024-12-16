@@ -7,7 +7,7 @@ const SelectVersion = ({ version, setVersion }) => {
             selectedKey={version}
             onSelectionChange={(e) => setVersion(e)}
             size="md"
-            className="w-full font-bold"
+            className="w-full font-bold text-default-900"
             variant="underlined"
             color="primary"
             listboxProps={{
@@ -30,7 +30,8 @@ const SelectVersion = ({ version, setVersion }) => {
                 offset: 10,
                 classNames: {
                     base: 'rounded-large',
-                    content: 'p-1 border-small border-default-100 bg-background mt-2'
+                    content:
+                        'p-1 border-small border-default-100 bg-background mt-2 text-default-900'
                 }
             }}
         >

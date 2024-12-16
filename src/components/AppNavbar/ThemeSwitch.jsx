@@ -36,7 +36,7 @@ const ThemeSwitch = (props) => {
                         class: [
                             'w-8 h-8',
                             'flex items-center justify-center',
-                            'rounded-lg bg-default-100 hover:bg-default-200'
+                            'rounded-lg bg-default-500 hover:bg-default-200'
                         ]
                     })}
                 >

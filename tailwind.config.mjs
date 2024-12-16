@@ -66,6 +66,7 @@ module.exports = {
             },
             backgroundImage: {
                 'maddons-bg': 'url(/background5.png)',
+                'maddons-light': 'url(/background1.jpg)',
                 'custom-radial':
                     'radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.6) 100%, rgba(0, 0, 0, 0.6) 100%)'
             },

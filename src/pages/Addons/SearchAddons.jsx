@@ -11,7 +11,7 @@ const SearchAddon = ({ searchTerm, setSearchTerm, addonNames }) => {
             defaultItems={addonNames.map((name) => ({ key: name, name: name }))}
             startContent={<SearchIcon size={18} />}
             size="md"
-            className="w-full font-bold"
+            className="w-full font-bold text-default-900"
             variant="underlined"
             color="primary"
             listboxProps={{
