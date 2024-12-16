@@ -8,13 +8,15 @@ import {
     Image,
     Tooltip,
     Spinner,
-    useDisclosure
+    useDisclosure,
+    Divider
 } from '@nextui-org/react'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/utils/icons'
-import { title } from '@/components'
+import { title, subtitle } from '@/components'
+import { siteConfig } from '@/config/dirConfit'
 import SelectType from './SelectType'
 import SelectVersion from './SelectVersion'
 import SearchAddons from './SearchAddons'
@@ -69,22 +71,26 @@ const Addon = () => {
     })
 
     return (
-        <div className="justify-center inline-block max-w-7xl text-center py-8">
+        <div className="justify-center inline-block max-w-7xl text-center">
+            <h1 className={title({ color: 'blue', size: 'lg' })}>
+                {data && data.length > 0
+                    ? `${data.length} Private Addons`
+                    : 'No Addons available in Maddons'}
+            </h1>
+            <p className={subtitle()}>{siteConfig.description}</p>
             {isSelectAddon && (
                 <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
-            <h1 className={title({ color: 'blue', size: 'lg' })}>
-                {data && data.length > 0
-                    ? `${data.length} Addons available in Maddons`
-                    : 'No Addons available in Maddons'}
-            </h1>
-            <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row">
+            <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
                 <SearchAddons
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
                     addonNames={data ? data.map((addon) => addon.name) : []}
                 />
+                <Divider orientation="vertical" className="h-auto" />
                 <SelectVersion version={version} setVersion={setVersion} />
+                <Divider orientation="vertical" className="h-auto" />
+
                 <SelectType
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}
@@ -96,7 +102,8 @@ const Addon = () => {
                 <div className=" h-full mx-auto mb-4">
                     <ScrollShadow
                         ref={scrollerRef}
-                        className="h-[calc(93vh-32px)] overflow-auto mb-4"
+                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
+                        sh
                     >
                         {isLoading && <p>Loading Addons...</p>}
                         {error && <p className="text-red-500">Error: {error}</p>}

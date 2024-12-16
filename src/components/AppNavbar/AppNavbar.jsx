@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Navbar,
     NavbarBrand,
@@ -7,23 +7,30 @@ import {
     NavbarMenuToggle,
     NavbarMenu,
     NavbarMenuItem,
-    Link
+    Link,
+    Image,
+    Chip
 } from '@nextui-org/react'
 
-import { DiscordIcon, GithubIcon, TwitterIcon } from '../Icons'
+import { DiscordIcon, GithubIcon, TwitterIcon } from '@/components/Icons'
 import { useLocation } from 'react-router-dom'
-import MADDONS_LOGO from '../../assets/images/logo.svg'
-import { siteConfig } from '../../config/dirConfit'
-
-const AcmeLogo = () => <img src={MADDONS_LOGO} alt="Maddons logo" className="w-auto h-8" />
+import MADDONS_LOGO from '@/assets/images/logo.svg'
+import { siteConfig } from '@/config/dirConfit'
+import ThemeSwitch from './ThemeSwitch'
 
 export default function AppNavbar() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const location = useLocation()
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="xl" position="sticky">
-            <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
+        <Navbar
+            size="sm"
+            shouldHideOnScroll
+            isMenuOpen={isMenuOpen}
+            onMenuOpenChange={setIsMenuOpen}
+            className="w-full max-w-[1080px] h-full rounded-full border-small dark:border-primary-200/40 dark:bg-background/60 shadow-medium backdrop-blur-md mt-2"
+        >
+            <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     className="sm:hidden"
@@ -34,8 +41,15 @@ export default function AppNavbar() {
                         className="flex items-center justify-start"
                         href="/home"
                     >
-                        <AcmeLogo />
-                        <p className="ml-0 font-bold uppercase text-inherit">addon Manager</p>
+                        <Image
+                            src={MADDONS_LOGO}
+                            alt="Maddons logo"
+                            className="w-auto h-8 object-contain"
+                        />
+                        <p className="ml-0 mr-1 font-bold uppercase text-inherit">addon Manager</p>
+                        <Chip color="primary" variant="flat" size="sm">
+                            on Dev👩🏽‍💻
+                        </Chip>
                     </Link>
                 </NavbarBrand>
             </NavbarContent>
@@ -56,7 +70,7 @@ export default function AppNavbar() {
                 ))}
             </NavbarContent>
             <NavbarContent justify="end">
-                <NavbarItem className="hidden gap-2 lg:flex">
+                <NavbarItem className=" gap-2 flex">
                     <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
                         <DiscordIcon className="text-default-500" />
                     </Link>
@@ -66,9 +80,10 @@ export default function AppNavbar() {
                     <Link isExternal aria-label="Github" href={siteConfig.links.github}>
                         <GithubIcon className="text-default-500" />
                     </Link>
+                    <ThemeSwitch />
                 </NavbarItem>
             </NavbarContent>
-            <NavbarMenu>
+            <NavbarMenu className="top-[calc(var(--navbar-height)/2)] mx-auto mt-9 max-h-[40vh] max-w-[80vw] rounded-large border-small border-primary-200/20 bg-background/60 py-6 shadow-medium backdrop-blur-md">
                 {siteConfig.navMenuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
@@ -78,6 +93,7 @@ export default function AppNavbar() {
                             }`}
                             href={item.href}
                             size="lg"
+                            onPress={() => setIsMenuOpen(false)}
                         >
                             {item.label}
                         </Link>

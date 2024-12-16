@@ -1,22 +1,31 @@
 export const siteConfig = {
     name: 'Maddons Manager',
-    description: 'Make beautiful websites regardless of your design experience.',
+    description:
+        'Effortlessly manage your World of Warcraft addons for Private servers with advanced search, easy configuration, and one-click removal.',
     navItems: [
         {
             label: 'Home',
             href: '/home'
         },
         {
-            label: 'How many addons?',
+            label: 'Addons',
             href: '/Addons'
         },
         {
-            label: 'How to use?',
-            href: '/howtouse'
+            label: 'WeakAuras',
+            href: '/WeakAuras'
         },
         {
-            label: 'About',
-            href: '/about'
+            label: 'ElvUI',
+            href: '/ElvUI'
+        },
+        {
+            label: 'Guides',
+            href: '/Guides'
+        },
+        {
+            label: 'Notes',
+            href: '/Notes'
         }
     ],
     navMenuItems: [
@@ -25,8 +34,20 @@ export const siteConfig = {
             href: '/home'
         },
         {
-            label: 'How many addons?',
-            href: '/login'
+            label: 'Addons',
+            href: '/Addons'
+        },
+        {
+            label: 'WeakAuras',
+            href: '/WeakAuras'
+        },
+        {
+            label: 'ElvUI',
+            href: '/ElvUI'
+        },
+        {
+            label: 'Guides',
+            href: '/Guides'
         },
         {
             label: 'About',
