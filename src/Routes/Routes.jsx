@@ -13,7 +13,7 @@ const AppRoutes = React.memo(() => {
             <Route path="/WeakAuras" element={<WeakAuras />} />
             <Route path="/ElvUI" element={<ElvUI />} />
             <Route path="/Guides" element={<Guides />} />
-            <Route path="/Notes" element={<Notes />} />
+            <Route path="/Notes/*" element={<Notes />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
             <Route path="/404" element={<RoutesNotFound />} />
         </Routes>

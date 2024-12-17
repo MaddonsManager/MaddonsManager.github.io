@@ -12,7 +12,7 @@ function Home() {
     const { downloadFile, downloadUrl } = useDownloadM()
 
     return (
-        <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <section className="flex flex-col items-center justify-center gap-4">
             <div className="justify-center inline-block max-w-4xl text-center">
                 <h1 className={title({ color: 'blue', size: 'lg' })}>
                     {contentHome.maddonsTitleWebPage}

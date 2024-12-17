@@ -71,7 +71,7 @@ const Addon = () => {
     })
 
     return (
-        <div className="justify-center inline-block max-w-7xl text-center">
+        <div className="justify-center inline-block max-w-4xl text-start">
             <h1 className={title({ color: 'blue', size: 'lg' })}>
                 {data && data.length > 0
                     ? `${data.length} Private Addons`

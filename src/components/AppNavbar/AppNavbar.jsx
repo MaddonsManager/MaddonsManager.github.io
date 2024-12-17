@@ -16,7 +16,7 @@ import { DiscordIcon, GithubIcon, TwitterIcon } from '@/components/Icons'
 import { useLocation } from 'react-router-dom'
 import MADDONS_LOGO from '@/assets/images/logo.svg'
 import { siteConfig } from '@/config/dirConfit'
-import ThemeSwitch from './ThemeSwitch'
+import { ThemeSwitch } from '@/components'
 
 export default function AppNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
