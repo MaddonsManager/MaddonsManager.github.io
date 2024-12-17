@@ -1,11 +1,15 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
+import { SearchIcon } from '@/components'
 
-const SelectVersion = ({ version, setVersion }) => {
+const SearchAddon = ({ searchTerm, setSearchTerm, valueName }) => {
     return (
         <Autocomplete
-            label="Select Version"
-            selectedKey={version}
-            onSelectionChange={(e) => setVersion(e)}
+            label="Search by Name"
+            isVirtualized
+            selectedKey={searchTerm}
+            onSelectionChange={(e) => setSearchTerm(e)}
+            defaultItems={valueName.map((name) => ({ key: name, name: name }))}
+            startContent={<SearchIcon size={18} />}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"
@@ -26,20 +30,22 @@ const SelectVersion = ({ version, setVersion }) => {
                     ]
                 }
             }}
+            placeholder="Enter addon name"
             popoverProps={{
                 offset: 10,
                 classNames: {
                     base: 'rounded-large',
-                    content:
-                        'p-1 border-small border-default-100 bg-background mt-2 text-default-900'
+                    content: 'p-1 border-small border-default-100 bg-background mt-2'
                 }
             }}
         >
-            <AutocompleteItem key="lich">Lich King</AutocompleteItem>
-            <AutocompleteItem key="cata">Cataclysm</AutocompleteItem>
-            <AutocompleteItem key="panda">Pandaria</AutocompleteItem>
+            {(item) => (
+                <AutocompleteItem key={item.key} textValue={item.name}>
+                    {item.name}
+                </AutocompleteItem>
+            )}
         </Autocomplete>
     )
 }
 
-export default SelectVersion
+export default SearchAddon

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 
-const useAddonsData = (version) => {
-    const [data, setData] = useState(null)
+const useAddonsData = () => {
+    const [data, setData] = useState({
+        lich: [],
+        cata: [],
+        panda: []
+    })
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    // Mapear las URLs a las versiones
     const urls = {
         lich: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
         cata: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Cata/cataclysm.json',
@@ -13,37 +16,40 @@ const useAddonsData = (version) => {
     }
 
     useEffect(() => {
-        // Resetear estados al cambiar de versión
-        setData(null)
         setIsLoading(true)
         setError(null)
 
-        // Validar si la versión existe
-        const url = urls[version]
-        if (!url) {
-            setError('Versión inválida.')
-            setIsLoading(false)
-            return
+        const fetchData = async () => {
+            try {
+                const [lichResponse, cataResponse, pandaResponse] = await Promise.all([
+                    fetch(urls.lich).then((res) => {
+                        if (!res.ok) throw new Error(`Error fetching LK: ${res.statusText}`)
+                        return res.json()
+                    }),
+                    fetch(urls.cata).then((res) => {
+                        if (!res.ok) throw new Error(`Error fetching Cata: ${res.statusText}`)
+                        return res.json()
+                    }),
+                    fetch(urls.panda).then((res) => {
+                        if (!res.ok) throw new Error(`Error fetching Panda: ${res.statusText}`)
+                        return res.json()
+                    })
+                ])
+
+                setData({
+                    lich: lichResponse,
+                    cata: cataResponse,
+                    panda: pandaResponse
+                })
+            } catch (err) {
+                setError(err.message)
+            } finally {
+                setIsLoading(false)
+            }
         }
 
-        // Obtener los datos desde la URL
-        fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Error al obtener los datos: ${response.statusText}`)
-                }
-                return response.json()
-            })
-            .then((jsonData) => {
-                setData(jsonData)
-                setIsLoading(false)
-            })
-            .catch((err) => {
-                setError(err.message)
-                setIsLoading(false)
-            })
-        console.log(`useAddonsData`, data)
-    }, [version])
+        fetchData()
+    }, [])
 
     return { data, isLoading, error }
 }

@@ -41,12 +41,13 @@ function Home() {
             </div>
             <div className="flex items-center justify-center gap-3">
                 <Link
+                    as="button"
                     className={buttonStyles({
                         color: 'primary',
                         radius: 'full',
                         variant: 'shadow'
                     })}
-                    onClick={() => downloadFile(downloadUrl)}
+                    onPress={() => downloadFile(downloadUrl)}
                     underline
                     color="primary"
                     radius="full"

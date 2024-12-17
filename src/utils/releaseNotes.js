@@ -1,5 +1,3 @@
-import { version } from 'react-dom'
-
 export const releaseNotes = [
     {
         version: 'v1.0.0',

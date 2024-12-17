@@ -50,8 +50,8 @@ export const siteConfig = {
             href: '/Guides'
         },
         {
-            label: 'About',
-            href: '/about'
+            label: 'Notes',
+            href: '/Notes'
         }
     ],
     links: {
