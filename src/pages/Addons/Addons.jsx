@@ -48,6 +48,7 @@ const Addon = () => {
                     ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
                     : true
                 const matchesType = selectedType ? addon.addonType === selectedType : true
+                console.log()
                 return matchesSearch && matchesType
             }) || []
         )
@@ -67,7 +68,7 @@ const Addon = () => {
         setItemToShow((prev) => prev + 10)
     }
 
-    const hasMore = itemToShow < filteredData.length
+    const hasMore = filteredData && filteredData.length > itemToShow
 
     const [loadRef, scrollerRef] = useInfiniteScroll({
         hasMore,
@@ -113,16 +114,18 @@ const Addon = () => {
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredData.length > 0 ? (
                             <div className="flex flex-wrap gap-4 content-center items-center justify-center">
-                                {filteredData.map((addon, index) => (
-                                    <AnimatePresence>
-                                        <div className="transition-transform duration-300 ease-in-out hover:scale-105">
+                                <AnimatePresence>
+                                    {filteredData.slice(0, itemToShow).map((addon) => (
+                                        <div
+                                            key={`${addon.name}-${addon.githubRepo}`}
+                                            className="transition-transform duration-300 ease-in-out hover:scale-105"
+                                        >
                                             <Card
                                                 isPressable={true}
                                                 onPress={() => handleOpenDetails(addon)}
                                                 isFooterBlurred
                                                 initial="hidden"
                                                 animate="visible"
-                                                transition={{ duration: 0.2, delay: index * 0.1 }}
                                                 fallback
                                                 shadow="sm"
                                                 className="w-[200px] h-[200px]"
@@ -167,14 +170,17 @@ const Addon = () => {
                                                 </CardFooter>
                                             </Card>
                                         </div>
-                                    </AnimatePresence>
-                                ))}
+                                    ))}
+                                </AnimatePresence>
                             </div>
                         ) : (
                             <p>dont found addons that match the filters.</p>
                         )}
-                        {hasMore &&
-                            (<Spinner ref={loadRef} color="primary" className="mt-4" /> || null)}
+                        {hasMore && (
+                            <div ref={loadRef} className="flex justify-center mt-4">
+                                <Spinner color="primary" />
+                            </div>
+                        )}
                     </ScrollShadow>
                 </div>
             </div>
