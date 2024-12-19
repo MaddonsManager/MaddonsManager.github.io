@@ -1,6 +1,8 @@
-import { Accordion, AccordionItem, Avatar, Divider, Link } from '@nextui-org/react'
+import { Accordion, AccordionItem, Avatar, Link } from '@nextui-org/react'
 
-function Notes({ releaseNotes }) {
+function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
+    const releaseNotes = selectedNotes === 'app' ? appReleaseNotes : webReleaseNotes
+
     return (
         <div className="mb-10 ">
             {releaseNotes.map((releaseNote) => (

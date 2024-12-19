@@ -1,4 +1,4 @@
-export const releaseNotes = [
+export const appReleaseNotes = [
     {
         version: 'v1.0.0',
         date: '2024-06-19',

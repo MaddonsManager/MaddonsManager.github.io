@@ -1,12 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import ReleaseNotes from './ReleaseNotes'
 import { title, subtitle } from '@/components'
-import { releaseNotes } from '@/utils/releaseNotes'
+import { appReleaseNotes } from '@/utils/appReleaseNotes'
+import { webReleaseNotes } from '@/utils/webReleaseNotes'
+import { SelectNotes } from '@/components'
 import { Link } from '@nextui-org/react'
 
 function Notes() {
     const location = useLocation()
+    const [selectedNotes, setSelectedNotes] = useState('web')
 
     useEffect(() => {
         const version = location.hash.replace('#release-note-', '')
@@ -18,6 +21,8 @@ function Notes() {
         }
     }, [location])
 
+    const currentReleaseNotes = selectedNotes === 'app' ? appReleaseNotes : webReleaseNotes
+
     return (
         <section>
             <div className="justify-center inline-block max-w-4xl text-start">
@@ -27,19 +32,20 @@ function Notes() {
                     <Link
                         size="lg"
                         href={`/Notes#release-note-${
-                            releaseNotes[releaseNotes.length - 1].version
+                            currentReleaseNotes[currentReleaseNotes.length - 1].version
                         }`}
                     >
                         first release
                     </Link>{' '}
                     till{' '}
-                    <Link size="lg" href={`/Notes#release-note-${releaseNotes[0].version}`}>
-                        {releaseNotes[0].version}
+                    <Link size="lg" href={`/Notes#release-note-${currentReleaseNotes[0].version}`}>
+                        {currentReleaseNotes[0].version}
                     </Link>
                     , We are committed to continuous improvement in Maddons Manager. Thank you for
                     your constructive feedback! ❤️
                 </p>
-                <ReleaseNotes releaseNotes={releaseNotes} />
+                <SelectNotes selectedNotes={selectedNotes} setSelectedNotes={setSelectedNotes} />
+                <ReleaseNotes appReleaseNotes={appReleaseNotes} webReleaseNotes={webReleaseNotes} />
             </div>
         </section>
     )

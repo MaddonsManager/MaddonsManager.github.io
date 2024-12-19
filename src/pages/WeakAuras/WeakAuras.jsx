@@ -6,6 +6,7 @@ import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { title, subtitle, SelectType, Searcher, SelectVersion } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
+import ReactMarkdown from 'react-markdown'
 
 const WeakAuras = () => {
     const [version, setVersion] = useState(null)
@@ -114,11 +115,11 @@ const WeakAuras = () => {
                                                         removeWrapper
                                                         alt={weakauras.title}
                                                         radius="sm"
-                                                        src="/logo.png"
-                                                        className="h-auto w-full flex-none object-cover object-top md:w-48"
+                                                        src={weakauras.logo}
+                                                        className="h-auto w-full flex-none object-cover object-top md:w-48 items-center justify-center"
                                                     />
                                                     <div className="px-4 py-5 flex-1">
-                                                        <div className="flex items-center justify-between">
+                                                        <div className="flex items-center justify-between mb-2">
                                                             <h3 className="text-large font-medium">
                                                                 {weakauras.title}
                                                             </h3>
@@ -141,8 +142,16 @@ const WeakAuras = () => {
                                                                 </Button>
                                                             </Tooltip>
                                                         </div>
+                                                        <Divider />
                                                         <div className="flex flex-col gap-3 pt-2 text-small text-default-400">
-                                                            <p>{weakauras.description}</p>
+                                                            <ReactMarkdown>
+                                                                {weakauras.description.length > 150
+                                                                    ? `${weakauras.description.substring(
+                                                                          0,
+                                                                          200
+                                                                      )}...`
+                                                                    : weakauras.description}
+                                                            </ReactMarkdown>
                                                             <p>{weakauras.type}</p>
                                                         </div>
                                                     </div>

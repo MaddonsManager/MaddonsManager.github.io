@@ -28,9 +28,10 @@ const useWeakAurasData = () => {
                         const txtResponse = await fetch(
                             `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/${folderPath}/WA/${item.uuid}.txt`
                         )
+                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/${folderPath}/logo/${item.uuid}.webp`
 
                         const content = txtResponse.ok ? await txtResponse.text() : null
-                        return { ...item, content }
+                        return { ...item, content, logo }
                     } catch (err) {
                         console.warn(
                             `Failed to fetch content for UUID ${item.uuid}: ${err.message}`
