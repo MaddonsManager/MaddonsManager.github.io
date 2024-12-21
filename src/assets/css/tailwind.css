@@ -1538,6 +1538,10 @@ html {
   margin-right: 0.25rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -1576,14 +1580,6 @@ html {
 
 .mt-\[150px\] {
   margin-top: 150px;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.mr-3 {
-  margin-right: 0.75rem;
 }
 
 .box-border {
@@ -1778,6 +1774,10 @@ html {
   height: 100vh;
 }
 
+.max-h-20 {
+  max-height: 5rem;
+}
+
 .max-h-\[20rem\] {
   max-height: 20rem;
 }
@@ -1832,27 +1832,6 @@ html {
 
 .max-h-full {
   max-height: 100%;
-}
-
-.max-h-fit {
-  max-height: -moz-fit-content;
-  max-height: fit-content;
-}
-
-.max-h-10 {
-  max-height: 2.5rem;
-}
-
-.max-h-2 {
-  max-height: 0.5rem;
-}
-
-.max-h-44 {
-  max-height: 11rem;
-}
-
-.max-h-20 {
-  max-height: 5rem;
 }
 
 .min-h-10 {

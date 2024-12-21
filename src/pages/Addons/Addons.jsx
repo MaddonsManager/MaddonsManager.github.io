@@ -110,7 +110,11 @@ const Addon = () => {
                         className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                         sh
                     >
-                        {isLoading && <p>Loading Addons...</p>}
+                        {isLoading && (
+                            <div className="flex justify-center mt-4">
+                                <Spinner>Loading Addons...</Spinner>
+                            </div>
+                        )}
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredData.length > 0 ? (
                             <div className="flex flex-wrap gap-4 content-center items-center justify-center">
@@ -173,9 +177,7 @@ const Addon = () => {
                                     ))}
                                 </AnimatePresence>
                             </div>
-                        ) : (
-                            <p>dont found addons that match the filters.</p>
-                        )}
+                        ) : null}
                         {hasMore && (
                             <div ref={loadRef} className="flex justify-center mt-4">
                                 <Spinner color="primary" />

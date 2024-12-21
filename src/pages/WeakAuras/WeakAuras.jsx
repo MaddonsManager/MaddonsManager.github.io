@@ -92,7 +92,11 @@ const WeakAuras = () => {
                         className="h-[calc(93vh-32px)] overflow-auto mb-4 p-4 shadow-sm"
                         sh
                     >
-                        {isLoading && <p>Loading Weakauras...</p>}
+                        {isLoading && (
+                            <div className="flex justify-center mt-4">
+                                <Spinner>Loading WeakAuras...</Spinner>
+                            </div>
+                        )}
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredData.length > 0 ? (
                             <div className="flex flex-wrap content-center items-center justify-center">
@@ -161,9 +165,7 @@ const WeakAuras = () => {
                                     ))}
                                 </AnimatePresence>
                             </div>
-                        ) : (
-                            <p>dont found WeakAuras that match the filters.</p>
-                        )}
+                        ) : null}
                         {hasMore && (
                             <div ref={loadRef} className="flex justify-center mt-4">
                                 <Spinner color="primary" />
