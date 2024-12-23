@@ -1,12 +1,24 @@
 import React, { useState, useMemo } from 'react'
 import useWeakAurasData from '@/hook/useWeakAurasData'
-import { Card, CardBody, Button, Image, Tooltip, Spinner, Divider } from '@nextui-org/react'
+import {
+    Card,
+    CardBody,
+    Button,
+    Image,
+    Tooltip,
+    Spinner,
+    Divider,
+    useDisclosure,
+    Chip,
+    Avatar
+} from '@nextui-org/react'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
-import { title, subtitle, SelectType, Searcher, SelectVersion } from '@/components'
+import { title, subtitle, SelectType, Searcher, SelectVersion, ProfilesDetails } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
 import ReactMarkdown from 'react-markdown'
+import { classIcon, roleIcon } from '@/utils/classIcon'
 
 const WeakAuras = () => {
     const [version, setVersion] = useState(null)
@@ -14,6 +26,8 @@ const WeakAuras = () => {
     const [itemToShow, setItemToShow] = useState(20)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('')
+    const [isSelectWeakAura, setIsSelectWeakAura] = useState(null)
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
     console.log('data', data)
 
@@ -51,6 +65,11 @@ const WeakAuras = () => {
         )
     }
 
+    const handleOpenDetails = (weakauras) => {
+        setIsSelectWeakAura(weakauras)
+        onOpen(true)
+    }
+
     const loadMore = () => {
         setItemToShow((prev) => prev + 10)
     }
@@ -68,6 +87,13 @@ const WeakAuras = () => {
                     : 'No WeakAuras available'}
             </h1>
             <p className={subtitle()}>{siteConfig.description}</p>
+            {isSelectWeakAura && (
+                <ProfilesDetails
+                    data={isSelectWeakAura}
+                    isOpen={isOpen}
+                    onOpenChange={onOpenChange}
+                />
+            )}
             <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
                 <Searcher
                     searchTerm={searchTerm}
@@ -107,6 +133,8 @@ const WeakAuras = () => {
                                             className="transition-transform duration-300 ease-in-out hover:scale-105 p-2"
                                         >
                                             <Card
+                                                isPressable={true}
+                                                onPress={() => handleOpenDetails(weakauras)}
                                                 isFooterBlurred
                                                 initial="hidden"
                                                 animate="visible"
@@ -120,7 +148,7 @@ const WeakAuras = () => {
                                                         alt={weakauras.title}
                                                         radius="sm"
                                                         src={weakauras.logo}
-                                                        className="h-auto w-full flex-none object-cover object-top md:w-48 items-center justify-center"
+                                                        className="h-auto w-full flex-none object-cover object-center md:w-72"
                                                     />
                                                     <div className="px-4 py-5 flex-1">
                                                         <div className="flex items-center justify-between mb-2">
@@ -147,7 +175,7 @@ const WeakAuras = () => {
                                                             </Tooltip>
                                                         </div>
                                                         <Divider />
-                                                        <div className="flex flex-col gap-3 pt-2 text-small text-default-400">
+                                                        <div className="flex flex-wrap gap-3 pt-2 text-small text-default-400">
                                                             <ReactMarkdown>
                                                                 {weakauras.description.length > 150
                                                                     ? `${weakauras.description.substring(
@@ -157,6 +185,32 @@ const WeakAuras = () => {
                                                                     : weakauras.description}
                                                             </ReactMarkdown>
                                                             <p>{weakauras.type}</p>
+                                                            {weakauras.class.map &&
+                                                                weakauras.class.map(
+                                                                    (className, index) => (
+                                                                        <Chip
+                                                                            avatar={
+                                                                                <Avatar
+                                                                                    name={
+                                                                                        data.title
+                                                                                    }
+                                                                                    src={
+                                                                                        classIcon[
+                                                                                            className
+                                                                                        ]
+                                                                                    }
+                                                                                />
+                                                                            }
+                                                                            key={index}
+                                                                            color="warning"
+                                                                            variant="dot"
+                                                                            size="sm"
+                                                                            className="my-1"
+                                                                        >
+                                                                            {className}
+                                                                        </Chip>
+                                                                    )
+                                                                )}
                                                         </div>
                                                     </div>
                                                 </CardBody>

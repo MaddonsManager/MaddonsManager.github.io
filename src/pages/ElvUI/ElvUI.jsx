@@ -1,10 +1,19 @@
 import React, { useState, useMemo } from 'react'
 import useElvUIData from '@/hook/useElvUIData'
-import { Card, CardBody, Button, Image, Tooltip, Spinner, Divider } from '@nextui-org/react'
+import {
+    Card,
+    CardBody,
+    Button,
+    Image,
+    Tooltip,
+    Spinner,
+    Divider,
+    useDisclosure
+} from '@nextui-org/react'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
-import { title, subtitle, SelectType, Searcher, SelectVersion } from '@/components'
+import { title, subtitle, SelectType, Searcher, SelectVersion, ProfilesDetails } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
 
 const ElvUI = () => {
@@ -13,6 +22,8 @@ const ElvUI = () => {
     const [itemToShow, setItemToShow] = useState(20)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('')
+    const [isSelectElvUI, setIsSelectElvUI] = useState(null)
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
     console.log('data', data)
 
@@ -49,6 +60,10 @@ const ElvUI = () => {
             }
         )
     }
+    const handleOpenDetails = (elvui) => {
+        setIsSelectElvUI(elvui)
+        onOpen(true)
+    }
 
     const loadMore = () => {
         setItemToShow((prev) => prev + 10)
@@ -67,6 +82,9 @@ const ElvUI = () => {
                     : 'No ElvUI available'}
             </h1>
             <p className={subtitle()}>{siteConfig.description}</p>
+            {isSelectElvUI && (
+                <ProfilesDetails data={isSelectElvUI} isOpen={isOpen} onOpenChange={onOpenChange} />
+            )}
             <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
                 <Searcher
                     searchTerm={searchTerm}
@@ -106,6 +124,8 @@ const ElvUI = () => {
                                             className="transition-transform duration-300 ease-in-out hover:scale-105 p-2"
                                         >
                                             <Card
+                                                isPressable={true}
+                                                onPress={() => handleOpenDetails(elvui)}
                                                 isFooterBlurred
                                                 initial="hidden"
                                                 animate="visible"
@@ -119,7 +139,7 @@ const ElvUI = () => {
                                                         alt={elvui.title}
                                                         radius="sm"
                                                         src="/logo.png"
-                                                        className="h-auto w-full flex-none object-cover object-top md:w-48"
+                                                        className="h-auto w-full flex-none object-cover object-center md:w-72"
                                                     />
                                                     <div className="px-4 py-5 flex-1">
                                                         <div className="flex items-center justify-between">

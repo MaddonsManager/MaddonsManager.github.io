@@ -22,7 +22,7 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
                         <DrawerBody>
                             <div className="flex gap-3">
                                 <Image
-                                    alt="nextui logo"
+                                    alt={addon.author}
                                     height={60}
                                     radius="sm"
                                     src="/logo.svg"
