@@ -20,7 +20,11 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
                             <Link
                                 showAnchorIcon
                                 isExternal
-                                href={`https://github.com/PentSec/MaddonsManager/releases/tag/${releaseNote.version}`}
+                                href={`https://github.com/${
+                                    selectedNotes === 'web'
+                                        ? 'MaddonsManager/MaddonsManager.github.io'
+                                        : 'PentSec/MaddonsManager'
+                                }/releases/tag/${releaseNote.version}`}
                             >
                                 Github Release
                             </Link>

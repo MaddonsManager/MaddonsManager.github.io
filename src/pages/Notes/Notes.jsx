@@ -45,7 +45,11 @@ function Notes() {
                     your constructive feedback! ❤️
                 </p>
                 <SelectNotes selectedNotes={selectedNotes} setSelectedNotes={setSelectedNotes} />
-                <ReleaseNotes appReleaseNotes={appReleaseNotes} webReleaseNotes={webReleaseNotes} />
+                <ReleaseNotes
+                    appReleaseNotes={appReleaseNotes}
+                    webReleaseNotes={webReleaseNotes}
+                    selectedNotes={selectedNotes}
+                />
             </div>
         </section>
     )
