@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
 
+const weakAurasCache = {
+    lich: null,
+    cata: null,
+    panda: null
+}
+
 const useWeakAurasData = () => {
     const [data, setData] = useState({
         lich: [],
@@ -51,11 +57,24 @@ const useWeakAurasData = () => {
         const loadAllData = async () => {
             setIsLoading(true)
             try {
-                const [lkData, cataData, pandaData] = await Promise.all([
-                    fetchWeakAurasWithContent(urls.lich, 'WeakAuras_LK'),
-                    fetchWeakAurasWithContent(urls.cata, 'WeakAuras_Cata'),
-                    fetchWeakAurasWithContent(urls.panda, 'WeakAuras_Panda')
-                ])
+                const [lkData, cataData, pandaData] = await Promise.all(
+                    ['lich', 'cata', 'panda'].map(async (key) => {
+                        if (weakAurasCache[key]) return weakAurasCache[key]
+
+                        const folderPath =
+                            key === 'lich'
+                                ? 'WeakAuras_LK'
+                                : key === 'cata'
+                                ? 'WeakAuras_Cata'
+                                : 'WeakAuras_Panda'
+
+                        const jsonData = await fetchWeakAurasWithContent(urls[key], folderPath)
+
+                        weakAurasCache[key] = jsonData
+
+                        return jsonData
+                    })
+                )
 
                 setData({
                     lich: lkData,

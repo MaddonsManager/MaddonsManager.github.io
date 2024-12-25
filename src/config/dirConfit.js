@@ -62,6 +62,6 @@ export const siteConfig = {
         issues: 'https://github.com/PentSec/MasterAddonManager/issues',
         discussions: 'https://github.com/PentSec/MasterAddonManager/discussions',
         personalGithub: 'https://github.com/PentSec',
-        nextui: 'https://nextui.org/'
+        Blog: 'https://maddonsmanager.github.io/blogposts'
     }
 }

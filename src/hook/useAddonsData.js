@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react'
 
+// Caché en memoria
+const addonsCache = {
+    lich: null,
+    cata: null,
+    panda: null
+}
+
 const useAddonsData = () => {
     const [data, setData] = useState({
         lich: [],
@@ -21,25 +28,29 @@ const useAddonsData = () => {
 
         const fetchData = async () => {
             try {
-                const [lichResponse, cataResponse, pandaResponse] = await Promise.all([
-                    fetch(urls.lich).then((res) => {
-                        if (!res.ok) throw new Error(`Error fetching LK: ${res.statusText}`)
-                        return res.json()
-                    }),
-                    fetch(urls.cata).then((res) => {
-                        if (!res.ok) throw new Error(`Error fetching Cata: ${res.statusText}`)
-                        return res.json()
-                    }),
-                    fetch(urls.panda).then((res) => {
-                        if (!res.ok) throw new Error(`Error fetching Panda: ${res.statusText}`)
-                        return res.json()
+                const [lichData, cataData, pandaData] = await Promise.all(
+                    ['lich', 'cata', 'panda'].map(async (key) => {
+                        // Revisar si ya está en caché
+                        if (addonsCache[key]) return addonsCache[key]
+
+                        // Si no está en caché, hacer fetch
+                        const response = await fetch(urls[key])
+                        if (!response.ok)
+                            throw new Error(`Error fetching ${key}: ${response.statusText}`)
+
+                        const jsonData = await response.json()
+
+                        // Guardar en caché
+                        addonsCache[key] = jsonData
+
+                        return jsonData
                     })
-                ])
+                )
 
                 setData({
-                    lich: lichResponse,
-                    cata: cataResponse,
-                    panda: pandaResponse
+                    lich: lichData,
+                    cata: cataData,
+                    panda: pandaData
                 })
             } catch (err) {
                 setError(err.message)

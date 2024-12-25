@@ -11,6 +11,8 @@ import '/favicon-32x32.png'
 import '/android-chrome-192x192.png'
 import '/android-chrome-512x512.png'
 import { useTheme } from '@nextui-org/use-theme'
+import 'highlight.js/styles/github-dark.css'
+import 'github-markdown-css/github-markdown.css'
 
 const Maddons = () => {
     const { theme } = useTheme()

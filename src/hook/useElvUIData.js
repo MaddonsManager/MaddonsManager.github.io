@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react'
 
+// Caché en memoria
+const elvUICache = {
+    lich: null,
+    cata: null,
+    panda: null
+}
+
 const useElvUIData = () => {
     const [data, setData] = useState({
         lich: [],
@@ -50,16 +57,31 @@ const useElvUIData = () => {
         const loadAllData = async () => {
             setIsLoading(true)
             try {
-                const [lichResponse, cataResponse, pandaResponse] = await Promise.all([
-                    fetchElvUIWithContent(urls.lich, 'ElvUI_LK'),
-                    fetchElvUIWithContent(urls.cata, 'ElvUI_Cata'),
-                    fetchElvUIWithContent(urls.panda, 'ElvUI_Panda')
-                ])
+                const [lichData, cataData, pandaData] = await Promise.all(
+                    ['lich', 'cata', 'panda'].map(async (key) => {
+                        // Revisar si ya está en caché
+                        if (elvUICache[key]) return elvUICache[key]
+
+                        const folderPath =
+                            key === 'lich'
+                                ? 'ElvUI_LK'
+                                : key === 'cata'
+                                ? 'ElvUI_Cata'
+                                : 'ElvUI_Panda'
+
+                        const jsonData = await fetchElvUIWithContent(urls[key], folderPath)
+
+                        // Guardar en caché
+                        elvUICache[key] = jsonData
+
+                        return jsonData
+                    })
+                )
 
                 setData({
-                    lich: lichResponse,
-                    cata: cataResponse,
-                    panda: pandaResponse
+                    lich: lichData,
+                    cata: cataData,
+                    panda: pandaData
                 })
                 setIsLoading(false)
             } catch (err) {
