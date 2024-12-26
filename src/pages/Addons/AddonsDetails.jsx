@@ -12,7 +12,6 @@ import {
 } from '@nextui-org/react'
 
 const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
-    console.log(addon)
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
             <DrawerContent>

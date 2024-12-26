@@ -29,8 +29,6 @@ const WeakAuras = () => {
     const [isSelectWeakAura, setIsSelectWeakAura] = useState(null)
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
-    console.log('data', data)
-
     const combinedData = useMemo(() => {
         if (!data) return []
         const allData = [...(data.lich || []), ...(data.cata || []), ...(data.panda || [])]
@@ -142,13 +140,13 @@ const WeakAuras = () => {
                                                 shadow="sm"
                                                 className="w-auto"
                                             >
-                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap h-[260px] overflow-hidden">
                                                     <Image
                                                         removeWrapper
                                                         alt={weakauras.title}
                                                         radius="sm"
                                                         src={weakauras.logo}
-                                                        className="h-auto w-full flex-none object-cover object-center md:w-72"
+                                                        className="w-full h-full flex-none object-cover object-center md:w-72"
                                                     />
                                                     <div className="px-4 py-5 flex-1">
                                                         <div className="flex items-center justify-between mb-2">

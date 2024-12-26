@@ -29,7 +29,6 @@ const useBlogPost = () => {
                 const data = await response.json()
 
                 blogPostCache = data
-
                 setPost(data)
             } catch (err) {
                 setError(err.message)

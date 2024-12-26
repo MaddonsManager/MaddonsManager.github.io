@@ -25,8 +25,6 @@ const ElvUI = () => {
     const [isSelectElvUI, setIsSelectElvUI] = useState(null)
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
-    console.log('data', data)
-
     const combinedData = useMemo(() => {
         if (!data) return []
         const allData = [...(data.lich || []), ...(data.cata || []), ...(data.panda || [])]
@@ -131,15 +129,15 @@ const ElvUI = () => {
                                                 animate="visible"
                                                 fallback
                                                 shadow="sm"
-                                                className="w-auto"
+                                                className="w-auto h-auto"
                                             >
-                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap h-[260px] overflow-hidden">
                                                     <Image
                                                         removeWrapper
                                                         alt={elvui.title}
                                                         radius="sm"
                                                         src="/logo.png"
-                                                        className="h-auto w-full flex-none object-cover object-center md:w-72"
+                                                        className="w-full h-full flex-none object-cover object-center md:w-72"
                                                     />
                                                     <div className="px-4 py-5 flex-1">
                                                         <div className="flex items-center justify-between">

@@ -48,7 +48,6 @@ const Addon = () => {
                     ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
                     : true
                 const matchesType = selectedType ? addon.addonType === selectedType : true
-                console.log()
                 return matchesSearch && matchesType
             }) || []
         )

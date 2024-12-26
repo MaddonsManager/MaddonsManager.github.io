@@ -12,9 +12,17 @@ import {
 } from '@nextui-org/react'
 import ReactMarkdown from 'react-markdown'
 import { classIcon, roleIcon } from '@/utils/classIcon'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
+import hljs from 'highlight.js'
+import { useEffect } from 'react'
 
 const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
-    console.log(data)
+    useEffect(() => {
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block)
+        })
+    }, [data])
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
             <DrawerContent>
@@ -31,10 +39,10 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                     width={60}
                                     className="object-contain"
                                 />
-                                <div className="flex flex-col">
-                                    <p className="text-tiny text-white/90">author: {data.author}</p>
+                                <div className="text-tiny flex flex-col text-default-400">
+                                    <p>author: {data.author}</p>
                                     <div className="flex items-center gap-2 my-2">
-                                        <p className="font-bold text-white">Tags:</p>
+                                        <p className="font-bold ">Tags:</p>
                                         {data.tags.map((tag, index) => (
                                             <Chip
                                                 key={index}
@@ -48,7 +56,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                         ))}
                                     </div>
                                     <div className="flex flex-wrap items-center gap-2 my-2">
-                                        <p className="font-bold text-white">Class:</p>
+                                        <p className="font-bold ">Class:</p>
                                         {data.class.map((className, index) => (
                                             <Chip
                                                 avatar={
@@ -68,7 +76,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                         ))}
                                     </div>
                                     <div className="flex items-center gap-2 my-2">
-                                        <p className="font-bold text-white">Roles:</p>
+                                        <p className="font-bold">Roles:</p>
                                         {data.roles.map((role, index) => (
                                             <Chip
                                                 avatar={
@@ -99,7 +107,9 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                             </div>
                             <Divider className="my-2" />
                             <h2 className="text-lg font-extrabold">Description</h2>
-                            <ReactMarkdown>{data.description}</ReactMarkdown>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                                {data.description}
+                            </ReactMarkdown>
                             <div className="flex justify-center p-4 ">
                                 <Image
                                     shadow="md"
