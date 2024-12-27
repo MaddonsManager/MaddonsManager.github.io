@@ -1,15 +1,12 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
-import { SearchIcon } from '@/components'
 
-const SearchAddon = ({ searchTerm, setSearchTerm, addonNames }) => {
+const SelectVersion = ({ version, setVersion, valueType }) => {
     return (
         <Autocomplete
-            label="Search Addons by Name"
-            isVirtualized
-            selectedKey={searchTerm}
-            onSelectionChange={(e) => setSearchTerm(e)}
-            defaultItems={addonNames.map((name) => ({ key: name, name: name }))}
-            startContent={<SearchIcon size={18} />}
+            label="Select Version"
+            selectedKey={version}
+            onSelectionChange={(e) => setVersion(e)}
+            defaultItems={valueType.map((type) => ({ key: type, name: type }))}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"
@@ -30,12 +27,13 @@ const SearchAddon = ({ searchTerm, setSearchTerm, addonNames }) => {
                     ]
                 }
             }}
-            placeholder="Enter addon name"
+            placeholder="Select wow version"
             popoverProps={{
                 offset: 10,
                 classNames: {
                     base: 'rounded-large',
-                    content: 'p-1 border-small border-default-100 bg-background mt-2'
+                    content:
+                        'p-1 border-small border-default-100 bg-background mt-2 text-default-900'
                 }
             }}
         >
@@ -48,4 +46,4 @@ const SearchAddon = ({ searchTerm, setSearchTerm, addonNames }) => {
     )
 }
 
-export default SearchAddon
+export default SelectVersion

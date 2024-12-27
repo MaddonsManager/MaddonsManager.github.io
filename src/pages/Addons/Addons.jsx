@@ -15,31 +15,35 @@ import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/utils/icons'
-import { title, subtitle } from '@/components'
+import { title, subtitle, Searcher, SelectType, SelectVersion } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
-import SelectType from './SelectType'
-import SelectVersion from './SelectVersion'
-import SearchAddons from './SearchAddons'
 import AddonsDetails from './AddonsDetails'
 
 const Addon = () => {
-    const [version, setVersion] = useState('lich')
-    const { data, isLoading, error } = useAddonsData(version)
+    const [version, setVersion] = useState(null)
+    const { data, isLoading, error } = useAddonsData()
     const [itemToShow, setItemToShow] = useState(20)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('')
     const [isSelectAddon, setIsSelectAddon] = useState(null)
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
+    const combinedData = useMemo(() => {
+        if (!data) return []
+        const allData = [...data.LichKing, ...data.Cataclysm, ...data.Pandaria]
+        if (version === null) return allData
+        return data[version] || []
+    }, [data, version])
+
     const addonTypes = useMemo(() => {
-        return data && data.length > 0
-            ? Array.from(new Set(data.map((addon) => addon.addonType)))
+        return combinedData && combinedData.length > 0
+            ? Array.from(new Set(combinedData.map((addon) => addon.addonType)))
             : []
-    }, [data])
+    }, [combinedData])
 
     const filteredData = useMemo(() => {
         return (
-            data?.filter((addon) => {
+            combinedData?.filter((addon) => {
                 const matchesSearch = searchTerm
                     ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
                     : true
@@ -47,7 +51,7 @@ const Addon = () => {
                 return matchesSearch && matchesType
             }) || []
         )
-    }, [data, searchTerm, selectedType])
+    }, [combinedData, searchTerm, selectedType])
 
     const handleDownload = async (githubRepo) => {
         const mainUrl = `${githubRepo}/archive/refs/heads/main.zip`
@@ -63,7 +67,7 @@ const Addon = () => {
         setItemToShow((prev) => prev + 10)
     }
 
-    const hasMore = itemToShow < filteredData.length
+    const hasMore = filteredData && filteredData.length > itemToShow
 
     const [loadRef, scrollerRef] = useInfiniteScroll({
         hasMore,
@@ -73,8 +77,8 @@ const Addon = () => {
     return (
         <div className="justify-center inline-block max-w-4xl text-start">
             <h1 className={title({ color: 'blue', size: 'lg' })}>
-                {data && data.length > 0
-                    ? `${data.length} Private Addons`
+                {combinedData.length > 0
+                    ? `${combinedData.length} Private Addons`
                     : 'No Addons available in Maddons'}
             </h1>
             <p className={subtitle()}>{siteConfig.description}</p>
@@ -82,19 +86,23 @@ const Addon = () => {
                 <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
             <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
-                <SearchAddons
+                <Searcher
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
-                    addonNames={data ? data.map((addon) => addon.name) : []}
+                    valueName={combinedData ? combinedData.map((addon) => addon.name) : []}
                 />
                 <Divider orientation="vertical" className="h-auto" />
-                <SelectVersion version={version} setVersion={setVersion} />
+                <SelectVersion
+                    version={version}
+                    setVersion={setVersion}
+                    valueType={['LichKing', 'Cataclysm', 'Pandaria']}
+                />
                 <Divider orientation="vertical" className="h-auto" />
 
                 <SelectType
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}
-                    addonTypes={addonTypes}
+                    valueType={addonTypes}
                 />
             </div>
 
@@ -105,20 +113,26 @@ const Addon = () => {
                         className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                         sh
                     >
-                        {isLoading && <p>Loading Addons...</p>}
+                        {isLoading && (
+                            <div className="flex justify-center mt-4">
+                                <Spinner>Loading Addons...</Spinner>
+                            </div>
+                        )}
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredData.length > 0 ? (
                             <div className="flex flex-wrap gap-4 content-center items-center justify-center">
-                                {filteredData.map((addon, index) => (
-                                    <AnimatePresence>
-                                        <div className="transition-transform duration-300 ease-in-out hover:scale-105">
+                                <AnimatePresence>
+                                    {filteredData.slice(0, itemToShow).map((addon) => (
+                                        <div
+                                            key={`${addon.name}-${addon.githubRepo}`}
+                                            className="transition-transform duration-300 ease-in-out hover:scale-105"
+                                        >
                                             <Card
                                                 isPressable={true}
                                                 onPress={() => handleOpenDetails(addon)}
                                                 isFooterBlurred
                                                 initial="hidden"
                                                 animate="visible"
-                                                transition={{ duration: 0.2, delay: index * 0.1 }}
                                                 fallback
                                                 shadow="sm"
                                                 className="w-[200px] h-[200px]"
@@ -163,14 +177,15 @@ const Addon = () => {
                                                 </CardFooter>
                                             </Card>
                                         </div>
-                                    </AnimatePresence>
-                                ))}
+                                    ))}
+                                </AnimatePresence>
                             </div>
-                        ) : (
-                            <p>No se encontraron addons que coincidan con los filtros.</p>
+                        ) : null}
+                        {hasMore && (
+                            <div ref={loadRef} className="flex justify-center mt-4">
+                                <Spinner color="primary" />
+                            </div>
                         )}
-                        {hasMore &&
-                            (<Spinner ref={loadRef} color="primary" className="mt-4" /> || null)}
                     </ScrollShadow>
                 </div>
             </div>

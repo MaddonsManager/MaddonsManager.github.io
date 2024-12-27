@@ -1,4 +1,3 @@
-// factor here download fetch api github to download file from github
 import { useState, useEffect } from 'react'
 const API_URL = 'https://api.github.com/repos/pentsec/maddonsmanager/releases/latest'
 

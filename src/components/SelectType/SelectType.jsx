@@ -1,13 +1,13 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 
-const SelectType = ({ selectedType, setSelectedType, addonTypes }) => {
+const SelectType = ({ selectedType, setSelectedType, valueType }) => {
     return (
         <Autocomplete
-            label="Filtrar por tipo"
+            label="Filter by Type"
             isVirtualized
             selectedKey={selectedType}
             onSelectionChange={(key) => setSelectedType(key)}
-            defaultItems={addonTypes.map((type) => ({ key: type, name: type }))}
+            defaultItems={valueType.map((type) => ({ key: type, name: type }))}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"

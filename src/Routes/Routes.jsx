@@ -1,7 +1,7 @@
 // src/Routes/Routes.jsx
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { Home, Notes, Loading, Addons, WeakAuras, ElvUI, Guides } from '@/pages'
+import { Home, Notes, Loading, Addons, WeakAuras, ElvUI, Guides, Post } from '@/pages'
 import { RoutesNotFound } from '@/components'
 
 const AppRoutes = React.memo(() => {
@@ -13,6 +13,7 @@ const AppRoutes = React.memo(() => {
             <Route path="/WeakAuras" element={<WeakAuras />} />
             <Route path="/ElvUI" element={<ElvUI />} />
             <Route path="/Guides" element={<Guides />} />
+            <Route path="/Post/:folder" element={<Post />} />
             <Route path="/Notes/*" element={<Notes />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
             <Route path="/404" element={<RoutesNotFound />} />

@@ -1,6 +1,8 @@
-import { Accordion, AccordionItem, Avatar, Divider, Link } from '@nextui-org/react'
+import { Accordion, AccordionItem, Avatar, Link } from '@nextui-org/react'
 
-function Notes({ releaseNotes }) {
+function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
+    const releaseNotes = selectedNotes === 'app' ? appReleaseNotes : webReleaseNotes
+
     return (
         <div className="mb-10 ">
             {releaseNotes.map((releaseNote) => (
@@ -18,7 +20,11 @@ function Notes({ releaseNotes }) {
                             <Link
                                 showAnchorIcon
                                 isExternal
-                                href={`https://github.com/PentSec/MaddonsManager/releases/tag/${releaseNote.version}`}
+                                href={`https://github.com/${
+                                    selectedNotes === 'web'
+                                        ? 'MaddonsManager/MaddonsManager.github.io'
+                                        : 'PentSec/MaddonsManager'
+                                }/releases/tag/${releaseNote.version}`}
                             >
                                 Github Release
                             </Link>

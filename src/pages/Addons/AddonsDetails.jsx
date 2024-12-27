@@ -10,10 +10,8 @@ import {
     Link,
     Image
 } from '@nextui-org/react'
-// import { DownloadIcon, DeleteIcon, VisibilityIcon, AccessTimeIcon } from '@/utils/icons'
 
 const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
-    console.log(addon)
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
             <DrawerContent>
@@ -23,7 +21,7 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
                         <DrawerBody>
                             <div className="flex gap-3">
                                 <Image
-                                    alt="nextui logo"
+                                    alt={addon.author}
                                     height={60}
                                     radius="sm"
                                     src="/logo.svg"
@@ -40,13 +38,8 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
                             </div>
                             <Divider className="my-2" />
                             <div className="flex items-center justify-between">
-                                <p className=" text-white/60">
-                                    {/* <DownloadIcon /> */}
-                                    95.1k Downloads -{/* <VisibilityIcon className="ml-1" /> */}
-                                    141.9k views
-                                </p>
+                                <p className=" text-white/60">95.1k Downloads - 141.9k views</p>
                                 <p className="text-sm text-gray-500">
-                                    {/* <AccessTimeIcon /> */}
                                     Last updated: {addon.lastCommitDate}
                                 </p>
                             </div>
