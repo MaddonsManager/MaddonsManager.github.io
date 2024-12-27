@@ -1,30 +1,20 @@
 import { useState, useEffect } from 'react'
 
-// Caché en memoria
 const elvUICache = {
-    lich: null,
-    cata: null,
-    panda: null
+    elvui: null
 }
 
 const useElvUIData = () => {
-    const [data, setData] = useState({
-        lich: [],
-        cata: [],
-        panda: []
-    })
+    const [data, setData] = useState([])
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
-    const urls = {
-        lich: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI_LK/ElvUI.json',
-        cata: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI_Cata/ElvUI.json',
-        panda: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI_Panda/ElvUI.json'
-    }
+    const jsonUrl =
+        'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/ElvUI.json'
 
-    const fetchElvUIWithContent = async (jsonUrl, folderPath) => {
+    const fetchElvUIWithContent = async (url) => {
         try {
-            const response = await fetch(jsonUrl)
+            const response = await fetch(url)
             if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
 
             const jsonData = await response.json()
@@ -33,11 +23,13 @@ const useElvUIData = () => {
                 jsonData.map(async (item) => {
                     try {
                         const txtResponse = await fetch(
-                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/${folderPath}/UI/${item.uuid}.txt`
+                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
                         )
+                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
+                        const markdown = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
 
                         const content = txtResponse.ok ? await txtResponse.text() : null
-                        return { ...item, content }
+                        return { ...item, content, logo, markdown }
                     } catch (err) {
                         console.warn(
                             `Failed to fetch content for UUID ${item.uuid}: ${err.message}`
@@ -57,32 +49,14 @@ const useElvUIData = () => {
         const loadAllData = async () => {
             setIsLoading(true)
             try {
-                const [lichData, cataData, pandaData] = await Promise.all(
-                    ['lich', 'cata', 'panda'].map(async (key) => {
-                        // Revisar si ya está en caché
-                        if (elvUICache[key]) return elvUICache[key]
-
-                        const folderPath =
-                            key === 'lich'
-                                ? 'ElvUI_LK'
-                                : key === 'cata'
-                                ? 'ElvUI_Cata'
-                                : 'ElvUI_Panda'
-
-                        const jsonData = await fetchElvUIWithContent(urls[key], folderPath)
-
-                        // Guardar en caché
-                        elvUICache[key] = jsonData
-
-                        return jsonData
-                    })
-                )
-
-                setData({
-                    lich: lichData,
-                    cata: cataData,
-                    panda: pandaData
-                })
+                if (elvUICache.elvui) {
+                    setData(elvUICache.elvui)
+                } else {
+                    const elvuiData = await fetchElvUIWithContent(jsonUrl)
+                    elvUICache.elvui = elvuiData
+                    setData(elvuiData)
+                    console.log(`back`, elvuiData)
+                }
                 setIsLoading(false)
             } catch (err) {
                 setError(err.message)

@@ -1,29 +1,20 @@
 import { useState, useEffect } from 'react'
 
 const weakAurasCache = {
-    lich: null,
-    cata: null,
-    panda: null
+    weakauras: null
 }
 
 const useWeakAurasData = () => {
-    const [data, setData] = useState({
-        lich: [],
-        cata: [],
-        panda: []
-    })
+    const [data, setData] = useState([])
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
-    const urls = {
-        lich: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras_LK/WeakAuras.json',
-        cata: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras_Cata/WeakAuras.json',
-        panda: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras_Panda/Weakauras.json'
-    }
+    const jsonUrl =
+        'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/WeakAuras.json'
 
-    const fetchWeakAurasWithContent = async (jsonUrl, folderPath) => {
+    const fetchWeakAurasWithContent = async (url) => {
         try {
-            const response = await fetch(jsonUrl)
+            const response = await fetch(url)
             if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
 
             const jsonData = await response.json()
@@ -32,12 +23,13 @@ const useWeakAurasData = () => {
                 jsonData.map(async (item) => {
                     try {
                         const txtResponse = await fetch(
-                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/${folderPath}/WA/${item.uuid}.txt`
+                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.txt`
                         )
-                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/${folderPath}/logo/${item.uuid}.webp`
+                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.logo}`
+                        const markdown = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.md`
 
                         const content = txtResponse.ok ? await txtResponse.text() : null
-                        return { ...item, content, logo }
+                        return { ...item, content, logo, markdown }
                     } catch (err) {
                         console.warn(
                             `Failed to fetch content for UUID ${item.uuid}: ${err.message}`
@@ -57,30 +49,14 @@ const useWeakAurasData = () => {
         const loadAllData = async () => {
             setIsLoading(true)
             try {
-                const [lkData, cataData, pandaData] = await Promise.all(
-                    ['lich', 'cata', 'panda'].map(async (key) => {
-                        if (weakAurasCache[key]) return weakAurasCache[key]
-
-                        const folderPath =
-                            key === 'lich'
-                                ? 'WeakAuras_LK'
-                                : key === 'cata'
-                                ? 'WeakAuras_Cata'
-                                : 'WeakAuras_Panda'
-
-                        const jsonData = await fetchWeakAurasWithContent(urls[key], folderPath)
-
-                        weakAurasCache[key] = jsonData
-
-                        return jsonData
-                    })
-                )
-
-                setData({
-                    lich: lkData,
-                    cata: cataData,
-                    panda: pandaData
-                })
+                if (weakAurasCache.weakauras) {
+                    setData(weakAurasCache.weakauras)
+                } else {
+                    const weakaurasData = await fetchWeakAurasWithContent(jsonUrl)
+                    weakAurasCache.weakauras = weakaurasData
+                    setData(weakaurasData)
+                    console.log(data)
+                }
                 setIsLoading(false)
             } catch (err) {
                 setError(err.message)

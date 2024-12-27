@@ -28,12 +28,10 @@ const Guides = () => {
     const [selectedTag, setSelectedTag] = useState('')
 
     const postTags = useMemo(() => {
-        if (!post || !post.posts) return []
         return Array.from(new Set(post.posts.flatMap((item) => item.tags)))
     }, [post])
 
     const filteredPosts = useMemo(() => {
-        if (!post || !post.posts) return []
         return post.posts.filter((post) => {
             const matchesSearch = searchTerm
                 ? post.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -51,19 +49,6 @@ const Guides = () => {
         hasMore,
         onLoadMore: loadMore
     })
-
-    if (isLoading) {
-        return <div>Looking for data...</div>
-    }
-
-    if (error) {
-        return <div>Error loading data: {error}</div>
-    }
-
-    if (!post || !post.posts) {
-        return <div>No data found.</div>
-    }
-    console.log('post', post)
 
     return (
         <div className="justify-center inline-block max-w-4xl text-start">

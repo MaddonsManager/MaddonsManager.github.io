@@ -1,11 +1,12 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 
-const SelectVersion = ({ version, setVersion }) => {
+const SelectVersion = ({ version, setVersion, valueType }) => {
     return (
         <Autocomplete
             label="Select Version"
             selectedKey={version}
             onSelectionChange={(e) => setVersion(e)}
+            defaultItems={valueType.map((type) => ({ key: type, name: type }))}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"
@@ -36,9 +37,11 @@ const SelectVersion = ({ version, setVersion }) => {
                 }
             }}
         >
-            <AutocompleteItem key="lich">Lich King</AutocompleteItem>
-            <AutocompleteItem key="cata">Cataclysm</AutocompleteItem>
-            <AutocompleteItem key="panda">Pandaria</AutocompleteItem>
+            {(item) => (
+                <AutocompleteItem key={item.key} textValue={item.name}>
+                    {item.name}
+                </AutocompleteItem>
+            )}
         </Autocomplete>
     )
 }

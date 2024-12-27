@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 let blogPostCache = null
 
 const useBlogPost = () => {
-    const [post, setPost] = useState(null)
+    const [post, setPost] = useState({ posts: [] })
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 

@@ -1,57 +1,61 @@
 import { useState, useEffect } from 'react'
 
-// Caché en memoria
 const addonsCache = {
-    lich: null,
-    cata: null,
-    panda: null
+    LichKing: null,
+    Cataclysm: null,
+    Pandaria: null
 }
 
 const useAddonsData = () => {
     const [data, setData] = useState({
-        lich: [],
-        cata: [],
-        panda: []
+        LichKing: [],
+        Cataclysm: [],
+        Pandaria: []
     })
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
     const urls = {
-        lich: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
-        cata: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Cata/cataclysm.json',
-        panda: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Panda/pandaria.json'
+        LichKing: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
+        Cataclysm:
+            'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Cata/cataclysm.json',
+        Pandaria: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Panda/pandaria.json'
     }
 
     useEffect(() => {
-        setIsLoading(true)
-        setError(null)
-
         const fetchData = async () => {
-            try {
-                const [lichData, cataData, pandaData] = await Promise.all(
-                    ['lich', 'cata', 'panda'].map(async (key) => {
-                        // Revisar si ya está en caché
-                        if (addonsCache[key]) return addonsCache[key]
+            setIsLoading(true)
+            setError(null)
 
-                        // Si no está en caché, hacer fetch
+            try {
+                const result = await Promise.all(
+                    Object.keys(urls).map(async (key) => {
+                        if (addonsCache[key]) {
+                            // Retorna los datos del caché si están disponibles
+                            return { key, data: addonsCache[key] }
+                        }
+
+                        // Si no está en el caché, realiza la solicitud
                         const response = await fetch(urls[key])
                         if (!response.ok)
                             throw new Error(`Error fetching ${key}: ${response.statusText}`)
 
                         const jsonData = await response.json()
 
-                        // Guardar en caché
+                        // Guarda los datos en el caché
                         addonsCache[key] = jsonData
-
-                        return jsonData
+                        return { key, data: jsonData }
                     })
                 )
 
-                setData({
-                    lich: lichData,
-                    cata: cataData,
-                    panda: pandaData
-                })
+                // Combina los resultados en el estado
+                const newData = result.reduce((acc, { key, data }) => {
+                    acc[key] = data
+                    return acc
+                }, {})
+
+                setData(newData)
+                console.log(`newData`, newData)
             } catch (err) {
                 setError(err.message)
             } finally {

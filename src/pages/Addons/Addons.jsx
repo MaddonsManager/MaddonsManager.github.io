@@ -30,7 +30,7 @@ const Addon = () => {
 
     const combinedData = useMemo(() => {
         if (!data) return []
-        const allData = [...data.lich, ...data.cata, ...data.panda]
+        const allData = [...data.LichKing, ...data.Cataclysm, ...data.Pandaria]
         if (version === null) return allData
         return data[version] || []
     }, [data, version])
@@ -92,7 +92,11 @@ const Addon = () => {
                     valueName={combinedData ? combinedData.map((addon) => addon.name) : []}
                 />
                 <Divider orientation="vertical" className="h-auto" />
-                <SelectVersion version={version} setVersion={setVersion} />
+                <SelectVersion
+                    version={version}
+                    setVersion={setVersion}
+                    valueType={['LichKing', 'Cataclysm', 'Pandaria']}
+                />
                 <Divider orientation="vertical" className="h-auto" />
 
                 <SelectType
