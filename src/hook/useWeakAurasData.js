@@ -26,15 +26,18 @@ const useWeakAurasData = () => {
                             `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.txt`
                         )
                         const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.logo}`
-                        const markdown = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.md`
+                        const markdown = await fetch(
+                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.md`
+                        )
 
                         const content = txtResponse.ok ? await txtResponse.text() : null
-                        return { ...item, content, logo, markdown }
+                        const md = markdown.ok ? await markdown.text() : null
+                        return { ...item, content, logo, md }
                     } catch (err) {
                         console.warn(
                             `Failed to fetch content for UUID ${item.uuid}: ${err.message}`
                         )
-                        return { ...item, content: null }
+                        return { ...item, content: null, md: null }
                     }
                 })
             )

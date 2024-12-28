@@ -37,5 +37,29 @@ export const webReleaseNotes = [
         fixed: [
             'Fix the window manager icons Minimize Maximize Close to stick in the same position'
         ]
+    },
+    {
+        version: 'v0.0.6',
+        date: '2024-12-28',
+        extra: 'Big update 👩🏽‍💻🎉',
+        features: [
+            'add ElvUI profiles',
+            'add WeakAuras profiles',
+            'add Guides',
+            'Add Post component and implement blog post fetching; update Guides page to display posts with author and tags',
+            'add markdown support on posts',
+            'add some new components',
+            'update some components',
+            'update some styles',
+            'add new class and role icons',
+            'update routing and component exports.',
+            'enhance ProfilesDetails component with syntax highlighting for code blocks'
+        ],
+        fixed: [
+            'fix detailsProfiles component',
+            'fix some bugs in the Addons page',
+            'fix some bugs in the Guides page',
+            'Refactor and enhance application structure'
+        ]
     }
 ].reverse()
