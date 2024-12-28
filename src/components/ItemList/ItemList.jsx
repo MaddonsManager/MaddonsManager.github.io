@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
 import { classIcon, roleIcon } from '@/utils/classIcon'
+import { TagIcon, GroupIcon } from '@/utils/icons'
 
 const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) => (
     <div className="flex flex-wrap content-center items-center justify-center">
@@ -55,10 +56,14 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                                         item.class.map((className, index) => (
                                             <Chip
                                                 avatar={
-                                                    <Avatar
-                                                        name={data.title}
-                                                        src={classIcon[className]}
-                                                    />
+                                                    className === 'ALL' ? (
+                                                        <GroupIcon />
+                                                    ) : (
+                                                        <Avatar
+                                                            name={data.title}
+                                                            src={classIcon[className]}
+                                                        />
+                                                    )
                                                 }
                                                 key={index}
                                                 color="warning"
@@ -70,6 +75,18 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                                             </Chip>
                                         ))}
                                 </div>
+                                {item.tags.map((tag, index) => (
+                                    <Chip
+                                        avatar={<TagIcon />}
+                                        key={index}
+                                        color="warning"
+                                        variant="dot"
+                                        size="sm"
+                                        className="my-1"
+                                    >
+                                        {tag}
+                                    </Chip>
+                                ))}
                             </div>
                         </CardBody>
                     </Card>

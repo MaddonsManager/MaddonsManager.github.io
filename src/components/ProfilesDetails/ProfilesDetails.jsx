@@ -23,8 +23,10 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
             hljs.highlightElement(block)
         })
     }, [data])
+
+    console.log('data profile', data)
     return (
-        <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
+        <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="full">
             <DrawerContent>
                 {(onClose) => (
                     <>
@@ -107,9 +109,14 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                             </div>
                             <Divider className="my-2" />
                             <h2 className="text-lg font-extrabold">Description</h2>
-                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                                {data.description}
-                            </ReactMarkdown>
+                            <article className="markdown-body  p-1 !bg-transparent justify-center inline-block max-w-4xl text-start">
+                                <ReactMarkdown
+                                    remarkPlugins={[remarkGfm]}
+                                    rehypePlugins={[rehypeRaw]}
+                                >
+                                    {data.md}
+                                </ReactMarkdown>
+                            </article>
                             <div className="flex justify-center p-4 ">
                                 <Image
                                     shadow="md"

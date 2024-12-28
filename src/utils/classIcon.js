@@ -13,9 +13,9 @@ const classIcon = {
 }
 
 const roleIcon = {
-    tank: '/roles/tank.png',
-    healer: '/roles/heal.png',
-    dps: '/roles/dps.png'
+    TANK: '/roles/tank.png',
+    HEALER: '/roles/heal.png',
+    DPS: '/roles/dps.png'
 }
 
 export { classIcon, roleIcon }
