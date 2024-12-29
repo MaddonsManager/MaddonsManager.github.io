@@ -5,12 +5,12 @@ import { classIcon, roleIcon } from '@/utils/classIcon'
 import { TagIcon, GroupIcon } from '@/utils/icons'
 
 const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) => (
-    <div className="flex flex-wrap content-center items-center justify-center">
+    <div className="flex flex-wrap gap-4 content-center items-center justify-center">
         <AnimatePresence>
             {data.slice(0, itemToShow).map((item) => (
                 <div
                     key={`${item.uuid}-${item.title}`}
-                    className="transition-transform duration-300 ease-in-out hover:scale-105 p-2"
+                    className="transition-transform duration-300 ease-in-out hover:scale-105"
                 >
                     <Card
                         isPressable={true}
@@ -20,7 +20,7 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                         animate="visible"
                         fallback
                         shadow="sm"
-                        className="w-[850px]"
+                        className="md:w-[850px]"
                     >
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap h-[260px] overflow-hidden w-full">
                             <Image

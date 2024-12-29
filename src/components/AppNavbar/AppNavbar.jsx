@@ -9,7 +9,8 @@ import {
     NavbarMenuItem,
     Link,
     Image,
-    Chip
+    Chip,
+    Divider
 } from '@nextui-org/react'
 
 import { DiscordIcon, GithubIcon, TwitterIcon } from '@/components/Icons'
@@ -46,8 +47,10 @@ export default function AppNavbar() {
                             alt="Maddons logo"
                             className="w-auto h-8 object-contain"
                         />
-                        <p className="ml-0 mr-1 font-bold uppercase text-inherit">addon Manager</p>
-                        <Chip color="primary" variant="flat" size="sm">
+                        <p className="text-tiny ml-0 mr-1 font-bold uppercase text-inherit md:text-base">
+                            addon Manager
+                        </p>
+                        <Chip color="primary" variant="flat" size="sm" className="hidden sm:flex">
                             on Dev👩🏽‍💻
                         </Chip>
                     </Link>
@@ -80,6 +83,7 @@ export default function AppNavbar() {
                     <Link isExternal aria-label="Github" href={siteConfig.links.github}>
                         <GithubIcon className="text-default-500" />
                     </Link>
+                    <Divider orientation="vertical" className="h-auto mr-4 ml-2" />
                     <ThemeSwitch />
                 </NavbarItem>
             </NavbarContent>

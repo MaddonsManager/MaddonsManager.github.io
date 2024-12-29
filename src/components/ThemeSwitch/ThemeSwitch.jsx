@@ -1,4 +1,4 @@
-import { VisuallyHidden, useSwitch, Divider } from '@nextui-org/react'
+import { VisuallyHidden, useSwitch } from '@nextui-org/react'
 import { MoonIcon, SunIcon } from '@/utils/icons'
 import { useTheme } from '@nextui-org/use-theme'
 import { useEffect } from 'react'
@@ -24,26 +24,23 @@ const ThemeSwitch = (props) => {
     })
 
     return (
-        <>
-            <Divider orientation="vertical" className="h-auto mr-4 ml-2" />
-            <Component {...getBaseProps()}>
-                <VisuallyHidden>
-                    <input {...getInputProps()} />
-                </VisuallyHidden>
-                <div
-                    {...getWrapperProps()}
-                    className={slots.wrapper({
-                        class: [
-                            'w-8 h-8',
-                            'flex items-center justify-center',
-                            'rounded-lg bg-default-500 hover:bg-default-200'
-                        ]
-                    })}
-                >
-                    {isSelected ? <SunIcon /> : <MoonIcon />}
-                </div>
-            </Component>
-        </>
+        <Component {...getBaseProps()}>
+            <VisuallyHidden>
+                <input {...getInputProps()} />
+            </VisuallyHidden>
+            <div
+                {...getWrapperProps()}
+                className={slots.wrapper({
+                    class: [
+                        'w-8 h-8',
+                        'flex items-center justify-center',
+                        'rounded-lg bg-default-500 hover:bg-default-200'
+                    ]
+                })}
+            >
+                {isSelected ? <SunIcon /> : <MoonIcon />}
+            </div>
+        </Component>
     )
 }
 

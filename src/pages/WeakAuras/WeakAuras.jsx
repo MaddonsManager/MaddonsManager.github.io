@@ -11,7 +11,7 @@ import {
     ItemList
 } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
-import { Spinner, useDisclosure } from '@nextui-org/react'
+import { Divider, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 
@@ -64,23 +64,24 @@ const WeakAuras = () => {
                     setSearchTerm={setSearchTerm}
                     valueName={data.map((item) => item.title)}
                 />
+                <Divider orientation="vertical" className="h-auto" />
                 <SelectVersion
                     version={version}
                     setVersion={setVersion}
                     valueType={uniqueExpansions}
                 />
+                <Divider orientation="vertical" className="h-auto" />
                 <SelectType
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}
                     valueType={dataTypes}
                 />
             </div>
-
             <div className="h-[calc(95vh-32px)]">
                 <div className=" h-full mx-auto mb-4">
                     <ScrollShadow
                         ref={scrollerRef}
-                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-4 shadow-sm"
+                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                         sh
                     >
                         {isLoading && (

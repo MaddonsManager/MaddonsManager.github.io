@@ -76,7 +76,7 @@ const Guides = () => {
                 <div className=" h-full mx-auto mb-4">
                     <ScrollShadow
                         ref={scrollerRef}
-                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-4 shadow-sm"
+                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                         sh
                     >
                         {isLoading && (
@@ -86,12 +86,12 @@ const Guides = () => {
                         )}
                         {error && <p className="text-red-500">Error: {error}</p>}
                         {filteredPosts.length > 0 ? (
-                            <div className="flex flex-wrap content-center items-center justify-center">
+                            <div className="flex flex-wrap gap-4 content-center items-center justify-center">
                                 <AnimatePresence>
                                     {filteredPosts.slice(0, itemToShow).map((post, index) => (
                                         <div
                                             key={`${index}-${post.title}`}
-                                            className="transition-transform duration-300 ease-in-out hover:scale-105 p-2"
+                                            className="transition-transform duration-300 ease-in-out hover:scale-105"
                                         >
                                             <Card
                                                 isPressable={true}
@@ -101,7 +101,7 @@ const Guides = () => {
                                                 animate="visible"
                                                 fallback
                                                 shadow="sm"
-                                                className="w-[400px]"
+                                                className="md:w-[400px] md:min-h-[446px]"
                                             >
                                                 <CardHeader className="relative bg-transparent h-[200px] mb-6">
                                                     <Image
@@ -129,7 +129,7 @@ const Guides = () => {
                                                         @{post.author.name}
                                                     </Chip>
                                                 </CardHeader>
-                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap">
+                                                <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap md:h-full">
                                                     <div className="px-4 flex-1">
                                                         <div className="flex items-center justify-between mb-2">
                                                             <h3 className="text-large font-medium">
@@ -148,7 +148,7 @@ const Guides = () => {
                                                                           0,
                                                                           200
                                                                       )}...`
-                                                                    : post.description}
+                                                                    : post.description}{' '}
                                                             </p>
                                                         </div>
                                                         <div className="flex flex-col justify-start items-start gap-2">
