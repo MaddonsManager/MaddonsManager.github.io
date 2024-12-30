@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import useElvUIData from '@/hook/useElvUIData'
 import useFilteredData from '@/hook/useFilteredData'
 import {
@@ -13,9 +12,10 @@ import {
 import { siteConfig } from '@/config/dirConfit'
 import { Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
-import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const ElvUI = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const { data, isLoading, error } = useElvUIData()
     const {
         searchTerm,
@@ -26,28 +26,12 @@ const ElvUI = () => {
         setSelectedType,
         uniqueExpansions,
         dataTypes,
-        filteredData
-    } = useFilteredData(data)
-
-    const [itemToShow, setItemToShow] = useState(20)
-    const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const [selectedItem, setSelectedItem] = useState(null)
-
-    const loadMore = () => setItemToShow((prev) => prev + 10)
-    const hasMore = filteredData.length > itemToShow
-    const [loadRef, scrollerRef] = useInfiniteScroll({
-        hasMore,
-        onLoadMore: loadMore
-    })
-
-    const handleCopyToClipboard = (content) => {
-        navigator.clipboard.writeText(content)
-    }
-
-    const handleOpenDetails = (item) => {
-        setSelectedItem(item)
-        onOpen(true)
-    }
+        filteredData,
+        handleCopyToClipboard,
+        handleOpenDetails,
+        selectedItem
+    } = useFilteredData(data, onOpen)
+    const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
         <div className="justify-center inline-block max-w-4xl text-start">
@@ -55,7 +39,7 @@ const ElvUI = () => {
                 {data.length > 0 ? `${data.length} Private ElvUI` : 'No ElvUI available'}
             </h1>
             <p className={subtitle()}>{siteConfig.description}</p>
-            {isOpen && (
+            {isOpen && selectedItem && (
                 <ProfilesDetails data={selectedItem} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
             <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">

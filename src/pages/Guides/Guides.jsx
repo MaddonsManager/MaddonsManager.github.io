@@ -1,4 +1,3 @@
-import { useState, useMemo } from 'react'
 import useBlogPost from '@/hook/useBlogPost'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -14,41 +13,20 @@ import {
     CardFooter,
     Link
 } from '@nextui-org/react'
-import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
+
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { title, subtitle, SelectType, Searcher } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
+import useFilterGuides from '@/hook/useFilterGuides'
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Guides = () => {
     const { post, error, isLoading } = useBlogPost()
+    const { searchTerm, setSearchTerm, selectedTag, setSelectedTag, postTags, filteredData } =
+        useFilterGuides(post)
+    const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
     const navigate = useNavigate()
-    const [itemToShow, setItemToShow] = useState(20)
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedTag, setSelectedTag] = useState('')
-
-    const postTags = useMemo(() => {
-        return Array.from(new Set(post.posts.flatMap((item) => item.tags)))
-    }, [post])
-
-    const filteredPosts = useMemo(() => {
-        return post.posts.filter((post) => {
-            const matchesSearch = searchTerm
-                ? post.title.toLowerCase().includes(searchTerm.toLowerCase())
-                : true
-            const matchesTag = selectedTag ? post.tags.includes(selectedTag) : true
-            return matchesSearch && matchesTag
-        })
-    }, [post, searchTerm, selectedTag])
-
-    const loadMore = () => {
-        setItemToShow((prev) => prev + 10)
-    }
-    const hasMore = filteredPosts && filteredPosts.length > itemToShow
-    const [loadRef, scrollerRef] = useInfiniteScroll({
-        hasMore,
-        onLoadMore: loadMore
-    })
 
     return (
         <div className="justify-center inline-block max-w-4xl text-start">
@@ -85,10 +63,10 @@ const Guides = () => {
                             </div>
                         )}
                         {error && <p className="text-red-500">Error: {error}</p>}
-                        {filteredPosts.length > 0 ? (
+                        {filteredData.length > 0 ? (
                             <div className="flex flex-wrap gap-4 content-center items-center justify-center">
                                 <AnimatePresence>
-                                    {filteredPosts.slice(0, itemToShow).map((post, index) => (
+                                    {filteredData.slice(0, itemToShow).map((post, index) => (
                                         <div
                                             key={`${index}-${post.title}`}
                                             className="transition-transform duration-300 ease-in-out hover:scale-105"

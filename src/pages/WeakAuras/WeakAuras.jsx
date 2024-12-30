@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import useWeakAurasData from '@/hook/useWeakAurasData'
 import useFilteredData from '@/hook/useFilteredData'
 import {
@@ -13,9 +12,10 @@ import {
 import { siteConfig } from '@/config/dirConfit'
 import { Divider, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
-import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const WeakAuras = () => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const { data, isLoading, error } = useWeakAurasData()
     const {
         searchTerm,
@@ -26,28 +26,12 @@ const WeakAuras = () => {
         setSelectedType,
         uniqueExpansions,
         dataTypes,
-        filteredData
-    } = useFilteredData(data)
-
-    const [itemToShow, setItemToShow] = useState(20)
-    const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const [selectedItem, setSelectedItem] = useState(null)
-
-    const loadMore = () => setItemToShow((prev) => prev + 10)
-    const hasMore = filteredData.length > itemToShow
-    const [loadRef, scrollerRef] = useInfiniteScroll({
-        hasMore,
-        onLoadMore: loadMore
-    })
-
-    const handleCopyToClipboard = (content) => {
-        navigator.clipboard.writeText(content)
-    }
-
-    const handleOpenDetails = (item) => {
-        setSelectedItem(item)
-        onOpen(true)
-    }
+        filteredData,
+        handleCopyToClipboard,
+        handleOpenDetails,
+        selectedItem
+    } = useFilteredData(data, onOpen)
+    const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
         <div className="justify-center inline-block max-w-4xl text-start">

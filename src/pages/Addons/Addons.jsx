@@ -1,4 +1,3 @@
-import React, { useState, useMemo } from 'react'
 import useAddonsData from '@/hook/useAddonsData'
 import {
     Card,
@@ -11,68 +10,33 @@ import {
     useDisclosure,
     Divider
 } from '@nextui-org/react'
-import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/utils/icons'
 import { title, subtitle, Searcher, SelectType, SelectVersion } from '@/components'
 import { siteConfig } from '@/config/dirConfit'
 import AddonsDetails from './AddonsDetails'
+import useFilterAddons from '@/hook/useFilterAddons'
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
-    const [version, setVersion] = useState(null)
-    const { data, isLoading, error } = useAddonsData()
-    const [itemToShow, setItemToShow] = useState(20)
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedType, setSelectedType] = useState('')
-    const [isSelectAddon, setIsSelectAddon] = useState(null)
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
-    const combinedData = useMemo(() => {
-        if (!data) return []
-        const allData = [...data.LichKing, ...data.Cataclysm, ...data.Pandaria]
-        if (version === null) return allData
-        return data[version] || []
-    }, [data, version])
-
-    const addonTypes = useMemo(() => {
-        return combinedData && combinedData.length > 0
-            ? Array.from(new Set(combinedData.map((addon) => addon.addonType)))
-            : []
-    }, [combinedData])
-
-    const filteredData = useMemo(() => {
-        return (
-            combinedData?.filter((addon) => {
-                const matchesSearch = searchTerm
-                    ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
-                    : true
-                const matchesType = selectedType ? addon.addonType === selectedType : true
-                return matchesSearch && matchesType
-            }) || []
-        )
-    }, [combinedData, searchTerm, selectedType])
-
-    const handleDownload = async (githubRepo) => {
-        const mainUrl = `${githubRepo}/archive/refs/heads/main.zip`
-        window.open(mainUrl)
-    }
-
-    const handleOpenDetails = (addon) => {
-        setIsSelectAddon(addon)
-        onOpen(true)
-    }
-
-    const loadMore = () => {
-        setItemToShow((prev) => prev + 10)
-    }
-
-    const hasMore = filteredData && filteredData.length > itemToShow
-
-    const [loadRef, scrollerRef] = useInfiniteScroll({
-        hasMore,
-        onLoadMore: loadMore
-    })
+    const { data, isLoading, error } = useAddonsData()
+    const {
+        searchTerm,
+        setSearchTerm,
+        version,
+        setVersion,
+        selectedType,
+        setSelectedType,
+        filteredData,
+        combinedData,
+        addonTypes,
+        handleDownload,
+        handleOpenDetails,
+        isSelectAddon
+    } = useFilterAddons(data, onOpen)
+    const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
         <div className="justify-center inline-block max-w-4xl text-start">

@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react'
 
-const useFilteredData = (data) => {
+const useFilteredData = (data, onOpen) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [version, setVersion] = useState(null)
     const [selectedType, setSelectedType] = useState('')
+    const [selectedItem, setSelectedItem] = useState(null)
 
     const uniqueExpansions = useMemo(() => {
         if (!data || data.length === 0) return []
@@ -25,6 +26,15 @@ const useFilteredData = (data) => {
         })
     }, [data, searchTerm, selectedType, version])
 
+    const handleCopyToClipboard = (content) => {
+        navigator.clipboard.writeText(content)
+    }
+
+    const handleOpenDetails = (item) => {
+        setSelectedItem(item)
+        onOpen(true)
+    }
+
     return {
         searchTerm,
         setSearchTerm,
@@ -34,7 +44,10 @@ const useFilteredData = (data) => {
         setSelectedType,
         uniqueExpansions,
         dataTypes,
-        filteredData
+        filteredData,
+        handleCopyToClipboard,
+        handleOpenDetails,
+        selectedItem
     }
 }
 
