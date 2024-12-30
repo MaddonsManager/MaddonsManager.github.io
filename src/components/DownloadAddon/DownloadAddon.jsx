@@ -1,38 +1,42 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useAddonsData from '@/hook/useAddonsData'
+import { Snippet, Link } from '@nextui-org/react'
 
 const DownloadAddon = () => {
-    const { addonName } = useParams()
     const { data } = useAddonsData()
+    const { addonName } = useParams()
     const [addon, setAddon] = useState(null)
+    console.log(data)
 
     useEffect(() => {
         if (data) {
             const allAddons = Object.values(data).flat()
             const foundAddon = allAddons.find((addon) => addon.name === addonName)
-            setAddon(foundAddon)
+
+            if (foundAddon) {
+                setAddon(foundAddon)
+                const downloadUrl = `${foundAddon.githubRepo}/archive/refs/heads/main.zip`
+                window.location.href = downloadUrl
+            }
         }
-    }, [addonName, data])
+    }, [data, addonName])
 
-    useEffect(() => {
-        if (addon) {
-            const downloadUrl = addon.githubRepo + '/archive/refs/heads/main.zip'
-            console.log('Preparando para descargar desde:', downloadUrl)
+    console.log(addon)
+    if (!addon) return <p>Loading.. or This addon is not available for download.</p>
 
-            // Crear un enlace invisible y simular un clic para iniciar la descarga
-            const link = document.createElement('a')
-            link.href = downloadUrl
-            link.download = `${addonName}.zip` // Nombre del archivo descargado
-            link.click()
-        }
-    }, [addon])
-
-    if (!addon) {
-        return <p>El addon "{addonName}" no fue encontrado.</p>
-    }
-
-    return <p>Redirigiendo para descargar {addonName}...</p>
+    return (
+        <div className="flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
+            <span>
+                Downloading Addon {addonName}... Click this if you are not redirected.{' '}
+                <Link href={addon.githubRepo} isExternal showAnchorIcon>
+                    Click here
+                </Link>{' '}
+                or copy this link{' '}
+                <Snippet>{`${addon.githubRepo}/archive/refs/heads/main.zip`}</Snippet>
+            </span>
+        </div>
+    )
 }
 
 export default DownloadAddon
