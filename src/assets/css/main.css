@@ -124,3 +124,13 @@
         font-style: italic;
     }
 }
+
+@layer components {
+    .layer {
+        @apply justify-center inline-block max-w-4xl text-start;
+    }
+
+    .bg-inputs {
+        @apply flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2;
+    }
+}

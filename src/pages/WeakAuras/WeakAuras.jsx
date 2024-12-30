@@ -1,8 +1,13 @@
 import useWeakAurasData from '@/hook/useWeakAurasData'
 import useFilteredData from '@/hook/useFilteredData'
-import { Searcher, SelectType, SelectVersion, ProfilesDetails, ItemList } from '@/components'
-import { title, subtitle } from '@/utils/primitives'
-import { siteConfig } from '@/config/dirConfit'
+import {
+    Searcher,
+    SelectType,
+    SelectVersion,
+    ProfilesDetails,
+    ItemList,
+    Header
+} from '@/components'
 import { Divider, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
@@ -27,15 +32,12 @@ const WeakAuras = () => {
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
-        <div className="justify-center inline-block max-w-4xl text-start">
-            <h1 className={title({ color: 'blue', size: 'lg' })}>
-                {data.length > 0 ? `${data.length} Private WeakAuras` : 'No WeakAuras available'}
-            </h1>
-            <p className={subtitle()}>{siteConfig.description}</p>
+        <div className="layer">
+            <Header data={data} />
             {isOpen && (
                 <ProfilesDetails data={selectedItem} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
-            <div className=" flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
+            <div className="bg-inputs">
                 <Searcher
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
@@ -54,34 +56,32 @@ const WeakAuras = () => {
                     valueType={dataTypes}
                 />
             </div>
-            <div className="h-[calc(95vh-32px)]">
-                <div className=" h-full mx-auto mb-4">
-                    <ScrollShadow
-                        ref={scrollerRef}
-                        className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
-                        sh
-                    >
-                        {isLoading && (
-                            <div className="flex justify-center mt-4">
-                                <Spinner>Loading WeakAuras...</Spinner>
-                            </div>
-                        )}
-                        {error && <p className="text-red-500">Error: {error}</p>}
-                        {filteredData.length > 0 ? (
-                            <ItemList
-                                data={filteredData}
-                                onOpenDetails={handleOpenDetails}
-                                handleCopyToClipboard={handleCopyToClipboard}
-                                itemToShow={itemToShow}
-                            />
-                        ) : null}
-                        {hasMore && (
-                            <div ref={loadRef} className="flex justify-center mt-4">
-                                <Spinner color="primary" />
-                            </div>
-                        )}
-                    </ScrollShadow>
-                </div>
+            <div className="h-[calc(95vh-32px)] mx-auto mb-4">
+                <ScrollShadow
+                    ref={scrollerRef}
+                    className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
+                    sh
+                >
+                    {isLoading && (
+                        <div className="flex justify-center mt-4">
+                            <Spinner>Loading WeakAuras...</Spinner>
+                        </div>
+                    )}
+                    {error && <p className="text-red-500">Error: {error}</p>}
+                    {filteredData.length > 0 ? (
+                        <ItemList
+                            data={filteredData}
+                            onOpenDetails={handleOpenDetails}
+                            handleCopyToClipboard={handleCopyToClipboard}
+                            itemToShow={itemToShow}
+                        />
+                    ) : null}
+                    {hasMore && (
+                        <div ref={loadRef} className="flex justify-center mt-4">
+                            <Spinner color="primary" />
+                        </div>
+                    )}
+                </ScrollShadow>
             </div>
         </div>
     )
