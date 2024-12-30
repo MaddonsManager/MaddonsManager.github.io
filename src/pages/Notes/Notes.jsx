@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import ReleaseNotes from './ReleaseNotes'
-import { title, subtitle } from '@/components'
+import { title, subtitle } from '@/utils/primitives'
 import { appReleaseNotes } from '@/utils/appReleaseNotes'
 import { webReleaseNotes } from '@/utils/webReleaseNotes'
 import { SelectNotes } from '@/components'

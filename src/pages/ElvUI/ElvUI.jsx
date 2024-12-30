@@ -1,16 +1,9 @@
 import useElvUIData from '@/hook/useElvUIData'
 import useFilteredData from '@/hook/useFilteredData'
-import {
-    title,
-    subtitle,
-    Searcher,
-    SelectType,
-    SelectVersion,
-    ProfilesDetails,
-    ItemList
-} from '@/components'
+import { Searcher, SelectType, SelectVersion, ProfilesDetails, ItemList } from '@/components'
+import { title, subtitle } from '@/utils/primitives'
 import { siteConfig } from '@/config/dirConfit'
-import { Spinner, useDisclosure } from '@nextui-org/react'
+import { Divider, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
@@ -48,11 +41,13 @@ const ElvUI = () => {
                     setSearchTerm={setSearchTerm}
                     valueName={data.map((item) => item.title)}
                 />
+                <Divider orientation="vertical" className="h-auto" />
                 <SelectVersion
                     version={version}
                     setVersion={setVersion}
                     valueType={uniqueExpansions}
                 />
+                <Divider orientation="vertical" className="h-auto" />
                 <SelectType
                     selectedType={selectedType}
                     setSelectedType={setSelectedType}

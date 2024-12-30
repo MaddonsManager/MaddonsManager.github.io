@@ -16,7 +16,8 @@ import {
 
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
-import { title, subtitle, SelectType, Searcher } from '@/components'
+import { SelectType, Searcher } from '@/components'
+import { title, subtitle } from '@/utils/primitives'
 import { siteConfig } from '@/config/dirConfit'
 import useFilterGuides from '@/hook/useFilterGuides'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'

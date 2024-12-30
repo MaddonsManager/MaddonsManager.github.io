@@ -1,14 +1,7 @@
 import useWeakAurasData from '@/hook/useWeakAurasData'
 import useFilteredData from '@/hook/useFilteredData'
-import {
-    title,
-    subtitle,
-    Searcher,
-    SelectType,
-    SelectVersion,
-    ProfilesDetails,
-    ItemList
-} from '@/components'
+import { Searcher, SelectType, SelectVersion, ProfilesDetails, ItemList } from '@/components'
+import { title, subtitle } from '@/utils/primitives'
 import { siteConfig } from '@/config/dirConfit'
 import { Divider, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
