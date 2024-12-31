@@ -1,18 +1,18 @@
 export const webReleaseNotes = [
     {
-        version: 'v0.0.1',
+        version: 'v0.1.1',
         date: '2024-06-19',
         extra: 'First release',
         features: ['First release']
     },
     {
-        version: 'v0.0.2',
+        version: 'v0.1.2',
         date: '2024-06-19',
         extra: 'Auto updater is now available',
         features: ['Added some features', 'Added autoUpdater']
     },
     {
-        version: 'v0.0.3',
+        version: 'v0.1.3',
         date: '2024-06-19',
         extra: 'some componentes are updated',
         features: [
@@ -24,13 +24,13 @@ export const webReleaseNotes = [
         ]
     },
     {
-        version: 'v0.0.4',
+        version: 'v0.1.4',
         date: '2024-06-19',
         extra: 'Fixed a critical bug.',
         fixed: ['Fixed a critical bug that caused it to not iterate correctly from main to master.']
     },
     {
-        version: 'v0.0.5',
+        version: 'v0.1.5',
         date: '2024-06-20',
         extra: 'some componentes are updated',
         features: ['add scrollbar into addon-container', 'addon-container setup to 50 from 10'],
@@ -39,7 +39,7 @@ export const webReleaseNotes = [
         ]
     },
     {
-        version: 'v0.0.6',
+        version: 'v0.1.6',
         date: '2024-12-28',
         extra: 'Big update 👩🏽‍💻🎉',
         features: [
@@ -60,6 +60,30 @@ export const webReleaseNotes = [
             'fix some bugs in the Addons page',
             'fix some bugs in the Guides page',
             'Refactor and enhance application structure'
+        ]
+    },
+    {
+        version: 'v0.1.7',
+        date: '2024-12-30',
+        extra: 'Big christmas update 🎉🎆',
+        features: [
+            'Add snow effect',
+            'Add new year Countdown with confetti',
+            'Add custom hooks for infinite scroll',
+            'Add custom hooks for filtering',
+            'refactor WeakAuras and ElvUI components to utilize new hooks',
+            'Refactor DownloadAddon component to streamline download process',
+            'Add Header component',
+            'update ElvUI, WeakAuras and Addons pages to include Header enhance CSS for layout styling'
+        ],
+        fixed: [
+            'improve user feedback with loading state and clickable download link',
+            'fix component imports to utilize new path primitives module',
+            'fix some bugs in the Addons page',
+            'fix some bugs in the Guides page',
+            'Refactor and enhance application structure',
+            'fix version number in webReleaseNotes',
+            'fix tailwind variants on Home page'
         ]
     }
 ].reverse()

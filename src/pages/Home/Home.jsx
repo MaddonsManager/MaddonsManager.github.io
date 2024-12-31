@@ -37,7 +37,7 @@ function Home() {
                     .
                 </div>
             </div>
-            <div className="lg:m-5 animate-[levitate_13s_ease_infinite_1s_reverse] aspect-video">
+            <div className="lg:m-5 animate-levitate aspect-video">
                 <Image isZoomed isBlurred width={800} src={PREVIEW_IMG} alt="Maddons Preview" />
             </div>
             <div className="flex items-center justify-center gap-3">
