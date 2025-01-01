@@ -39,7 +39,7 @@ const Addon = () => {
 
     return (
         <div className="layer">
-            <Header data={data} />
+            <Header data={combinedData} />
             {isSelectAddon && (
                 <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
