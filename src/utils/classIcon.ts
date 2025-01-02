@@ -1,4 +1,4 @@
-const classIcon = {
+const classIcon: { [key: string]: string } = {
     'Death Knight': '/class/dk-class.png',
     Druid: '/class/druid-class.png',
     Hunter: '/class/hunter-class.png',
@@ -12,7 +12,7 @@ const classIcon = {
     Monk: '/class/monk-class.png'
 }
 
-const roleIcon = {
+const roleIcon: { [key: string]: string } = {
     TANK: '/roles/tank.png',
     HEALER: '/roles/heal.png',
     DPS: '/roles/dps.png'

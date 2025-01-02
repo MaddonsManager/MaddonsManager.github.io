@@ -1,15 +1,16 @@
 import { useState, useMemo } from 'react'
+import { Post } from '@/types'
 
-const useFilterGuides = (post) => {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [selectedTag, setSelectedTag] = useState('')
+const useFilterGuides = (post: Post[]) => {
+    const [searchTerm, setSearchTerm] = useState<string | null>(null)
+    const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
     const postTags = useMemo(() => {
-        return Array.from(new Set(post.posts.flatMap((item) => item.tags)))
+        return Array.from(new Set(post.flatMap((item) => item.tags)))
     }, [post])
 
     const filteredData = useMemo(() => {
-        return post.posts.filter((post) => {
+        return post.filter((post) => {
             const matchesSearch = searchTerm
                 ? post.title.toLowerCase().includes(searchTerm.toLowerCase())
                 : true

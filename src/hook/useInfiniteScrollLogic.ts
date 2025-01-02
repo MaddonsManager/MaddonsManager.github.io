@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
 
-const useInfiniteScrollLogic = (filteredData) => {
+const useInfiniteScrollLogic = (filteredData: any[]) => {
     const [itemToShow, setItemToShow] = useState(20)
 
     const loadMore = () => {

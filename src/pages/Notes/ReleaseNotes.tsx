@@ -1,6 +1,12 @@
 import { Accordion, AccordionItem, Avatar, Link } from '@nextui-org/react'
 
-function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
+interface ReleaseNotesProps {
+    appReleaseNotes: any[]
+    webReleaseNotes: any[]
+    selectedNotes: 'app' | 'web'
+}
+
+function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }: ReleaseNotesProps) {
     const releaseNotes = selectedNotes === 'app' ? appReleaseNotes : webReleaseNotes
 
     return (
@@ -47,7 +53,7 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
                         <div className="mt-8" data-orientation="vertical"></div>
 
                         <Accordion selectionMode="multiple" variant="light">
-                            {releaseNote.features?.length > 0 && (
+                            {releaseNote.features && releaseNote.features.length > 0 && (
                                 <AccordionItem
                                     key={`${releaseNote.version}-features`}
                                     aria-label={`Features - ${releaseNote.version}`}
@@ -62,7 +68,7 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
                                     }
                                     title="Features"
                                 >
-                                    {releaseNote.features.map((feature, index) => (
+                                    {releaseNote.features.map((feature: string, index: number) => (
                                         <p key={index} className="text-default-500">
                                             - {feature}
                                         </p>
@@ -85,7 +91,7 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
                                     }
                                     title="Fixes"
                                 >
-                                    {releaseNote.fixed.map((fix, index) => (
+                                    {releaseNote.fixed.map((fix: string, index: number) => (
                                         <p key={index} className="text-default-500">
                                             - {fix}
                                         </p>
@@ -93,28 +99,31 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }) {
                                 </AccordionItem>
                             )}
 
-                            {releaseNote.breakingChanges?.length > 0 && (
-                                <AccordionItem
-                                    key={`${releaseNote.version}-breaking`}
-                                    aria-label={`Breaking Changes - ${releaseNote.version}`}
-                                    startContent={
-                                        <Avatar
-                                            showFallback
-                                            name="Breacking"
-                                            isBordered
-                                            color="danger"
-                                            radius="md"
-                                        />
-                                    }
-                                    title="Breaking Changes"
-                                >
-                                    {releaseNote.breakingChanges.map((change, index) => (
-                                        <p key={index} className="text-default-500">
-                                            - {change}
-                                        </p>
-                                    ))}
-                                </AccordionItem>
-                            )}
+                            {releaseNote.breakingChanges &&
+                                releaseNote.breakingChanges.length > 0 && (
+                                    <AccordionItem
+                                        key={`${releaseNote.version}-breaking`}
+                                        aria-label={`Breaking Changes - ${releaseNote.version}`}
+                                        startContent={
+                                            <Avatar
+                                                showFallback
+                                                name="Breacking"
+                                                isBordered
+                                                color="danger"
+                                                radius="md"
+                                            />
+                                        }
+                                        title="Breaking Changes"
+                                    >
+                                        {releaseNote.breakingChanges.map(
+                                            (change: string, index: number) => (
+                                                <p key={index} className="text-default-500">
+                                                    - {change}
+                                                </p>
+                                            )
+                                        )}
+                                    </AccordionItem>
+                                )}
                         </Accordion>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
     Navbar,
     NavbarBrand,
@@ -25,7 +25,6 @@ export default function AppNavbar() {
 
     return (
         <Navbar
-            size="sm"
             shouldHideOnScroll
             isMenuOpen={isMenuOpen}
             onMenuOpenChange={setIsMenuOpen}

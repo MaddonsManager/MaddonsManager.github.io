@@ -1,10 +1,16 @@
-import React from 'react'
 import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
-import { classIcon, roleIcon } from '@/utils/classIcon'
+import { classIcon } from '@/utils/classIcon'
 import { TagIcon, GroupIcon } from '@/utils/icons'
 
-const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) => (
+interface ItemListProps {
+    data: any[]
+    onOpenDetails: (item: any) => void
+    handleCopyToClipboard: (content: string) => void
+    itemToShow: number
+}
+
+const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: ItemListProps) => (
     <div className="flex flex-wrap gap-4 content-center items-center justify-center">
         <AnimatePresence>
             {data.slice(0, itemToShow).map((item) => (
@@ -16,9 +22,6 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                         isPressable={true}
                         onPress={() => onOpenDetails(item)}
                         isFooterBlurred
-                        initial="hidden"
-                        animate="visible"
-                        fallback
                         shadow="sm"
                         className="md:w-[850px]"
                     >
@@ -53,14 +56,14 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                                             : item.description}
                                     </p>
                                     {item.class.map &&
-                                        item.class.map((className, index) => (
+                                        item.class.map((className: string, index: number) => (
                                             <Chip
                                                 avatar={
                                                     className === 'ALL' ? (
                                                         <GroupIcon />
                                                     ) : (
                                                         <Avatar
-                                                            name={data.title}
+                                                            name={item.title}
                                                             src={classIcon[className]}
                                                         />
                                                     )
@@ -75,7 +78,7 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }) =>
                                             </Chip>
                                         ))}
                                 </div>
-                                {item.tags.map((tag, index) => (
+                                {item.tags.map((tag: string, index: number) => (
                                     <Chip
                                         avatar={<TagIcon />}
                                         key={index}

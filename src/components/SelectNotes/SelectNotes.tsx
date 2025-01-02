@@ -1,13 +1,20 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 
-const SelectNotes = ({ selectedNotes, setSelectedNotes }) => {
+interface SelectNotesProps {
+    selectedNotes: 'app' | 'web'
+    setSelectedNotes: (notes: 'app' | 'web') => void
+}
+
+const SelectNotes = ({ selectedNotes, setSelectedNotes }: SelectNotesProps) => {
     return (
         <div className="max-w-fit flex justify-end mb-4 mr-3 flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md">
             <Autocomplete
                 label="Notes"
                 isVirtualized
                 selectedKey={selectedNotes}
-                onSelectionChange={(key) => setSelectedNotes(key)}
+                onSelectionChange={(key: React.Key | null) =>
+                    setSelectedNotes(key as 'app' | 'web')
+                }
                 size="md"
                 className="w-auto max-w-fit font-bold text-default-900"
                 variant="underlined"

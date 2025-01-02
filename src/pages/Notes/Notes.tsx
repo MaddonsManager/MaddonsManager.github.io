@@ -9,7 +9,7 @@ import { Link } from '@nextui-org/react'
 
 function Notes() {
     const location = useLocation()
-    const [selectedNotes, setSelectedNotes] = useState('web')
+    const [selectedNotes, setSelectedNotes] = useState<'app' | 'web'>('web')
 
     useEffect(() => {
         const version = location.hash.replace('#release-note-', '')

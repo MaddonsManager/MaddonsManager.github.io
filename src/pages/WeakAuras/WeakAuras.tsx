@@ -14,7 +14,7 @@ import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const WeakAuras = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const { data, isLoading, error } = useWeakAurasData()
+    const { data = [], isLoading, error } = useWeakAurasData()
     const {
         searchTerm,
         setSearchTerm,
@@ -41,7 +41,7 @@ const WeakAuras = () => {
                 <Searcher
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
-                    valueName={data.map((item) => item.title)}
+                    valueName={data?.map((item) => item.title)}
                 />
                 <Divider orientation="vertical" className="h-auto" />
                 <SelectVersion
@@ -60,7 +60,6 @@ const WeakAuras = () => {
                 <ScrollShadow
                     ref={scrollerRef}
                     className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
-                    sh
                 >
                     {isLoading && (
                         <div className="flex justify-center mt-4">
@@ -77,8 +76,8 @@ const WeakAuras = () => {
                         />
                     ) : null}
                     {hasMore && (
-                        <div ref={loadRef} className="flex justify-center mt-4">
-                            <Spinner color="primary" />
+                        <div className="flex w-full justify-center mt-4">
+                            <Spinner ref={loadRef} color="primary" />
                         </div>
                     )}
                 </ScrollShadow>

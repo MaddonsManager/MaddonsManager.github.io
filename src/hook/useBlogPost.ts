@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
+import { Post } from '@/types'
 
-let blogPostCache = null
+interface postCache {
+    posts: Post[] | null
+}
 
-const useBlogPost = () => {
-    const [post, setPost] = useState({ posts: [] })
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+const postCache: postCache = {
+    posts: null
+}
+
+const useBlogPost = (): { post: Post[]; error: string | null; isLoading: boolean } => {
+    const [post, setPost] = useState<Post[]>([])
+    const [error, setError] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
         const loadPost = async () => {
@@ -13,8 +20,8 @@ const useBlogPost = () => {
             setError(null)
 
             try {
-                if (blogPostCache) {
-                    setPost(blogPostCache)
+                if (postCache.posts) {
+                    setPost(postCache.posts)
                     setIsLoading(false)
                     return
                 }
@@ -27,16 +34,15 @@ const useBlogPost = () => {
                 }
 
                 const data = await response.json()
-
-                blogPostCache = data
-                setPost(data)
+                const posts = data.posts || []
+                postCache.posts = posts
+                setPost(posts)
             } catch (err) {
-                setError(err.message)
+                setError(err instanceof Error ? err.message : 'Unknown error')
             } finally {
                 setIsLoading(false)
             }
         }
-
         loadPost()
     }, [])
 

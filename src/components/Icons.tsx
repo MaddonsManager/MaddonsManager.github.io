@@ -1,4 +1,7 @@
-export const Logo = ({ size = 36, width, height, ...props }) => (
+import { FC } from 'react'
+import { IconSvgProps } from '@/types'
+
+export const Logo: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg fill="none" height={size || height} viewBox="0 0 32 32" width={size || width} {...props}>
         <path
             clipRule="evenodd"
@@ -9,7 +12,7 @@ export const Logo = ({ size = 36, width, height, ...props }) => (
     </svg>
 )
 
-export const DiscordIcon = ({ size = 24, width, height, ...props }) => {
+export const DiscordIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
     return (
         <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
             <path
@@ -20,7 +23,7 @@ export const DiscordIcon = ({ size = 24, width, height, ...props }) => {
     )
 }
 
-export const TwitterIcon = ({ size = 24, width, height, ...props }) => {
+export const TwitterIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
     return (
         <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
             <path
@@ -31,7 +34,7 @@ export const TwitterIcon = ({ size = 24, width, height, ...props }) => {
     )
 }
 
-export const GithubIcon = ({ size = 24, width, height, ...props }) => {
+export const GithubIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => {
     return (
         <svg height={size || height} viewBox="0 0 24 24" width={size || width} {...props}>
             <path
@@ -44,7 +47,7 @@ export const GithubIcon = ({ size = 24, width, height, ...props }) => {
     )
 }
 
-export const MoonFilledIcon = ({ size = 24, width, height, ...props }) => (
+export const MoonFilledIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         focusable="false"
@@ -61,7 +64,7 @@ export const MoonFilledIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const SunFilledIcon = ({ size = 24, width, height, ...props }) => (
+export const SunFilledIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         focusable="false"
@@ -78,7 +81,7 @@ export const SunFilledIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const DeleteIcon = ({ size = 24, width, height, ...props }) => (
+export const DeleteIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         fill="none"
@@ -127,7 +130,7 @@ export const DeleteIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const DownloadIcon = ({ size = 24, width, height, ...props }) => (
+export const DownloadIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         fill="none"
@@ -165,7 +168,7 @@ export const DownloadIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const SearchIcon = ({ size = 24, width, height, ...props }) => (
+export const SearchIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         fill="none"
@@ -203,7 +206,7 @@ export const SearchIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const MonitorMobileIcon = ({ size = 24, width, height, ...props }) => (
+export const MonitorMobileIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         fill="none"
@@ -259,7 +262,7 @@ export const MonitorMobileIcon = ({ size = 24, width, height, ...props }) => (
     </svg>
 )
 
-export const EditDocumentIcon = ({ size = 24, width, height, ...props }) => (
+export const EditDocumentIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
     <svg
         aria-hidden="true"
         fill="none"

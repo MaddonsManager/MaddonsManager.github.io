@@ -17,14 +17,19 @@ import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
 import { useEffect } from 'react'
 
-const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
+interface ProfilesDetailsProps {
+    data: any
+    isOpen: boolean
+    onOpenChange: (isOpen: boolean) => void
+}
+
+const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) => {
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block)
+            hljs.highlightElement(block as HTMLElement)
         })
     }, [data])
 
-    console.log('data profile', data)
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="full">
             <DrawerContent>
@@ -45,7 +50,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                     <p>author: {data.author}</p>
                                     <div className="flex items-center gap-2 my-2">
                                         <p className="font-bold ">Tags:</p>
-                                        {data.tags.map((tag, index) => (
+                                        {data.tags.map((tag: string, index: number) => (
                                             <Chip
                                                 key={index}
                                                 color="warning"
@@ -59,7 +64,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                     </div>
                                     <div className="flex flex-wrap items-center gap-2 my-2">
                                         <p className="font-bold ">Class:</p>
-                                        {data.class.map((className, index) => (
+                                        {data.class.map((className: string, index: number) => (
                                             <Chip
                                                 avatar={
                                                     <Avatar
@@ -79,7 +84,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                                     </div>
                                     <div className="flex items-center gap-2 my-2">
                                         <p className="font-bold">Roles:</p>
-                                        {data.roles.map((role, index) => (
+                                        {data.roles.map((role: string, index: number) => (
                                             <Chip
                                                 avatar={
                                                     <Avatar
@@ -128,7 +133,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }) => {
                             </div>
                             <div className="flex flex-col items-start justify-center p-4">
                                 <h2 className="text-lg font-extrabold">Changelogs</h2>
-                                {data.changelog.map((changelog, index) => (
+                                {data.changelog.map((changelog: string, index: number) => (
                                     <p key={index} className="block my-2 text-justify">
                                         {changelog}
                                     </p>

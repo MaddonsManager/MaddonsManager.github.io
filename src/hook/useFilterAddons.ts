@@ -1,16 +1,16 @@
 import { useState, useMemo } from 'react'
+import { AddonsData, AddonsDataState } from '@/types'
 
-const useFilterAddons = (data) => {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [version, setVersion] = useState(null)
-    const [selectedType, setSelectedType] = useState('')
-    const [isSelectAddon, setIsSelectAddon] = useState(null)
+const useFilterAddons = (data: AddonsDataState | null, onOpen: (isOpen: boolean) => void) => {
+    const [searchTerm, setSearchTerm] = useState<string | null>(null)
+    const [version, setVersion] = useState<string | null>(null)
+    const [selectedType, setSelectedType] = useState<string | null>(null)
+    const [isSelectAddon, setIsSelectAddon] = useState<AddonsData | null>(null)
 
     const combinedData = useMemo(() => {
         if (!data) return []
         const allData = [...data.LichKing, ...data.Cataclysm, ...data.Pandaria]
-        if (version === null) return allData
-        return data[version] || []
+        return version === null ? allData : data[version] || []
     }, [data, version])
 
     const addonTypes = useMemo(() => {
@@ -31,12 +31,12 @@ const useFilterAddons = (data) => {
         )
     }, [combinedData, searchTerm, selectedType])
 
-    const handleDownload = async (githubRepo) => {
+    const handleDownload = async (githubRepo: string) => {
         const mainUrl = `${githubRepo}/archive/refs/heads/main.zip`
         window.open(mainUrl)
     }
 
-    const handleOpenDetails = (addon) => {
+    const handleOpenDetails = (addon: AddonsData) => {
         setIsSelectAddon(addon)
         onOpen(true)
     }
@@ -51,7 +51,6 @@ const useFilterAddons = (data) => {
         addonTypes,
         filteredData,
         combinedData,
-        addonTypes,
         handleDownload,
         handleOpenDetails,
         isSelectAddon

@@ -1,13 +1,19 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 import { SearchIcon } from '@/components'
 
-const SearchAddon = ({ searchTerm, setSearchTerm, valueName }) => {
+interface SearcherProps {
+    searchTerm: string | null
+    setSearchTerm: (searchTerm: string) => void
+    valueName: string[]
+}
+
+const SearchAddon = ({ searchTerm, setSearchTerm, valueName }: SearcherProps) => {
     return (
         <Autocomplete
             label="Search by Name"
             isVirtualized
             selectedKey={searchTerm}
-            onSelectionChange={(e) => setSearchTerm(e)}
+            onSelectionChange={(key: React.Key | null) => setSearchTerm(key as string)}
             defaultItems={valueName.map((name) => ({ key: name, name: name }))}
             startContent={<SearchIcon size={18} />}
             size="md"

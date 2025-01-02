@@ -7,10 +7,10 @@ import { RoutesNotFound, DownloadAddon } from '@/components'
 const AppRoutes = React.memo(() => {
     return (
         <Routes>
-            <Route exact path="/" element={<Loading />} />
+            <Route path="/" element={<Loading />} />
             <Route path="/home" element={<Home />} />
             <Route path="/Addons" element={<Addons />} />
-            <Route path="/download/:addonName" element={<DownloadAddon />} />
+            <Route path="/download/:addonName" element={<DownloadAddon />} />1
             <Route path="/WeakAuras" element={<WeakAuras />} />
             <Route path="/ElvUI" element={<ElvUI />} />
             <Route path="/Guides" element={<Guides />} />

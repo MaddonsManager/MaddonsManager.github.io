@@ -3,7 +3,7 @@ import { MoonIcon, SunIcon } from '@/utils/icons'
 import { useTheme } from '@nextui-org/use-theme'
 import { useEffect } from 'react'
 
-const ThemeSwitch = (props) => {
+const ThemeSwitch = (props: any) => {
     const { theme, setTheme } = useTheme()
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme')

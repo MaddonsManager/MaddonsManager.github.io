@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react'
+import { StringItems } from '@/types'
 
-const useFilteredData = (data, onOpen) => {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [version, setVersion] = useState(null)
-    const [selectedType, setSelectedType] = useState('')
-    const [selectedItem, setSelectedItem] = useState(null)
+const useFilteredData = (data: StringItems[], onOpen: (open: boolean) => void) => {
+    const [searchTerm, setSearchTerm] = useState<string | null>(null)
+    const [version, setVersion] = useState<string | null>(null)
+    const [selectedType, setSelectedType] = useState<string | null>(null)
+    const [selectedItem, setSelectedItem] = useState<StringItems | null>(null)
 
     const uniqueExpansions = useMemo(() => {
         if (!data || data.length === 0) return []
@@ -26,11 +27,11 @@ const useFilteredData = (data, onOpen) => {
         })
     }, [data, searchTerm, selectedType, version])
 
-    const handleCopyToClipboard = (content) => {
+    const handleCopyToClipboard = (content: string) => {
         navigator.clipboard.writeText(content)
     }
 
-    const handleOpenDetails = (item) => {
+    const handleOpenDetails = (item: any) => {
         setSelectedItem(item)
         onOpen(true)
     }

@@ -16,10 +16,11 @@ import { DownloadIcon } from '@/utils/icons'
 import { Searcher, SelectType, SelectVersion, Header } from '@/components'
 import AddonsDetails from './AddonsDetails'
 import useFilterAddons from '@/hook/useFilterAddons'
+import { AddonsDataState } from '@/types'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure()
+    const { isOpen, onOpenChange } = useDisclosure()
     const { data, isLoading, error } = useAddonsData()
     const {
         searchTerm,
@@ -34,7 +35,7 @@ const Addon = () => {
         handleDownload,
         handleOpenDetails,
         isSelectAddon
-    } = useFilterAddons(data, onOpen)
+    } = useFilterAddons(data as AddonsDataState, onOpenChange)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
@@ -68,7 +69,6 @@ const Addon = () => {
                 <ScrollShadow
                     ref={scrollerRef}
                     className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
-                    sh
                 >
                     {isLoading && (
                         <div className="flex justify-center mt-4">
@@ -88,9 +88,6 @@ const Addon = () => {
                                             isPressable={true}
                                             onPress={() => handleOpenDetails(addon)}
                                             isFooterBlurred
-                                            initial="hidden"
-                                            animate="visible"
-                                            fallback
                                             shadow="sm"
                                             className="w-[200px] h-[200px]"
                                         >
@@ -136,8 +133,8 @@ const Addon = () => {
                         </div>
                     ) : null}
                     {hasMore && (
-                        <div ref={loadRef} className="flex justify-center mt-4">
-                            <Spinner color="primary" />
+                        <div className="flex justify-center mt-4">
+                            <Spinner ref={loadRef} color="primary" />
                         </div>
                     )}
                 </ScrollShadow>

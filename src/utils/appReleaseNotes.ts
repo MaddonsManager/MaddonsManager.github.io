@@ -1,15 +1,21 @@
-export const appReleaseNotes = [
+import { ReleaseNotesTypes } from '@/types'
+
+export const appReleaseNotes: ReleaseNotesTypes[] = [
     {
         version: 'v1.0.0',
         date: '2024-06-19',
         extra: 'First release',
-        features: ['First release']
+        features: ['First release'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.2',
         date: '2024-06-19',
         extra: 'Auto updater is now available',
-        features: ['Added some features', 'Added autoUpdater']
+        features: ['Added some features', 'Added autoUpdater'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.3',
@@ -21,13 +27,19 @@ export const appReleaseNotes = [
             'update motion when install/uninstall',
             'update index.html',
             ' update some alerts'
-        ]
+        ],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.4',
         date: '2024-06-19',
         extra: 'Fixed a critical bug.',
-        fixed: ['Fixed a critical bug that caused it to not iterate correctly from main to master.']
+        fixed: [
+            'Fixed a critical bug that caused it to not iterate correctly from main to master.'
+        ],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.5',
@@ -36,19 +48,24 @@ export const appReleaseNotes = [
         features: ['add scrollbar into addon-container', 'addon-container setup to 50 from 10'],
         fixed: [
             'Fix the window manager icons Minimize Maximize Close to stick in the same position'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.0.6',
         date: '2024-06-21',
         extra: 'add filters',
-        features: ['add filter by Installed addons and NonInstalled addons.']
+        features: ['add filter by Installed addons and NonInstalled addons.'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.7',
         date: '2024-07-08',
         extra: 'fixed some bugs',
-        fixed: ['Fixed error when trying to update addons split with _ or -']
+        fixed: ['Fixed error when trying to update addons split with _ or -'],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.8',
@@ -57,7 +74,9 @@ export const appReleaseNotes = [
         fixed: [
             'Fixed error when trying to update addons split with _ or -',
             ' Fixed spanish words.'
-        ]
+        ],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.0.9',
@@ -66,32 +85,41 @@ export const appReleaseNotes = [
         features: [
             'added an option in the logo menu to choose again the location of wow.exe',
             'added About me modal to see the version and some other things about the app'
-        ]
+        ],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.0',
         date: '2024-07-14',
         extra: 'New logo hell yeah!',
-        features: ['New logo']
+        features: ['New logo'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.1',
         date: '2024-07-15',
         extra: 'Prepare to incoming update',
-        features: ['Prepare to incoming update']
+        features: ['Prepare to incoming update'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.2',
         date: '2024-07-15',
         extra: '...🥲',
-        fixed: ['...']
+        fixed: ['...'],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.3',
         date: '2024-07-17',
         extra: 'Fixed some bugs and add features',
         fixed: ['Fixed some error when try update addons. (not at all)'],
-        features: ['Added alerts on update addon.']
+        features: ['Added alerts on update addon.'],
+        breakingChanges: []
     },
     {
         version: 'v1.1.4',
@@ -102,41 +130,49 @@ export const appReleaseNotes = [
             'Fixed and Added alerts on update addon.',
             'Fixed and Added alerts on update addon.',
             'Fixed some emojis on modal'
-        ]
+        ],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.5',
         date: '2024-07-18',
         extra: 'Fixed some bugs',
-        fixed: ['ixed some folders were not deleted']
+        fixed: ['ixed some folders were not deleted'],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v1.1.6',
         date: '2024-07-21',
         extra: 'Scaffolding all files and folders, fixes and features',
         fixed: ['Fixed windows when open any URL'],
-        features: ['Move changelogs.md path', 'Move changelogs.md path']
+        features: ['Move changelogs.md path', 'Move changelogs.md path'],
+        breakingChanges: []
     },
     {
         version: 'v1.1.7',
         date: '2024-09-22',
         extra: 'On this version jump to React, this version is now on Dev',
         features: ['React 18'],
-        breakingChanges: ['it will be constantly updated and will receive several upgrades']
+        breakingChanges: ['it will be constantly updated and will receive several upgrades'],
+        fixed: []
     },
     {
         version: 'v1.1.8',
         date: '2024-09-30',
         extra: 'Fixed some bugs',
         fixed: ['Fixed backend issues.'],
-        features: [' Rename Window to Master Addon Manager']
+        features: [' Rename Window to Master Addon Manager'],
+        breakingChanges: []
     },
     {
         version: 'v1.1.9',
         date: '2024-10-01',
         extra: 'Hello, new factures and important bug fixes.',
         fixed: ['Fixed update notifications.', 'Fixed visual uninstall button on install addons.'],
-        features: ['Progress bar to install/uninstall addon']
+        features: ['Progress bar to install/uninstall addon'],
+        breakingChanges: []
     },
     {
         version: 'v1.2.0',
@@ -147,14 +183,16 @@ export const appReleaseNotes = [
             'parse html fixed',
             'remove shadowscroll from modals, we need fix the new scroll'
         ],
-        features: ['About content modal', 'Control toggle menu to close on click any item']
+        features: ['About content modal', 'Control toggle menu to close on click any item'],
+        breakingChanges: []
     },
     {
         version: 'v1.2.1',
         date: '2024-10-05',
         extra: 'Hello everyone in this update we bring',
         fixed: [' Cards in contentaddon is now fixed', ' some UI issue is now fixed'],
-        features: ['New custom TitleBar.', ' New clean logo.']
+        features: ['New custom TitleBar.', ' New clean logo.'],
+        breakingChanges: []
     },
     {
         version: 'v1.2.2',
@@ -164,7 +202,8 @@ export const appReleaseNotes = [
         features: [
             'addons now only deleting specific folders that are',
             '  written in the API no longer makes splits.'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.2.3',
@@ -176,7 +215,8 @@ export const appReleaseNotes = [
         features: [
             'this will make the addon names more stylized.',
             'Change name to Maddons Manager.'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.2.4',
@@ -189,7 +229,8 @@ export const appReleaseNotes = [
         ],
         features: [
             'added a class to handle multiple downloads, now all downloads are queued and start when the previous one finishes.'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.2.5',
@@ -201,7 +242,8 @@ export const appReleaseNotes = [
         ],
         features: [
             'The Select component now dynamically pulls all addon types directly from the APIs JSON files. These will now auto-update without manual intervention! 🎉'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.2.6',
@@ -218,7 +260,8 @@ export const appReleaseNotes = [
             'Add openFileDialog handler in the main process for Wow expansions.',
             'Validate selected WoW paths for Interface and WTF directories.',
             'Update get-config and path handlers to return detailed error messages.'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v1.2.7',
@@ -226,7 +269,9 @@ export const appReleaseNotes = [
         extra: 'Several bug 🫥...',
         breakingChanges: [
             ' Fixed several bugs when trying to use the menu items and it bucle on Loading page..'
-        ]
+        ],
+        fixed: [],
+        features: []
     },
     {
         version: 'v1.3.0',
@@ -250,6 +295,7 @@ export const appReleaseNotes = [
             '🏜️ New fuction to implemented new UIX',
             '🍫Titlebar litle change',
             '🔗Modal to view more addon info are implemented'
-        ]
+        ],
+        breakingChanges: []
     }
 ].reverse()

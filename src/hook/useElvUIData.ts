@@ -1,26 +1,31 @@
 import { useState, useEffect } from 'react'
+import { StringItems } from '@/types'
 
-const elvUICache = {
+interface ElvUICache {
+    elvui: StringItems[] | null
+}
+
+const elvUICache: ElvUICache = {
     elvui: null
 }
 
-const useElvUIData = () => {
-    const [data, setData] = useState([])
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+const useElvUIData = (): { data: StringItems[]; error: string | null; isLoading: boolean } => {
+    const [data, setData] = useState<StringItems[]>([])
+    const [error, setError] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const jsonUrl =
         'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/ElvUI.json'
 
-    const fetchElvUIWithContent = async (url) => {
+    const fetchElvUIWithContent = async (url: string) => {
         try {
             const response = await fetch(url)
             if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
 
-            const jsonData = await response.json()
+            const jsonData: StringItems[] = await response.json()
 
             const dataWithContent = await Promise.all(
-                jsonData.map(async (item) => {
+                jsonData.map(async (item: any): Promise<any> => {
                     try {
                         const txtResponse = await fetch(
                             `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
@@ -35,7 +40,9 @@ const useElvUIData = () => {
                         return { ...item, content, logo, md }
                     } catch (err) {
                         console.warn(
-                            `Failed to fetch content for UUID ${item.uuid}: ${err.message}`
+                            `Failed to fetch content for UUID ${item.uuid}: ${
+                                err instanceof Error ? err.message : 'Unknown error'
+                            }`
                         )
                         return { ...item, content: null, md: null }
                     }
@@ -44,7 +51,9 @@ const useElvUIData = () => {
 
             return dataWithContent
         } catch (err) {
-            throw new Error(`Failed to load data: ${err.message}`)
+            throw new Error(
+                `Failed to load data: ${err instanceof Error ? err.message : 'Unknown error'}`
+            )
         }
     }
 
@@ -58,11 +67,10 @@ const useElvUIData = () => {
                     const elvuiData = await fetchElvUIWithContent(jsonUrl)
                     elvUICache.elvui = elvuiData
                     setData(elvuiData)
-                    console.log(`back`, elvuiData)
                 }
                 setIsLoading(false)
             } catch (err) {
-                setError(err.message)
+                setError(err instanceof Error ? err.message : 'Unknown error')
                 setIsLoading(false)
             }
         }

@@ -1,15 +1,21 @@
-export const webReleaseNotes = [
+import { ReleaseNotesTypes } from '@/types'
+
+export const webReleaseNotes: ReleaseNotesTypes[] = [
     {
         version: 'v0.1.1',
         date: '2024-06-19',
         extra: 'First release',
-        features: ['First release']
+        features: ['First release'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v0.1.2',
         date: '2024-06-19',
         extra: 'Auto updater is now available',
-        features: ['Added some features', 'Added autoUpdater']
+        features: ['Added some features', 'Added autoUpdater'],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v0.1.3',
@@ -21,13 +27,19 @@ export const webReleaseNotes = [
             'update motion when install/uninstall',
             'update index.html',
             ' update some alerts'
-        ]
+        ],
+        fixed: [],
+        breakingChanges: []
     },
     {
         version: 'v0.1.4',
         date: '2024-06-19',
         extra: 'Fixed a critical bug.',
-        fixed: ['Fixed a critical bug that caused it to not iterate correctly from main to master.']
+        fixed: [
+            'Fixed a critical bug that caused it to not iterate correctly from main to master.'
+        ],
+        features: [],
+        breakingChanges: []
     },
     {
         version: 'v0.1.5',
@@ -36,7 +48,8 @@ export const webReleaseNotes = [
         features: ['add scrollbar into addon-container', 'addon-container setup to 50 from 10'],
         fixed: [
             'Fix the window manager icons Minimize Maximize Close to stick in the same position'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v0.1.6',
@@ -60,7 +73,8 @@ export const webReleaseNotes = [
             'fix some bugs in the Addons page',
             'fix some bugs in the Guides page',
             'Refactor and enhance application structure'
-        ]
+        ],
+        breakingChanges: []
     },
     {
         version: 'v0.1.7',
@@ -84,6 +98,7 @@ export const webReleaseNotes = [
             'Refactor and enhance application structure',
             'fix version number in webReleaseNotes',
             'fix tailwind variants on Home page'
-        ]
+        ],
+        breakingChanges: []
     }
 ].reverse()

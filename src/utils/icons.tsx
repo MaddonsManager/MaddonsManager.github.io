@@ -1,4 +1,8 @@
-export const DeleteIcon = (props) => (
+import { FC } from 'react'
+
+import { IconSvgProps } from '@/types'
+
+export const DeleteIcon: FC<IconSvgProps> = (props) => (
     <svg
         aria-hidden="true"
         fill="none"
@@ -47,7 +51,7 @@ export const DeleteIcon = (props) => (
     </svg>
 )
 
-export const TagIcon = (props) => (
+export const TagIcon: FC<IconSvgProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
         <path
             fill="currentColor"
@@ -58,7 +62,7 @@ export const TagIcon = (props) => (
     </svg>
 )
 
-export const GroupIcon = (props) => (
+export const GroupIcon: FC<IconSvgProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}>
         <path
             fill="currentColor"
@@ -67,7 +71,7 @@ export const GroupIcon = (props) => (
     </svg>
 )
 
-export const MoonIcon = (props) => {
+export const MoonIcon: FC<IconSvgProps> = (props) => {
     return (
         <svg
             aria-hidden="true"
@@ -86,7 +90,7 @@ export const MoonIcon = (props) => {
     )
 }
 
-export const SunIcon = (props) => {
+export const SunIcon: FC<IconSvgProps> = (props) => {
     return (
         <svg
             aria-hidden="true"
@@ -105,7 +109,7 @@ export const SunIcon = (props) => {
     )
 }
 
-export const DownloadIcon = (props) => (
+export const DownloadIcon: FC<IconSvgProps> = (props) => (
     <svg
         aria-hidden="true"
         fill="none"

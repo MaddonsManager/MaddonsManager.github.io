@@ -2,7 +2,11 @@ import { useLocation } from 'react-router-dom'
 import { title, subtitle } from '@/utils/primitives'
 import { siteConfig } from '@/config/dirConfit'
 
-const Header = ({ data }) => {
+interface HeaderProps {
+    data: any[]
+}
+
+const Header = ({ data }: HeaderProps) => {
     const location = useLocation()
 
     const currentNavItem = siteConfig.navItems.find(

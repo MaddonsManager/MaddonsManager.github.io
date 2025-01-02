@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { siteConfig } from '@/config/dirConfit'
 import ReactMarkdown from 'react-markdown'
@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
 
-const postCache = {}
+const postCache: any = {}
 
 const Post = () => {
     const { folder } = useParams()
@@ -44,7 +44,7 @@ const Post = () => {
 
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block)
+            hljs.highlightElement(block as HTMLElement)
         })
     }, [markdown])
 

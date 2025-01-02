@@ -1,11 +1,16 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
+interface SelectVersionProps {
+    version: string | null
+    setVersion: (version: string | null) => void
+    valueType: string[]
+}
 
-const SelectVersion = ({ version, setVersion, valueType }) => {
+const SelectVersion = ({ version, setVersion, valueType }: SelectVersionProps) => {
     return (
         <Autocomplete
             label="Select Version"
             selectedKey={version}
-            onSelectionChange={(e) => setVersion(e)}
+            onSelectionChange={(key: React.Key | null) => setVersion(key as string)}
             defaultItems={valueType.map((type) => ({ key: type, name: type }))}
             size="md"
             className="w-full font-bold text-default-900"

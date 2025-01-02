@@ -10,8 +10,13 @@ import {
     Link,
     Image
 } from '@nextui-org/react'
+interface AddonsDetailsProps {
+    addon: any
+    isOpen: boolean
+    onOpenChange: (isOpen: boolean) => void
+}
 
-const AddonsDetails = ({ addon, isOpen, onOpenChange }) => {
+const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="4xl">
             <DrawerContent>

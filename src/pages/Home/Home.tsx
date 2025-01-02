@@ -49,27 +49,21 @@ function Home() {
                         variant: 'shadow'
                     })}
                     onPress={() => downloadFile(downloadUrl)}
-                    underline
                     color="primary"
-                    radius="full"
-                    variant="shadow"
                     size="sm"
                 >
-                    <DownloadIcon size={20} />
+                    <DownloadIcon size={20} width={20} height={20} />
                     Download it
                 </Link>
                 <Link
                     isExternal
                     className={buttonStyles({ variant: 'bordered', radius: 'full' })}
                     href={siteConfig.links.github}
-                    underline
                     title="Last release from github page."
                     color="primary"
-                    radius="full"
-                    variant="shadow"
                     size="sm"
                 >
-                    <GithubIcon size={20} />
+                    <GithubIcon size={20} width={20} height={20} />
                     GitHub
                 </Link>
             </div>
@@ -82,7 +76,7 @@ function Home() {
                         className="bg-background/60 dark:bg-default-100/40 max-w-[300px]"
                         shadow="lg"
                     >
-                        <CardBody className="w-full h-full " color="Primary">
+                        <CardBody className="w-full h-full">
                             <div>
                                 <h3 className="z-10 flex items-center justify-start w-full gap-2 p-3 pb-0 text-lg subpixel-antialiased font-semibold shrink-0 rounded-t-large">
                                     <div className="flex items-center justify-center p-2 rounded-full text-primary-400 bg-primary-100/80">
