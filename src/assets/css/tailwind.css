@@ -1289,10 +1289,6 @@ html {
   left: 50%;
 }
 
-.left-4 {
-  left: 1rem;
-}
-
 .left-\[10\%\] {
   left: 10%;
 }
@@ -1355,10 +1351,6 @@ html {
 
 .top-2 {
   top: 0.5rem;
-}
-
-.top-40 {
-  top: 10rem;
 }
 
 .top-\[10\%\] {
@@ -1583,10 +1575,6 @@ html {
 
 .mr-1 {
   margin-right: 0.25rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .mr-3 {
@@ -2445,24 +2433,6 @@ html {
 
 .animate-drip-expand {
   animation: drip-expand 420ms linear;
-}
-
-@keyframes hueRotate {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-
-  50% {
-    filter: hue-rotate(-120deg);
-  }
-
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-.animate-hueRotate {
-  animation: hueRotate 6s ease-in-out 3s infinite;
 }
 
 @keyframes indeterminate-bar {
@@ -9724,10 +9694,6 @@ html {
 }
 
 @media (min-width: 1024px) {
-  .lg\:fixed {
-    position: fixed;
-  }
-
   .lg\:m-5 {
     margin: 1.25rem;
   }
