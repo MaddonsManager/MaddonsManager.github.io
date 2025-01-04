@@ -1,5 +1,5 @@
 import { button as buttonStyles, Link, Image, Card, CardBody } from '@nextui-org/react'
-import { DownloadIcon, GithubIcon } from '@/components'
+import { DownloadIcon, GithubIcon } from '@/components/Icons'
 import { title, subtitle, normal } from '@/utils/primitives'
 import { contentHome } from './contentHome'
 import { siteConfig } from '@/config/dirConfit'

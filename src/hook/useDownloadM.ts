@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-const API_URL: string = 'https://api.github.com/repos/maddon/maddon-manager/releases/latest'
+const API_URL: string = 'https://api.github.com/repos/PentSec/MaddonsManager/releases/latest'
 interface UseDownloadMReturn {
     downloadUrl: string
     downloadFile: (url: string) => void

@@ -34,7 +34,7 @@ const SelectType = ({ selectedType, setSelectedType, valueType }: SelectTypeProp
                     ]
                 }
             }}
-            placeholder="Enter addon type"
+            placeholder="Enter a type"
             popoverProps={{
                 offset: 10,
                 classNames: {

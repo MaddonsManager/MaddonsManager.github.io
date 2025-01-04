@@ -1,5 +1,5 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
-import { SearchIcon } from '@/components'
+import { SearchIcon } from '@/components/Icons'
 
 interface SearcherProps {
     searchTerm: string | null
@@ -15,7 +15,7 @@ const SearchAddon = ({ searchTerm, setSearchTerm, valueName }: SearcherProps) =>
             selectedKey={searchTerm}
             onSelectionChange={(key: React.Key | null) => setSearchTerm(key as string)}
             defaultItems={valueName.map((name) => ({ key: name, name: name }))}
-            startContent={<SearchIcon size={18} />}
+            startContent={<SearchIcon className="w-4 h-4" />}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"
@@ -36,7 +36,7 @@ const SearchAddon = ({ searchTerm, setSearchTerm, valueName }: SearcherProps) =>
                     ]
                 }
             }}
-            placeholder="Enter addon name"
+            placeholder="Enter a name"
             popoverProps={{
                 offset: 10,
                 classNames: {

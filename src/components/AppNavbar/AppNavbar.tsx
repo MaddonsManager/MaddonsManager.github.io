@@ -74,13 +74,13 @@ export default function AppNavbar() {
             <NavbarContent justify="end">
                 <NavbarItem className=" gap-2 flex">
                     <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-                        <DiscordIcon className="text-default-500" />
+                        <DiscordIcon />
                     </Link>
                     <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-                        <TwitterIcon className="text-default-500" />
+                        <TwitterIcon className="w-5 h-5" />
                     </Link>
                     <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-                        <GithubIcon className="text-default-500" />
+                        <GithubIcon className="w-5 h-5" />
                     </Link>
                     <Divider orientation="vertical" className="h-auto mr-4 ml-2" />
                     <ThemeSwitch />

@@ -100,5 +100,13 @@ export const webReleaseNotes: ReleaseNotesTypes[] = [
             'fix tailwind variants on Home page'
         ],
         breakingChanges: []
+    },
+    {
+        version: 'v0.1.8',
+        date: '2025-1-03',
+        extra: 'Minimal update 🎉',
+        features: ['Add new motion svg icons'],
+        fixed: ['Fix download button', 'Fix text on input components'],
+        breakingChanges: []
     }
 ].reverse()
