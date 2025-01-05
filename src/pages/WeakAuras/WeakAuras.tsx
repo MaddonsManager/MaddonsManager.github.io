@@ -1,4 +1,4 @@
-import { useWeakAurasContext } from '@/context/weakAurasContext'
+import { useWeakAurasContext } from '@/context/WeakAurasContext'
 import useFilteredData from '@/hook/useFilteredData'
 import {
     Searcher,
