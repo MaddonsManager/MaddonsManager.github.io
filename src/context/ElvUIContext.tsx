@@ -1,23 +1,39 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext, useContext, FC, ReactNode } from 'react'
 import { StringItems } from '@/types'
 
-interface WeakAurasCache {
-    weakauras: StringItems[] | null
+interface ElvUICache {
+    elvui: StringItems[] | null
 }
 
-const weakAurasCache: WeakAurasCache = {
-    weakauras: null
+const elvUICache: ElvUICache = {
+    elvui: null
 }
 
-const useWeakAurasData = (): { data: StringItems[]; error: string | null; isLoading: boolean } => {
+interface ElvUIContextValue {
+    data: StringItems[]
+    isLoading: boolean
+    error: string | null
+}
+
+const ElvUIContext = createContext<ElvUIContextValue | undefined>(undefined)
+
+export const useElvUIContext = (): ElvUIContextValue => {
+    const context = useContext(ElvUIContext)
+    if (!context) {
+        throw new Error('useElvUIContext must be used inside an ElvUIProvider')
+    }
+    return context
+}
+
+export const ElvUIProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [data, setData] = useState<StringItems[]>([])
-    const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string | null>(null)
 
     const jsonUrl =
-        'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/WeakAuras.json'
+        'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/ElvUI.json'
 
-    const fetchWeakAurasWithContent = async (url: string) => {
+    const fetchElvUIWithContent = async (url: string) => {
         try {
             const response = await fetch(url)
             if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
@@ -28,11 +44,11 @@ const useWeakAurasData = (): { data: StringItems[]; error: string | null; isLoad
                 jsonData.map(async (item: any): Promise<any> => {
                     try {
                         const txtResponse = await fetch(
-                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.txt`
+                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
                         )
-                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.logo}`
+                        const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
                         const markdown = await fetch(
-                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/WeakAuras/${item.uuid}/${item.uuid}.md`
+                            `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
                         )
 
                         const content = txtResponse.ok ? await txtResponse.text() : null
@@ -61,12 +77,12 @@ const useWeakAurasData = (): { data: StringItems[]; error: string | null; isLoad
         const loadAllData = async () => {
             setIsLoading(true)
             try {
-                if (weakAurasCache.weakauras) {
-                    setData(weakAurasCache.weakauras)
+                if (elvUICache.elvui) {
+                    setData(elvUICache.elvui)
                 } else {
-                    const weakaurasData = await fetchWeakAurasWithContent(jsonUrl)
-                    weakAurasCache.weakauras = weakaurasData
-                    setData(weakaurasData)
+                    const elvuiData = await fetchElvUIWithContent(jsonUrl)
+                    elvUICache.elvui = elvuiData
+                    setData(elvuiData)
                 }
                 setIsLoading(false)
             } catch (err) {
@@ -78,7 +94,7 @@ const useWeakAurasData = (): { data: StringItems[]; error: string | null; isLoad
         loadAllData()
     }, [])
 
-    return { data, error, isLoading }
+    return (
+        <ElvUIContext.Provider value={{ data, isLoading, error }}>{children}</ElvUIContext.Provider>
+    )
 }
-
-export default useWeakAurasData

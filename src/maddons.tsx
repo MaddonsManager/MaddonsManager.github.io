@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { HashRouter as Router, useNavigate, useHref, useLocation } from 'react-router-dom'
 import Layout from '@/Layout/Layout'
 import { NextUIProvider } from '@nextui-org/react'
+import { AddonsProvider, WeakAurasProvider, ElvUIProvider, BlogPostProvider } from '@/context'
 import '@/assets/css/main.css'
 import '/logo.png'
 import '/apple-touch-icon.png'
@@ -15,22 +16,25 @@ import 'github-markdown-css/github-markdown.css'
 const Maddons = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const isLoadingRoute = location.pathname === '/'
     const isErrorRoute = location.pathname === '/404'
 
     return (
         <NextUIProvider navigate={navigate} useHref={useHref}>
-            <Layout isLoadingRoute={isLoadingRoute} isErrorRoute={isErrorRoute} />
+            <AddonsProvider>
+                <WeakAurasProvider>
+                    <ElvUIProvider>
+                        <BlogPostProvider>
+                            <Layout isErrorRoute={isErrorRoute} />
+                        </BlogPostProvider>
+                    </ElvUIProvider>
+                </WeakAurasProvider>
+            </AddonsProvider>
         </NextUIProvider>
     )
 }
 
-const AppWrapper = () => {
-    return (
-        <Router>
-            <Maddons />
-        </Router>
-    )
-}
-
-ReactDOM.createRoot(document.getElementById('root')!).render(<AppWrapper />)
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <Router>
+        <Maddons />
+    </Router>
+)

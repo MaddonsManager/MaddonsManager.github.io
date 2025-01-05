@@ -1,4 +1,4 @@
-import useWeakAurasData from '@/hook/useWeakAurasData'
+import { useWeakAurasContext } from '@/context/weakAurasContext'
 import useFilteredData from '@/hook/useFilteredData'
 import {
     Searcher,
@@ -14,7 +14,7 @@ import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const WeakAuras = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const { data = [], isLoading, error } = useWeakAurasData()
+    const { data = [], isLoading, error } = useWeakAurasContext()
     const {
         searchTerm,
         setSearchTerm,

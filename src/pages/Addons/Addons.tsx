@@ -1,4 +1,4 @@
-import useAddonsData from '@/hook/useAddonsData'
+import { useAddonsContext } from '@/context/AddonsContext'
 import {
     Card,
     CardBody,
@@ -21,7 +21,7 @@ import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
     const { isOpen, onOpenChange } = useDisclosure()
-    const { data, isLoading, error } = useAddonsData()
+    const { data, isLoading, error } = useAddonsContext()
     const {
         searchTerm,
         setSearchTerm,

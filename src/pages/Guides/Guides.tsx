@@ -1,4 +1,4 @@
-import useBlogPost from '@/hook/useBlogPost'
+import { useBlogPostContext } from '@/context/BlogPostContext'
 import { useNavigate } from 'react-router-dom'
 import {
     Card,
@@ -22,7 +22,7 @@ import useFilterGuides from '@/hook/useFilterGuides'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Guides = () => {
-    const { post, error, isLoading } = useBlogPost()
+    const { post, error, isLoading } = useBlogPostContext()
     const { searchTerm, setSearchTerm, selectedTag, setSelectedTag, postTags, filteredData } =
         useFilterGuides(post)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)

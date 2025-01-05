@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import useAddonsData from '@/hook/useAddonsData'
+import { useAddonsContext } from '@/context/AddonsContext'
 import { Snippet, Link } from '@nextui-org/react'
 import { AddonsData } from '@/types'
 
 const DownloadAddon = () => {
-    const { data } = useAddonsData()
+    const { data } = useAddonsContext()
     const { addonName } = useParams<{ addonName: string }>()
     const [addon, setAddon] = useState<AddonsData | null>(null)
 

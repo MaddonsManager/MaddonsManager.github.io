@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
-import { Home, Notes, Loading, Addons, WeakAuras, ElvUI, Guides, Post } from '@/pages'
+import { Home, Notes, Addons, WeakAuras, ElvUI, Guides, Post } from '@/pages'
 import { RoutesNotFound, DownloadAddon } from '@/components'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -15,7 +15,7 @@ const AppRoutes = () => {
                 transition={{ duration: 0.1 }}
             >
                 <Routes>
-                    <Route path="/" element={<Loading />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/Addons" element={<Addons />} />
                     <Route path="/download/:addonName" element={<DownloadAddon />} />

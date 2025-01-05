@@ -1,4 +1,4 @@
-import useElvUIData from '@/hook/useElvUIData'
+import { useElvUIContext } from '@/context/ElvUIContext'
 import useFilteredData from '@/hook/useFilteredData'
 import {
     Searcher,
@@ -16,7 +16,7 @@ import { StringItems } from '@/types'
 
 const ElvUI = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const { data, isLoading, error } = useElvUIData()
+    const { data, isLoading, error } = useElvUIContext()
     const {
         searchTerm,
         setSearchTerm,

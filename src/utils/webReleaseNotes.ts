@@ -108,5 +108,13 @@ export const webReleaseNotes: ReleaseNotesTypes[] = [
         features: ['Add new motion svg icons'],
         fixed: ['Fix download button', 'Fix text on input components'],
         breakingChanges: []
+    },
+    {
+        version: 'v0.1.9',
+        date: '2025-1-04',
+        extra: 'Minimal update 🎉',
+        features: ['added all context providers to enhance UX and performance'],
+        fixed: ['Remove unused Loading page and related styles'],
+        breakingChanges: []
     }
 ].reverse()
