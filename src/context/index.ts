@@ -1,4 +1,4 @@
 export { AddonsProvider } from './AddonsContext'
-export { WeakAurasProvider } from './weakAurasContext'
+export { WeakAurasProvider } from './WeakAurasContext'
 export { ElvUIProvider } from './ElvUIContext'
 export { BlogPostProvider } from './BlogPostContext'
