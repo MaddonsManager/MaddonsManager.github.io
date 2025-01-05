@@ -3,6 +3,8 @@ import { HashRouter as Router, useNavigate, useHref, useLocation } from 'react-r
 import Layout from '@/Layout/Layout'
 import { NextUIProvider } from '@nextui-org/react'
 import { AddonsProvider, WeakAurasProvider, ElvUIProvider, BlogPostProvider } from '@/context'
+import { QueryClientProvider } from '@tanstack/react-query'
+import queryClient from '@/utils/QueryClient'
 import '@/assets/css/main.css'
 import '/logo.png'
 import '/apple-touch-icon.png'
@@ -19,17 +21,19 @@ const Maddons = () => {
     const isErrorRoute = location.pathname === '/404'
 
     return (
-        <NextUIProvider navigate={navigate} useHref={useHref}>
-            <AddonsProvider>
-                <WeakAurasProvider>
-                    <ElvUIProvider>
-                        <BlogPostProvider>
-                            <Layout isErrorRoute={isErrorRoute} />
-                        </BlogPostProvider>
-                    </ElvUIProvider>
-                </WeakAurasProvider>
-            </AddonsProvider>
-        </NextUIProvider>
+        <QueryClientProvider client={queryClient}>
+            <NextUIProvider navigate={navigate} useHref={useHref}>
+                <AddonsProvider>
+                    <WeakAurasProvider>
+                        <ElvUIProvider>
+                            <BlogPostProvider>
+                                <Layout isErrorRoute={isErrorRoute} />
+                            </BlogPostProvider>
+                        </ElvUIProvider>
+                    </WeakAurasProvider>
+                </AddonsProvider>
+            </NextUIProvider>
+        </QueryClientProvider>
     )
 }
 

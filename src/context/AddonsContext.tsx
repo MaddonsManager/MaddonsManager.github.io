@@ -1,15 +1,6 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useState } from 'react'
-import { AddonsData, AddonsDataState } from '@/types'
-
-interface AddonsCache {
-    [key: string]: AddonsData[] | null
-}
-
-const addonsCache: AddonsCache = {
-    LichKing: null,
-    Cataclysm: null,
-    Pandaria: null
-}
+import { createContext, FC, ReactNode, useContext } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { AddonsDataState } from '@/types'
 
 const urls: { [key: string]: string } = {
     LichKing: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
@@ -19,7 +10,7 @@ const urls: { [key: string]: string } = {
 
 interface AddonsContextValue {
     data: AddonsDataState
-    isLoading: boolean
+    isPending: boolean
     error: string | null
 }
 
@@ -33,55 +24,47 @@ export const useAddonsContext = (): AddonsContextValue => {
     return context
 }
 
+const fetchAddons = async (key: string) => {
+    console.log(`Fetching data for ${key}`)
+    const response = await fetch(urls[key])
+    if (!response.ok) {
+        throw new Error(`Error fetching ${key}: ${response.statusText}`)
+    }
+    console.log(`Response for ${key}`, response)
+    return response.json()
+}
+
 export const AddonsProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const [data, setData] = useState<AddonsDataState>({
-        LichKing: [],
-        Cataclysm: [],
-        Pandaria: []
+    const lichKingQuery = useQuery({
+        queryKey: ['lichKing'],
+        queryFn: () => fetchAddons('LichKing'),
+        refetchOnWindowFocus: false
     })
-    const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>(null)
+    const cataclysmQuery = useQuery({
+        queryKey: ['cataclysm'],
+        queryFn: () => fetchAddons('Cataclysm'),
+        refetchOnWindowFocus: false
+    })
+    const pandariaQuery = useQuery({
+        queryKey: ['pandaria'],
+        queryFn: () => fetchAddons('Pandaria'),
+        refetchOnWindowFocus: false
+    })
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true)
-            setError(null)
+    const data: AddonsDataState = {
+        LichKing: lichKingQuery.data || [],
+        Cataclysm: cataclysmQuery.data || [],
+        Pandaria: pandariaQuery.data || []
+    }
 
-            try {
-                const result = await Promise.all(
-                    Object.keys(urls).map(async (key) => {
-                        if (addonsCache[key]) {
-                            return { key, data: addonsCache[key] }
-                        }
+    const isPending = lichKingQuery.isPending || cataclysmQuery.isPending || pandariaQuery.isPending
 
-                        const response = await fetch(urls[key])
-                        if (!response.ok)
-                            throw new Error(`Error fetching ${key}: ${response.statusText}`)
-
-                        const jsonData = await response.json()
-                        addonsCache[key] = jsonData
-                        return { key, data: jsonData }
-                    })
-                )
-
-                const newData = result.reduce((acc, { key, data }) => {
-                    acc[key] = data as AddonsData[]
-                    return acc
-                }, {} as AddonsDataState)
-
-                setData(newData)
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'Unknown error')
-            } finally {
-                setIsLoading(false)
-            }
-        }
-
-        fetchData()
-    }, [])
+    const error = lichKingQuery.error || cataclysmQuery.error || pandariaQuery.error
 
     return (
-        <AddonsContext.Provider value={{ data, isLoading, error }}>
+        <AddonsContext.Provider
+            value={{ data, isPending, error: error ? (error as Error).message : null }}
+        >
             {children}
         </AddonsContext.Provider>
     )

@@ -16,7 +16,7 @@ import { StringItems } from '@/types'
 
 const ElvUI = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const { data, isLoading, error } = useElvUIContext()
+    const { data, isPending, error } = useElvUIContext()
     const {
         searchTerm,
         setSearchTerm,
@@ -64,7 +64,7 @@ const ElvUI = () => {
                     ref={scrollerRef}
                     className="h-[calc(93vh-32px)] overflow-auto mb-4 p-4 shadow-sm"
                 >
-                    {isLoading && (
+                    {isPending && (
                         <div className="flex justify-center mt-4">
                             <Spinner>Loading ElvUI...</Spinner>
                         </div>

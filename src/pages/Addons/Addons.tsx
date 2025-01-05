@@ -21,7 +21,7 @@ import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
     const { isOpen, onOpenChange } = useDisclosure()
-    const { data, isLoading, error } = useAddonsContext()
+    const { data, isPending, error } = useAddonsContext()
     const {
         searchTerm,
         setSearchTerm,
@@ -70,7 +70,7 @@ const Addon = () => {
                     ref={scrollerRef}
                     className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                 >
-                    {isLoading && (
+                    {isPending && (
                         <div className="flex justify-center mt-4">
                             <Spinner>Loading Addons...</Spinner>
                         </div>

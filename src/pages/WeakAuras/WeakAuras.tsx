@@ -14,7 +14,7 @@ import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const WeakAuras = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
-    const { data = [], isLoading, error } = useWeakAurasContext()
+    const { data = [], isPending, error } = useWeakAurasContext()
     const {
         searchTerm,
         setSearchTerm,
@@ -61,7 +61,7 @@ const WeakAuras = () => {
                     ref={scrollerRef}
                     className="h-[calc(93vh-32px)] overflow-auto mb-4 p-2 shadow-sm"
                 >
-                    {isLoading && (
+                    {isPending && (
                         <div className="flex justify-center mt-4">
                             <Spinner>Loading WeakAuras...</Spinner>
                         </div>

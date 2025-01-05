@@ -12,7 +12,7 @@ const Post = () => {
     const { folder } = useParams()
     const [markdown, setMarkdown] = useState('')
     const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
+    const [isPending, setIsLoading] = useState(true)
 
     useEffect(() => {
         if (!folder) return
@@ -48,7 +48,7 @@ const Post = () => {
         })
     }, [markdown])
 
-    if (isLoading) {
+    if (isPending) {
         return <div>Cargando...</div>
     }
 

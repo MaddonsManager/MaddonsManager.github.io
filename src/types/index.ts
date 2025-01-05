@@ -43,7 +43,7 @@ export type Post = {
     date: string
     tags: string[]
     folder: string
-    post: Post[]
+    posts: Post[]
     [key: string]: any
 }
 

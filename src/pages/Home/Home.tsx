@@ -7,10 +7,10 @@ import PREVIEW_IMG from '/preview.webp'
 import LK_IMG from '/lk.webp'
 import CAT_IMG from '/cata.webp'
 import PANDA_IMG from '/panda.webp'
-import useDownloadM from '@/hook/useDownloadM'
+import { useDownloadM } from '@/hook/useDownloadM'
 
 function Home() {
-    const { downloadFile, downloadUrl } = useDownloadM()
+    const { downloadFile, downloadUrl, isPending, error } = useDownloadM()
 
     return (
         <section className="flex flex-col items-center justify-center gap-4">
@@ -51,9 +51,10 @@ function Home() {
                     onPress={() => downloadFile(downloadUrl)}
                     color="primary"
                     size="sm"
+                    isDisabled={!!isPending || !!error}
                 >
                     <DownloadIcon size={20} width={20} height={20} />
-                    Download it
+                    {isPending ? 'Loading...' : error ? 'Link Error' : 'Download it'}
                 </Link>
                 <Link
                     isExternal
