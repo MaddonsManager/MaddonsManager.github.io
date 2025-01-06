@@ -44,7 +44,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                     radius="sm"
                                     src="/logo.png"
                                     width={60}
-                                    className="object-contain"
+                                    className="object-cover"
                                 />
                                 <div className="text-tiny flex flex-col text-default-400">
                                     <p>author: {data.author}</p>

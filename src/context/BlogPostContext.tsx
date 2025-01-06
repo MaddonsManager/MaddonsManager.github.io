@@ -21,16 +21,8 @@ export const useBlogPostContext = (): BlogPostContextValue => {
 }
 
 const fetchBlogPosts = async (url: string): Promise<Post[]> => {
-    try {
-        const response = await fetch(url)
-        if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
-        const jsonData = await response.json()
-        return jsonData.posts || []
-    } catch (err) {
-        throw new Error(
-            `Failed to load data: ${err instanceof Error ? err.message : 'Unknown error'}`
-        )
-    }
+    const response = await fetch(url).then((res) => res.json())
+    return response.posts
 }
 
 export const BlogPostProvider: FC<{ children: ReactNode }> = ({ children }) => {

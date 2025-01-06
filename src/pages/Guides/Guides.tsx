@@ -11,7 +11,8 @@ import {
     CardHeader,
     Avatar,
     CardFooter,
-    Link
+    Link,
+    Snippet
 } from '@nextui-org/react'
 
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
@@ -55,7 +56,11 @@ const Guides = () => {
                             <Spinner>Loading Guides...</Spinner>
                         </div>
                     )}
-                    {error && <p className="text-red-500">Error: {error}</p>}
+                    {error && (
+                        <Snippet symbol color="danger">
+                            Error: {error}
+                        </Snippet>
+                    )}
                     {filteredData.length > 0 ? (
                         <div className="flex flex-wrap gap-4 content-center items-center justify-center">
                             <AnimatePresence>

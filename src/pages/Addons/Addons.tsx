@@ -8,7 +8,8 @@ import {
     Tooltip,
     Spinner,
     useDisclosure,
-    Divider
+    Divider,
+    Snippet
 } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
@@ -75,7 +76,11 @@ const Addon = () => {
                             <Spinner>Loading Addons...</Spinner>
                         </div>
                     )}
-                    {error && <p className="text-red-500">Error: {error}</p>}
+                    {error && (
+                        <Snippet symbol color="danger">
+                            Error: {error}
+                        </Snippet>
+                    )}
                     {filteredData.length > 0 ? (
                         <div className="flex flex-wrap gap-4 content-center items-center justify-center">
                             <AnimatePresence>

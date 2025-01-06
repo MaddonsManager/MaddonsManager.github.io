@@ -21,43 +21,28 @@ export const useElvUIContext = (): ElvUIContextValue => {
 }
 
 const fetchElvUIWithContent = async (url: string): Promise<StringItems[]> => {
-    try {
-        const response = await fetch(url)
-        if (!response.ok) throw new Error(`Error fetching JSON: ${response.statusText}`)
+    const response = await fetch(url)
+    const jsonData = await response.json()
+    return Promise.all(
+        jsonData.map(async (item: any) => {
+            const txtUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
+            const logoUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
+            const mdUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
 
-        const jsonData: StringItems[] = await response.json()
+            const [content, md] = await Promise.all([
+                fetch(txtUrl).then((res) => {
+                    if (!res.ok) throw new Error(`Failed to fetch txt for ${item.uuid}`)
+                    return res.text()
+                }),
+                fetch(mdUrl).then((res) => {
+                    if (!res.ok) throw new Error(`Failed to fetch md for ${item.uuid}`)
+                    return res.text()
+                })
+            ])
 
-        const dataWithContent = await Promise.all(
-            jsonData.map(async (item: any): Promise<any> => {
-                try {
-                    const txtResponse = await fetch(
-                        `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
-                    )
-                    const logo = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
-                    const markdown = await fetch(
-                        `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
-                    )
-
-                    const content = txtResponse.ok ? await txtResponse.text() : null
-                    const md = markdown.ok ? await markdown.text() : null
-                    return { ...item, content, logo, md }
-                } catch (err) {
-                    console.warn(
-                        `Failed to fetch content for UUID ${item.uuid}: ${
-                            err instanceof Error ? err.message : 'Unknown error'
-                        }`
-                    )
-                    return { ...item, content: null, md: null }
-                }
-            })
-        )
-
-        return dataWithContent
-    } catch (err) {
-        throw new Error(
-            `Failed to load data: ${err instanceof Error ? err.message : 'Unknown error'}`
-        )
-    }
+            return { ...item, content, logo: logoUrl, md }
+        })
+    )
 }
 
 export const ElvUIProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -69,7 +54,11 @@ export const ElvUIProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     return (
         <ElvUIContext.Provider
-            value={{ data: data || [], isPending, error: error?.message || null }}
+            value={{
+                data: data || [],
+                isPending,
+                error: error ? (error as Error).message : null
+            }}
         >
             {children}
         </ElvUIContext.Provider>

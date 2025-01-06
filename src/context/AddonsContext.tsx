@@ -25,13 +25,8 @@ export const useAddonsContext = (): AddonsContextValue => {
 }
 
 const fetchAddons = async (key: string) => {
-    console.log(`Fetching data for ${key}`)
-    const response = await fetch(urls[key])
-    if (!response.ok) {
-        throw new Error(`Error fetching ${key}: ${response.statusText}`)
-    }
-    console.log(`Response for ${key}`, response)
-    return response.json()
+    const response = await fetch(urls[key]).then((res) => res.json())
+    return response
 }
 
 export const AddonsProvider: FC<{ children: ReactNode }> = ({ children }) => {
