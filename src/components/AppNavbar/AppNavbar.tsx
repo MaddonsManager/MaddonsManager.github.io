@@ -8,7 +8,6 @@ import {
     NavbarMenu,
     NavbarMenuItem,
     Link,
-    Image,
     Chip,
     Divider,
     Avatar

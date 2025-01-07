@@ -15,6 +15,7 @@ import '/android-chrome-512x512.png'
 import 'highlight.js/styles/github-dark.css'
 import 'github-markdown-css/github-markdown.css'
 
+
 const Maddons = () => {
     const navigate = useNavigate()
     const location = useLocation()

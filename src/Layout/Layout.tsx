@@ -12,7 +12,7 @@ export default function Layout({ isErrorRoute }: { isErrorRoute: boolean }) {
                 <main className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
                     <AppRoutes />
                 </main>
-                <footer className="bottom-0 left-0 right-0 p-2 dark:bg-black/80 text-default-500 shadow-2xl bg-default-100/80">
+                <footer className="bottom-0 left-0 right-0 p-2 dark:bg-black/80 text-default-500 shadow-2xl bg-default-50/80 border-t-1 border-white/5">
                     {!isErrorRoute && <AppFooter />}
                 </footer>
             </div>

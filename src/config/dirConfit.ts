@@ -60,7 +60,7 @@ export const siteConfig = {
         github: 'https://github.com/pentsec/maddonsmanager',
         twitter: 'https://twitter.com/maddonsmanager',
         discord: 'https://discord.gg/c3NafGk8Dh',
-        sponsor: 'https://patreon.com/jrgarciadev',
+        sponsor: 'https://patreon.com/',
         issues: 'https://github.com/PentSec/MasterAddonManager/issues',
         discussions: 'https://github.com/PentSec/MasterAddonManager/discussions',
         personalGithub: 'https://github.com/PentSec',
