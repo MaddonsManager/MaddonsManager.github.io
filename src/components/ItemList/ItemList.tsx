@@ -1,7 +1,7 @@
 import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@nextui-org/react'
 import { AnimatePresence } from 'framer-motion'
 import { classIcon } from '@/utils/classIcon'
-import { TagIcon, GroupIcon } from '@/utils/icons'
+import { FlameIcon, GroupIcon } from '@/assets/Icons'
 
 interface ItemListProps {
     data: any[]
@@ -55,41 +55,48 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
                                             ? `${item.description.substring(0, 200)}...`
                                             : item.description}
                                     </p>
-                                    {item.class.map &&
-                                        item.class.map((className: string, index: number) => (
+                                </div>
+                                <div className="flex flex-col">
+                                    <div className="flex flex-wrap gap-3 pt-2">
+                                        {item.class.map &&
+                                            item.class.map((className: string, index: number) => (
+                                                <Chip
+                                                    avatar={
+                                                        className === 'ALL' ? (
+                                                            <GroupIcon />
+                                                        ) : (
+                                                            <Avatar
+                                                                name={item.title}
+                                                                src={classIcon[className]}
+                                                            />
+                                                        )
+                                                    }
+                                                    key={index}
+                                                    color="warning"
+                                                    variant="dot"
+                                                    size="sm"
+                                                    className="my-1"
+                                                >
+                                                    {className}
+                                                </Chip>
+                                            ))}
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {item.tags.map((tag: string, index: number) => (
                                             <Chip
-                                                avatar={
-                                                    className === 'ALL' ? (
-                                                        <GroupIcon />
-                                                    ) : (
-                                                        <Avatar
-                                                            name={item.title}
-                                                            src={classIcon[className]}
-                                                        />
-                                                    )
-                                                }
+                                                avatar={<FlameIcon />}
                                                 key={index}
                                                 color="warning"
                                                 variant="dot"
                                                 size="sm"
                                                 className="my-1"
                                             >
-                                                {className}
+                                                {tag}
                                             </Chip>
                                         ))}
+                                    </div>
                                 </div>
-                                {item.tags.map((tag: string, index: number) => (
-                                    <Chip
-                                        avatar={<TagIcon />}
-                                        key={index}
-                                        color="warning"
-                                        variant="dot"
-                                        size="sm"
-                                        className="my-1"
-                                    >
-                                        {tag}
-                                    </Chip>
-                                ))}
                             </div>
                         </CardBody>
                     </Card>

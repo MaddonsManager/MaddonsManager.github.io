@@ -13,7 +13,7 @@ import {
 } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
-import { DownloadIcon } from '@/components/Icons'
+import { DownloadIcon } from '@/assets/Icons'
 import { Searcher, SelectType, SelectVersion, Header } from '@/components'
 import AddonsDetails from './AddonsDetails'
 import useFilterAddons from '@/hook/useFilterAddons'

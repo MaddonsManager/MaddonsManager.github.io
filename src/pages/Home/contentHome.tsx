@@ -1,4 +1,4 @@
-import { SettingIcon, DeleteIcon, SearchIcon, FlameIcon } from '@/components/Icons'
+import { SettingIcon, DeleteIcon, SearchIcon, FlameIcon } from '@/assets/Icons'
 
 export const contentHome = {
     maddonsTitleWebPage: 'Maddons Manager',

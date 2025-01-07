@@ -1,5 +1,5 @@
 import { VisuallyHidden, useSwitch } from '@nextui-org/react'
-import { MoonIcon, SunIcon } from '@/components/Icons'
+import { MoonIcon, SunIcon } from '@/assets/Icons'
 import { useTheme } from '@nextui-org/use-theme'
 import { useEffect } from 'react'
 

@@ -2,8 +2,10 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import { Home, Notes, Addons, WeakAuras, ElvUI, Guides, Post } from '@/pages'
 import { RoutesNotFound, DownloadAddon } from '@/components'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useSEO } from '@/hook/useSEO'
 
 const AppRoutes = () => {
+    useSEO()
     const location = useLocation()
 
     return (

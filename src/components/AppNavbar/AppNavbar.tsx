@@ -10,12 +10,12 @@ import {
     Link,
     Image,
     Chip,
-    Divider
+    Divider,
+    Avatar
 } from '@nextui-org/react'
 
-import { DiscordIcon, GithubIcon, TwitterIcon } from '@/components/Icons'
+import { DiscordIcon, GithubIcon, TwitterIcon } from '@/assets/Icons'
 import { useLocation } from 'react-router-dom'
-import MADDONS_LOGO from '@/assets/images/logo.svg'
 import { siteConfig } from '@/config/dirConfit'
 import { ThemeSwitch } from '@/components'
 
@@ -41,10 +41,10 @@ export default function AppNavbar() {
                         className="flex items-center justify-start"
                         href="/home"
                     >
-                        <Image
-                            src={MADDONS_LOGO}
+                        <Avatar
+                            src="/logo.svg"
                             alt="Maddons logo"
-                            className="w-auto h-8 object-contain"
+                            className="w-8 h-8 object-contain text-primary-400 bg-primary-100/80"
                         />
                         <p className="text-tiny ml-0 mr-1 font-bold uppercase text-inherit md:text-base">
                             addon Manager

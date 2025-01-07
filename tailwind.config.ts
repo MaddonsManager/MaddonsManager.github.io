@@ -1,6 +1,6 @@
 import { nextui } from '@nextui-org/react'
-const defaultTheme = require('tailwindcss/defaultTheme')
-const { commonColors } = require('@nextui-org/theme/colors')
+import defaultTheme from 'tailwindcss/defaultTheme'
+import { commonColors } from '@nextui-org/theme/colors'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -71,8 +71,8 @@ module.exports = {
                 highlighted: `${commonColors.purple[500]} 1px 0 0, ${commonColors.purple[500]} -1px 0 0`
             },
             backgroundImage: {
-                'maddons-bg': 'url(/background5.png)',
-                'maddons-light': 'url(/background1.jpg)',
+                'maddons-bg': 'url(/background5.webp)',
+                'maddons-light': 'url(/background1.webp)',
                 'custom-radial':
                     'radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.6) 100%, rgba(0, 0, 0, 0.6) 100%)'
             },

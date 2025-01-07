@@ -1,5 +1,5 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
-import { SearchIcon } from '@/components/Icons'
+import { SearchIcon } from '@/assets/Icons'
 
 interface SearcherProps {
     searchTerm: string | null

@@ -1,5 +1,7 @@
 export const siteConfig = {
     name: 'Maddons Manager',
+    description_meta:
+        'Maddons - Browse and download from a large library of addons, ElvUI profiles and old WeakAuras for World of Warcraft private servers.',
     description:
         'Effortlessly manage your World of Warcraft addons for Private servers with advanced search, easy configuration, and one-click removal.',
     navItems: [

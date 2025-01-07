@@ -19,6 +19,7 @@ const SelectNotes = ({ selectedNotes, setSelectedNotes }: SelectNotesProps) => {
                 className="w-auto max-w-fit font-bold text-default-900"
                 variant="underlined"
                 color="primary"
+                showScrollIndicators={false}
                 listboxProps={{
                     hideSelectedIcon: true,
                     itemClasses: {
@@ -34,6 +35,9 @@ const SelectNotes = ({ selectedNotes, setSelectedNotes }: SelectNotesProps) => {
                             'data-[focus-visible=true]:ring-primary-500'
                         ]
                     }
+                }}
+                scrollShadowProps={{
+                    isEnabled: false
                 }}
                 placeholder="Select Notes"
                 popoverProps={{

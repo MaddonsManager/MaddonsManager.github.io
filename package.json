@@ -2,25 +2,25 @@
     "name": "maddons-manager",
     "private": true,
     "version": "0.1.9",
-    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "test": "vitest"
     },
     "dependencies": {
         "@nextui-org/react": "^2.6.11",
         "@nextui-org/use-infinite-scroll": "^2.2.2",
         "@nextui-org/use-theme": "^2.1.1",
         "@tailwindcss/typography": "^0.5.15",
-        "@tanstack/react-query": "^5.62.15",
-        "framer-motion": "^11.15.0",
+        "@tanstack/react-query": "^5.62.16",
+        "framer-motion": "^11.16.0",
         "github-markdown-css": "^5.8.1",
         "highlight.js": "^11.11.1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "react-markdown": "^9.0.1",
+        "react-markdown": "^9.0.3",
         "react-router-dom": "^7.1.1",
         "react-spinners": "^0.15.0",
         "rehype-raw": "^7.0.0",
@@ -30,9 +30,9 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.17.0",
-        "@tanstack/eslint-plugin-query": "^5.62.15",
+        "@tanstack/eslint-plugin-query": "^5.62.16",
         "@types/node": "^22.10.5",
-        "@types/react": "^19.0.2",
+        "@types/react": "^19.0.3",
         "@types/react-dom": "^19.0.2",
         "@types/react-router-dom": "^5.3.3",
         "@vitejs/plugin-react-swc": "^3.7.2",
@@ -42,11 +42,11 @@
         "eslint-plugin-react-hooks": "^5.1.0",
         "eslint-plugin-react-refresh": "^0.4.16",
         "globals": "^15.14.0",
-        "pnpm": "^9.15.2",
         "postcss": "^8.4.49",
         "tailwindcss": "^3.4.17",
+        "ts-node": "^10.9.2",
         "typescript": "^5.7.2",
-        "typescript-eslint": "^8.19.0",
+        "typescript-eslint": "^8.19.1",
         "vite": "^6.0.7"
     }
 }
