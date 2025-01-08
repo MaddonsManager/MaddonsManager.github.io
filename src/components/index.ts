@@ -1,5 +1,5 @@
-export { default as AppFooter } from './AppFooter/AppFooter'
-export { default as AppNavbar } from './AppNavbar/AppNavbar'
+export { default as Footer } from './Footer/Footer'
+export { default as Navbar } from './Navbar/Navbar'
 export { default as RoutesNotFound } from './RoutesNotFound/RoutesNotFound'
 export { default as ThemeSwitch } from './ThemeSwitch/ThemeSwitch'
 export { default as Searcher } from './Searcher/Searcher'
