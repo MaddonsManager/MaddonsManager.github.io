@@ -4,6 +4,7 @@ import { Chip, Link } from '@nextui-org/react'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
+
     return (
         <div className="mx-auto flex w-full max-w-7xl flex-col justify-center px-4 pb-8 pt-16 md:px-12 lg:px-8">
             <div className="mt-8 text-center xl:grid xl:grid-cols-2 xl:gap-8">
@@ -40,6 +41,9 @@ export default function Footer() {
                                         color="foreground"
                                         className="outline-none text-small no-underline hover:opacity-80 active:opacity-disabled transition-opacity text-default-400"
                                         href={item.href}
+                                        onPress={() =>
+                                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                                        }
                                     >
                                         {item.label}
                                     </Link>

@@ -3,7 +3,7 @@ import { SearchIcon } from '@/assets/Icons'
 
 interface SearcherProps {
     searchTerm: string | null
-    setSearchTerm: (searchTerm: string) => void
+    setSearchTerm: (key: string) => void
     valueName: string[]
 }
 
@@ -13,7 +13,7 @@ const SearchAddon = ({ searchTerm, setSearchTerm, valueName }: SearcherProps) =>
             label="Search by Name"
             isVirtualized
             selectedKey={searchTerm}
-            onSelectionChange={(key: React.Key | null) => setSearchTerm(key as string)}
+            onSelectionChange={(key) => setSearchTerm(key as string)}
             defaultItems={valueName.map((name) => ({ key: name, name: name }))}
             startContent={<SearchIcon className="w-4 h-4" />}
             size="md"

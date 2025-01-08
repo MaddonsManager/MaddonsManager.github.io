@@ -24,7 +24,7 @@ const fetchElvUIWithContent = async (url: string): Promise<StringItems[]> => {
     const response = await fetch(url)
     const jsonData = await response.json()
     return Promise.all(
-        jsonData.map(async (item: any) => {
+        jsonData.map(async (item: StringItems) => {
             const txtUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
             const logoUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
             const mdUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
