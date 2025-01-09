@@ -7,7 +7,7 @@ export function NextUIProv({ children }: { children: ReactNode }) {
 
     return (
         <NextUIProvider navigate={navigate} useHref={useHref} className="bg-backgrounds-main">
-            <div className="bg-backgrounds-main-shadows"></div>
+            <div className="bg-backgrounds-main-shadows" />
             {children}
         </NextUIProvider>
     )
