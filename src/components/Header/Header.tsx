@@ -7,13 +7,14 @@ interface HeaderProps {
 }
 
 const Header = ({ data }: HeaderProps) => {
-    const location = useLocation()
+    const { pathname } = useLocation()
 
-    const currentNavItem = siteConfig.navItems.find(
-        (item) => item.href.toLowerCase() === location.pathname.toLowerCase()
-    )
+    const getPageLabel = () => {
+        const allNavItems = [...siteConfig.navItems, ...siteConfig.navItemsAccord]
+        return allNavItems.find((item) => item.href.toLowerCase() === pathname.toLowerCase())?.label
+    }
 
-    const pageTitle = currentNavItem ? currentNavItem.label : 'Page'
+    const pageTitle = getPageLabel()
 
     return (
         <>
