@@ -14,7 +14,7 @@ function Home() {
 
     return (
         <section className="flex flex-col items-center justify-center gap-4">
-            <div className="justify-center inline-block max-w-4xl text-center">
+            <div className="justify-center text-center">
                 <h1 className={title({ color: 'blue', size: 'lg' })}>
                     {contentHome.maddonsTitleWebPage}
                 </h1>

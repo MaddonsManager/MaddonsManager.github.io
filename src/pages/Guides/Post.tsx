@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
 
-const postCache: any = {}
+const postCache: { [key: string]: string } = {}
 
 const Post = () => {
     const { folder } = useParams()
@@ -62,7 +62,7 @@ const Post = () => {
                 <button className="btn btn-primary btn-sm">Back</button>
             </Link>
 
-            <article className="markdown-body p-1 !bg-transparent justify-center inline-block max-w-4xl text-start">
+            <article className="markdown-body p-1 !bg-transparent ">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}

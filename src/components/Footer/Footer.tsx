@@ -39,7 +39,7 @@ export default function Footer() {
                                 <li key={`${item}-${index}`}>
                                     <Link
                                         color="foreground"
-                                        className="outline-none text-small no-underline hover:opacity-80 active:opacity-disabled transition-opacity text-default-400"
+                                        className="outline-none text-small no-underline hover:opacity-80 active:opacity-disabled transition-opacity text-default-500"
                                         href={item.href}
                                         onPress={() =>
                                             window.scrollTo({ top: 0, behavior: 'smooth' })

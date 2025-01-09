@@ -17,7 +17,6 @@ import { DownloadIcon } from '@/assets/Icons'
 import { Searcher, SelectType, SelectVersion, Header } from '@/components'
 import AddonsDetails from './AddonsDetails'
 import useFilterAddons from '@/hook/useFilterAddons'
-import { AddonsDataState } from '@/types'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
@@ -36,11 +35,11 @@ const Addon = () => {
         handleDownload,
         handleOpenDetails,
         isSelectAddon
-    } = useFilterAddons(data as AddonsDataState, onOpenChange)
+    } = useFilterAddons(data, onOpenChange)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (
-        <div className="layer">
+        <div className="">
             <Header data={combinedData} />
             {isSelectAddon && (
                 <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />

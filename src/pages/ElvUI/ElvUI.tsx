@@ -12,7 +12,6 @@ import {
 import { Divider, Snippet, Spinner, useDisclosure } from '@nextui-org/react'
 import { ScrollShadow } from '@nextui-org/scroll-shadow'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
-import { StringItems } from '@/types'
 
 const ElvUI = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -30,7 +29,7 @@ const ElvUI = () => {
         handleCopyToClipboard,
         handleOpenDetails,
         selectedItem
-    } = useFilteredData(data as StringItems[], onOpen)
+    } = useFilteredData(data, onOpen)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
     return (

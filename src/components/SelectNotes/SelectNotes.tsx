@@ -2,7 +2,7 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 
 interface SelectNotesProps {
     selectedNotes: 'app' | 'web'
-    setSelectedNotes: (notes: 'app' | 'web') => void
+    setSelectedNotes: (key: 'app' | 'web') => void
 }
 
 const SelectNotes = ({ selectedNotes, setSelectedNotes }: SelectNotesProps) => {
@@ -12,9 +12,7 @@ const SelectNotes = ({ selectedNotes, setSelectedNotes }: SelectNotesProps) => {
                 label="Notes"
                 isVirtualized
                 selectedKey={selectedNotes}
-                onSelectionChange={(key: React.Key | null) =>
-                    setSelectedNotes(key as 'app' | 'web')
-                }
+                onSelectionChange={(key) => setSelectedNotes(key as 'app' | 'web')}
                 size="md"
                 className="w-auto max-w-fit font-bold text-default-900"
                 variant="underlined"

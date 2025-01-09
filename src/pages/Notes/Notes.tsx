@@ -25,7 +25,7 @@ function Notes() {
 
     return (
         <section>
-            <div className="justify-center inline-block max-w-4xl text-start">
+            <div className="">
                 <h1 className={title({ color: 'blue', size: 'lg' })}>Release Notes</h1>
                 <p className={subtitle()}>
                     Keep your Maddons Manager fresh with the newest updates! Since the{' '}

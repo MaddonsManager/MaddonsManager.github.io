@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { StringItems } from '@/types'
 
-const useFilteredData = (data: StringItems[], onOpen: (open: boolean) => void) => {
+const useFilteredData = (data: StringItems[], onOpen: () => void) => {
     const [searchTerm, setSearchTerm] = useState<string | null>(null)
     const [version, setVersion] = useState<string | null>(null)
     const [selectedType, setSelectedType] = useState<string | null>(null)
@@ -31,9 +31,9 @@ const useFilteredData = (data: StringItems[], onOpen: (open: boolean) => void) =
         navigator.clipboard.writeText(content)
     }
 
-    const handleOpenDetails = (item: any) => {
+    const handleOpenDetails = (item: StringItems) => {
         setSelectedItem(item)
-        onOpen(true)
+        onOpen()
     }
 
     return {

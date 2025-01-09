@@ -63,4 +63,5 @@ export type StringItems = {
     preview: string | null
     preview2: string | null
     preview3: string | null
+    item: string
 }

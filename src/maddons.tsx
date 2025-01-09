@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client'
-import { HashRouter as Router, useNavigate, useHref, useLocation } from 'react-router-dom'
-import Layout from '@/Layout/Layout'
-import { NextUIProvider } from '@nextui-org/react'
 import { AddonsProvider, WeakAurasProvider, ElvUIProvider, BlogPostProvider } from '@/context'
 import { QueryClientProvider } from '@tanstack/react-query'
 import queryClient from '@/utils/QueryClient'
+import { NextUIProv } from '@/NextUIProv'
+import { BrowserRouter } from 'react-router-dom'
+
 import '@/assets/css/main.css'
 import '/logo.png'
 import '/apple-touch-icon.png'
@@ -14,32 +14,22 @@ import '/android-chrome-192x192.png'
 import '/android-chrome-512x512.png'
 import 'highlight.js/styles/github-dark.css'
 import 'github-markdown-css/github-markdown.css'
+import Layout from '@/Layout/Layout'
 
-
-const Maddons = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const isErrorRoute = location.pathname === '/404'
-
-    return (
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-            <NextUIProvider navigate={navigate} useHref={useHref}>
+            <NextUIProv>
                 <AddonsProvider>
                     <WeakAurasProvider>
                         <ElvUIProvider>
                             <BlogPostProvider>
-                                <Layout isErrorRoute={isErrorRoute} />
+                                <Layout />
                             </BlogPostProvider>
                         </ElvUIProvider>
                     </WeakAurasProvider>
                 </AddonsProvider>
-            </NextUIProvider>
+            </NextUIProv>
         </QueryClientProvider>
-    )
-}
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <Router>
-        <Maddons />
-    </Router>
+    </BrowserRouter>
 )

@@ -2,10 +2,11 @@ import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@
 import { AnimatePresence } from 'framer-motion'
 import { classIcon } from '@/utils/classIcon'
 import { FlameIcon, GroupIcon } from '@/assets/Icons'
+import { StringItems } from '@/types'
 
 interface ItemListProps {
-    data: any[]
-    onOpenDetails: (item: any) => void
+    data: StringItems[]
+    onOpenDetails: (item: StringItems) => void
     handleCopyToClipboard: (content: string) => void
     itemToShow: number
 }
@@ -13,7 +14,7 @@ interface ItemListProps {
 const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: ItemListProps) => (
     <div className="flex flex-wrap gap-4 content-center items-center justify-center">
         <AnimatePresence>
-            {data.slice(0, itemToShow).map((item) => (
+            {data.slice(0, itemToShow).map((item: StringItems) => (
                 <div
                     key={`${item.uuid}-${item.title}`}
                     className="transition-transform duration-300 ease-in-out hover:scale-105"
@@ -42,7 +43,11 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
                                             radius="sm"
                                             size="sm"
                                             variant="shadow"
-                                            onPress={() => handleCopyToClipboard(item.content)}
+                                            onPress={() =>
+                                                handleCopyToClipboard(
+                                                    item.content || 'Dont have content'
+                                                )
+                                            }
                                         >
                                             Copy
                                         </Button>

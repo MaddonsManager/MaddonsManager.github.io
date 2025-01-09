@@ -30,9 +30,9 @@ const Guides = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="layer">
+        <>
             <Header data={post} />
-            <div className="bg-inputs">
+            <div className="bg-inputs-double">
                 <Searcher
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
@@ -62,7 +62,7 @@ const Guides = () => {
                         </Snippet>
                     )}
                     {filteredData.length > 0 ? (
-                        <div className="flex flex-wrap gap-4 content-center items-center justify-center">
+                        <div className="flex flex-wrap gap-4 content-start items-start justify-start">
                             <AnimatePresence>
                                 {filteredData
                                     .slice(0, itemToShow)
@@ -76,7 +76,7 @@ const Guides = () => {
                                                 onPress={() => navigate(`/post/${post.folder}`)}
                                                 isFooterBlurred
                                                 shadow="sm"
-                                                className="md:w-[400px] md:min-h-[446px]"
+                                                className="md:w-[390px] md:min-h-[446px]"
                                             >
                                                 <CardHeader className="relative bg-transparent h-[200px] mb-6">
                                                     <Image
@@ -188,7 +188,7 @@ const Guides = () => {
                     )}
                 </ScrollShadow>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -50,7 +50,6 @@ function Notes({ appReleaseNotes, webReleaseNotes, selectedNotes }: ReleaseNotes
                         {releaseNote.extra ? (
                             <p className="text-md mt-8 text-default-800">{releaseNote.extra}</p>
                         ) : null}
-                        <div className="mt-8" data-orientation="vertical"></div>
 
                         <Accordion selectionMode="multiple" variant="light">
                             {releaseNote.features && releaseNote.features.length > 0 && (

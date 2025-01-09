@@ -114,7 +114,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                             </div>
                             <Divider className="my-2" />
                             <h2 className="text-lg font-extrabold">Description</h2>
-                            <article className="markdown-body  p-1 !bg-transparent justify-center inline-block max-w-4xl text-start">
+                            <article className="markdown-body  p-1 !bg-transparent">
                                 <ReactMarkdown
                                     remarkPlugins={[remarkGfm]}
                                     rehypePlugins={[rehypeRaw]}
