@@ -10,8 +10,8 @@ import {
     useDisclosure,
     Divider,
     Snippet
-} from '@nextui-org/react'
-import { ScrollShadow } from '@nextui-org/scroll-shadow'
+} from "@heroui/react"
+import { ScrollShadow } from "@heroui/scroll-shadow"
 import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/assets/Icons'
 import { Searcher, SelectType, SelectVersion, Header } from '@/components'

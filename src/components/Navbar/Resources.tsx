@@ -6,7 +6,7 @@ import {
     NavbarContent,
     NavbarItem,
     Link
-} from '@nextui-org/react'
+} from "@heroui/react"
 import { CircleChevronDownIcon } from '@/assets/Icons'
 
 export default function Resources({ items }: { items: { label: string; href: string }[] }) {

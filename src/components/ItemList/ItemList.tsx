@@ -1,4 +1,4 @@
-import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@nextui-org/react'
+import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from "@heroui/react"
 import { AnimatePresence } from 'framer-motion'
 import { classIcon } from '@/utils/classIcon'
 import { FlameIcon, GroupIcon } from '@/assets/Icons'

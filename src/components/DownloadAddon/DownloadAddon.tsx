@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAddonsContext } from '@/context/AddonsContext'
-import { Snippet, Link } from '@nextui-org/react'
+import { Snippet, Link } from "@heroui/react"
 import { AddonsData } from '@/types'
 
 const DownloadAddon = () => {

@@ -1,4 +1,4 @@
-import { button as buttonStyles, Link, Image, Card, CardBody } from '@nextui-org/react'
+import { button as buttonStyles, Link, Image, Card, CardBody } from "@heroui/react"
 import { DownloadIcon, GithubIcon } from '@/assets/Icons'
 import { title, subtitle, normal } from '@/utils/primitives'
 import { contentHome } from './contentHome'

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useInfiniteScroll } from '@nextui-org/use-infinite-scroll'
+import { useInfiniteScroll } from "@heroui/use-infinite-scroll"
 
 const useInfiniteScrollLogic = (filteredData: any[]) => {
     const [itemToShow, setItemToShow] = useState(20)

@@ -5,7 +5,7 @@ import { title, subtitle } from '@/utils/primitives'
 import { appReleaseNotes } from '@/utils/appReleaseNotes'
 import { webReleaseNotes } from '@/utils/webReleaseNotes'
 import { SelectNotes } from '@/components'
-import { Link } from '@nextui-org/react'
+import { Link } from "@heroui/react"
 
 function Notes() {
     const location = useLocation()

@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, Avatar, Link } from '@nextui-org/react'
+import { Accordion, AccordionItem, Avatar, Link } from "@heroui/react"
 
 interface ReleaseNotesProps {
     appReleaseNotes: any[]

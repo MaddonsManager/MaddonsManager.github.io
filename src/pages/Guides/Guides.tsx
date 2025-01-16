@@ -13,9 +13,9 @@ import {
     CardFooter,
     Link,
     Snippet
-} from '@nextui-org/react'
+} from "@heroui/react"
 
-import { ScrollShadow } from '@nextui-org/scroll-shadow'
+import { ScrollShadow } from "@heroui/scroll-shadow"
 import { AnimatePresence } from 'framer-motion'
 import { SelectType, Searcher, Header } from '@/components'
 import { siteConfig } from '@/config/dirConfit'

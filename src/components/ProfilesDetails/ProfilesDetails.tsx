@@ -9,7 +9,7 @@ import {
     Chip,
     Image,
     Avatar
-} from '@nextui-org/react'
+} from "@heroui/react"
 import ReactMarkdown from 'react-markdown'
 import { classIcon, roleIcon } from '@/utils/classIcon'
 import remarkGfm from 'remark-gfm'

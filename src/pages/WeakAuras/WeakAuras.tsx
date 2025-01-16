@@ -8,8 +8,8 @@ import {
     ItemList,
     Header
 } from '@/components'
-import { Divider, Snippet, Spinner, useDisclosure } from '@nextui-org/react'
-import { ScrollShadow } from '@nextui-org/scroll-shadow'
+import { Divider, Snippet, Spinner, useDisclosure } from "@heroui/react"
+import { ScrollShadow } from "@heroui/scroll-shadow"
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const WeakAuras = () => {

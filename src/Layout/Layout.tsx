@@ -7,7 +7,7 @@ export default function Layout() {
     const isErrorRoute = location.pathname === '/404'
 
     return (
-        <div className="relative z-[2]">
+        <div className="relative z-[2] grid min-h-[100vh] grid-rows-[auto_1fr_auto] w-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
                 <Content />

@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
+import { Autocomplete, AutocompleteItem } from "@heroui/react"
 
 interface SelectTypeProps {
     selectedType: string | null
@@ -12,7 +12,7 @@ const SelectType = ({ selectedType, setSelectedType, valueType }: SelectTypeProp
             label="Filter by Type"
             isVirtualized
             selectedKey={selectedType}
-            onSelectionChange={(key: React.Key | null) => setSelectedType(key as string)}
+            onSelectionChange={(key) => setSelectedType(key as string)}
             defaultItems={valueType.map((type) => ({ key: type, name: type }))}
             size="md"
             className="w-full font-bold text-default-900"
