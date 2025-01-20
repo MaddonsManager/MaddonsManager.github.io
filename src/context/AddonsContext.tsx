@@ -2,14 +2,11 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AddonsDataState } from '@/types'
 
-const urls: { [key: string]: string } = {
-    LichKing: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/LK/lichking.json',
-    Cataclysm: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Cata/cataclysm.json',
-    Pandaria: 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/main/Panda/pandaria.json'
-}
+const jsonUrl =
+    'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
 
 interface AddonsContextValue {
-    data: AddonsDataState
+    data: AddonsDataState[]
     isPending: boolean
     error: string | null
 }
@@ -24,41 +21,41 @@ export const useAddonsContext = (): AddonsContextValue => {
     return context
 }
 
-const fetchAddons = async (key: string) => {
-    const response = await fetch(urls[key]).then((res) => res.json())
-    return response
+const fetchAddons = async (url: string) => {
+    const response = await fetch(url)
+    const jsonData = await response.json()
+    return Promise.all(
+        jsonData.map(async (item: AddonsDataState) => {
+            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.file_name}/post.md`
+            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.webp`
+            const zipUrl = `https://github.com/PentSec/MaddonsManager/raw/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.zip`
+
+            const [md] = await Promise.all([
+                fetch(mdUrl).then((res) => {
+                    if (!res.ok) throw new Error(`Failed to fetch md for ${item.file_name}`)
+                    return res.text()
+                })
+            ])
+
+            return { ...item, md, logo: logoUrl, zip: zipUrl }
+        })
+    )
 }
 
 export const AddonsProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const lichKingQuery = useQuery({
-        queryKey: ['lichKing'],
-        queryFn: () => fetchAddons('LichKing'),
+    const { data, isPending, error } = useQuery({
+        queryKey: ['addons'],
+        queryFn: () => fetchAddons(jsonUrl),
         refetchOnWindowFocus: false
     })
-    const cataclysmQuery = useQuery({
-        queryKey: ['cataclysm'],
-        queryFn: () => fetchAddons('Cataclysm'),
-        refetchOnWindowFocus: false
-    })
-    const pandariaQuery = useQuery({
-        queryKey: ['pandaria'],
-        queryFn: () => fetchAddons('Pandaria'),
-        refetchOnWindowFocus: false
-    })
-
-    const data: AddonsDataState = {
-        LichKing: lichKingQuery.data || [],
-        Cataclysm: cataclysmQuery.data || [],
-        Pandaria: pandariaQuery.data || []
-    }
-
-    const isPending = lichKingQuery.isPending || cataclysmQuery.isPending || pandariaQuery.isPending
-
-    const error = lichKingQuery.error || cataclysmQuery.error || pandariaQuery.error
 
     return (
         <AddonsContext.Provider
-            value={{ data, isPending, error: error ? (error as Error).message : null }}
+            value={{
+                data: data || [],
+                isPending,
+                error: error ? (error as Error).message : null
+            }}
         >
             {children}
         </AddonsContext.Provider>

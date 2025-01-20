@@ -1,44 +1,35 @@
 import { useState, useMemo } from 'react'
 import { AddonsData, AddonsDataState } from '@/types'
 
-const useFilterAddons = (data: AddonsDataState | null, onOpen: (isOpen: boolean) => void) => {
+const useFilterAddons = (data: AddonsDataState[], onOpen: () => void) => {
     const [searchTerm, setSearchTerm] = useState<string | null>(null)
     const [version, setVersion] = useState<string | null>(null)
     const [selectedType, setSelectedType] = useState<string | null>(null)
     const [isSelectAddon, setIsSelectAddon] = useState<AddonsData | null>(null)
 
     const combinedData = useMemo(() => {
-        if (!data) return []
-        const allData = [...data.LichKing, ...data.Cataclysm, ...data.Pandaria]
-        return version === null ? allData : data[version] || []
-    }, [data, version])
+        if (!data || data.length === 0) return []
+        return Array.from(new Set(data.flatMap((item) => item.expansion)))
+    }, [data])
 
     const addonTypes = useMemo(() => {
-        return combinedData && combinedData.length > 0
-            ? Array.from(new Set(combinedData.map((addon) => addon.addonType)))
-            : []
-    }, [combinedData])
+        return Array.from(new Set(data.flatMap((item) => item.tags)))
+    }, [data])
 
     const filteredData = useMemo(() => {
-        return (
-            combinedData?.filter((addon) => {
-                const matchesSearch = searchTerm
-                    ? addon.name.toLowerCase().includes(searchTerm.toLowerCase())
-                    : true
-                const matchesType = selectedType ? addon.addonType === selectedType : true
-                return matchesSearch && matchesType
-            }) || []
-        )
-    }, [combinedData, searchTerm, selectedType])
-
-    const handleDownload = async (githubRepo: string) => {
-        const mainUrl = `${githubRepo}/archive/refs/heads/main.zip`
-        window.open(mainUrl)
-    }
+        return data.filter((item) => {
+            const matchesSearch = searchTerm
+                ? item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                : true
+            const matchesType = selectedType ? item.tags.includes(selectedType) : true
+            const matchesExpansion = version ? item.expansion.includes(version) : true
+            return matchesSearch && matchesType && matchesExpansion
+        })
+    }, [data, searchTerm, selectedType, version])
 
     const handleOpenDetails = (addon: AddonsData) => {
         setIsSelectAddon(addon)
-        onOpen(true)
+        onOpen()
     }
 
     return {
@@ -51,7 +42,6 @@ const useFilterAddons = (data: AddonsDataState | null, onOpen: (isOpen: boolean)
         addonTypes,
         filteredData,
         combinedData,
-        handleDownload,
         handleOpenDetails,
         isSelectAddon
     }

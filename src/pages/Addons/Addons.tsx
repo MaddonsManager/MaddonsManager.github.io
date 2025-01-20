@@ -10,8 +10,8 @@ import {
     useDisclosure,
     Divider,
     Snippet
-} from "@heroui/react"
-import { ScrollShadow } from "@heroui/scroll-shadow"
+} from '@heroui/react'
+import { ScrollShadow } from '@heroui/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
 import { DownloadIcon } from '@/assets/Icons'
 import { Searcher, SelectType, SelectVersion, Header } from '@/components'
@@ -32,15 +32,15 @@ const Addon = () => {
         filteredData,
         combinedData,
         addonTypes,
-        handleDownload,
         handleOpenDetails,
         isSelectAddon
     } = useFilterAddons(data, onOpenChange)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
+    console.log(combinedData)
 
     return (
         <div className="">
-            <Header data={combinedData} />
+            <Header data={data} />
             {isSelectAddon && (
                 <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
             )}
@@ -48,7 +48,7 @@ const Addon = () => {
                 <Searcher
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
-                    valueName={combinedData ? combinedData.map((addon) => addon.name) : []}
+                    valueName={data.map((item) => item.title)}
                 />
                 <Divider orientation="vertical" className="h-auto" />
                 <SelectVersion
@@ -85,7 +85,7 @@ const Addon = () => {
                             <AnimatePresence>
                                 {filteredData.slice(0, itemToShow).map((addon) => (
                                     <div
-                                        key={`${addon.name}-${addon.githubRepo}`}
+                                        key={`${addon.title}-${addon.file_name}`}
                                         className="transition-transform duration-300 ease-in-out hover:scale-105"
                                     >
                                         <Card
@@ -98,19 +98,19 @@ const Addon = () => {
                                             <CardBody className="p-0 overflow-visible">
                                                 <Image
                                                     removeWrapper
-                                                    alt={addon.name}
+                                                    alt={addon.title}
                                                     radius="sm"
-                                                    src={addon.imageUrl}
+                                                    src={addon.logo}
                                                     className="object-contain w-full h-full"
                                                 />
                                             </CardBody>
                                             <CardFooter className="absolute bottom-0 z-10 flex items-center justify-between bg-black/70 border-t-1 border-default-600 dark:border-default-100">
                                                 <div className="flex flex-col items-start flex-grow gap-1">
                                                     <p className="font-bold md:text-sm xl:text-md">
-                                                        {addon.name}
+                                                        {addon.title}
                                                     </p>
                                                     <p className="text-tiny text-white/60">
-                                                        {addon.addonType}
+                                                        {addon.expansion.join(', ')}
                                                     </p>
                                                 </div>
                                                 <div className="flex items-end justify-end flex-grow gap-2">
@@ -121,9 +121,7 @@ const Addon = () => {
                                                             radius="full"
                                                             size="sm"
                                                             variant="shadow"
-                                                            onPress={() =>
-                                                                handleDownload(addon.githubRepo)
-                                                            }
+                                                            onPress={() => window.open(addon.zip)}
                                                         >
                                                             <DownloadIcon
                                                                 size={20}

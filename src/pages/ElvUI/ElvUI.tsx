@@ -9,8 +9,8 @@ import {
     Header
 } from '@/components'
 
-import { Divider, Snippet, Spinner, useDisclosure } from "@heroui/react"
-import { ScrollShadow } from "@heroui/scroll-shadow"
+import { Divider, Snippet, Spinner, useDisclosure } from '@heroui/react'
+import { ScrollShadow } from '@heroui/scroll-shadow'
 import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const ElvUI = () => {
@@ -31,6 +31,8 @@ const ElvUI = () => {
         selectedItem
     } = useFilteredData(data, onOpen)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
+
+    console.log(data)
 
     return (
         <div className="layer">

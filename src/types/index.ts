@@ -14,20 +14,33 @@ export type ReleaseNotesTypes = {
 }
 
 export type AddonsData = {
-    name: string
-    folders: string[]
-    githubRepo: string
-    imageUrl: string
-    addonType: string
+    title: string
+    file_name: string
+    expansion: string[]
+    tags: string[]
     description: string
     author: string
-    lastCommitData: string
-    Hot: any | null
-    [key: string]: any
+    pr_author: string
+    avatar_pr_author: string
+    roles: string[]
+    class: string[]
 }
 
 export type AddonsDataState = {
-    [key: string]: AddonsData[]
+    item: string
+    md: string
+    logo: string
+    zip: string
+    title: string
+    file_name: string
+    description: string
+    author: string
+    pr_author: string
+    avatar_pr_author: string
+    expansion: string[]
+    tags: string[]
+    roles: string[]
+    class: string[]
 }
 
 export type Post = {
@@ -48,20 +61,19 @@ export type Post = {
 }
 
 export type StringItems = {
-    uuid: string
+    item: string
+    md: string
     logo: string
-    content: string | null
-    md: string | null
+    zip: string
     title: string
+    file_name: string
     description: string
     author: string
+    pr_author: string
+    avatar_pr_author: string
     expansion: string[]
-    changelog: string[]
     tags: string[]
-    class: string[]
     roles: string[]
-    preview: string | null
-    preview2: string | null
-    preview3: string | null
-    item: string
+    class: string[]
+    content: string
 }

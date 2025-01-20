@@ -9,6 +9,9 @@ lerna-debug.log*
 MaddonsManager.github.io.code-workspace
 .react-router/
 
+.env
+.env.production
+.env.development
 node_modules
 dist
 dist-ssr

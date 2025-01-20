@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header = ({ data }: HeaderProps) => {
     const { pathname } = useLocation()
 
-    const getPageLabel = () => {
+    const getPageLabel = (): string | undefined => {
         const allNavItems = [...siteConfig.navItems, ...siteConfig.navItemsAccord]
         return allNavItems.find((item) => item.href.toLowerCase() === pathname.toLowerCase())?.label
     }

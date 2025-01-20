@@ -2,7 +2,7 @@ import { createContext, useContext, FC, ReactNode } from 'react'
 import { StringItems } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 
-const jsonUrl = 'https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/ElvUI.json'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI.json'
 
 interface ElvUIContextValue {
     data: StringItems[]
@@ -25,17 +25,17 @@ const fetchElvUIWithContent = async (url: string): Promise<StringItems[]> => {
     const jsonData = await response.json()
     return Promise.all(
         jsonData.map(async (item: StringItems) => {
-            const txtUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.txt`
-            const logoUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.logo}`
-            const mdUrl = `https://raw.githubusercontent.com/PentSec/wowAddonsAPI/develop/ElvUI/${item.uuid}/${item.uuid}.md`
+            const txtUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/${item.file_name}.txt`
+            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/${item.file_name}.webp`
+            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/post.md`
 
             const [content, md] = await Promise.all([
                 fetch(txtUrl).then((res) => {
-                    if (!res.ok) throw new Error(`Failed to fetch txt for ${item.uuid}`)
+                    if (!res.ok) throw new Error(`Failed to fetch txt for ${item.file_name}`)
                     return res.text()
                 }),
                 fetch(mdUrl).then((res) => {
-                    if (!res.ok) throw new Error(`Failed to fetch md for ${item.uuid}`)
+                    if (!res.ok) throw new Error(`Failed to fetch md for ${item.file_name}`)
                     return res.text()
                 })
             ])

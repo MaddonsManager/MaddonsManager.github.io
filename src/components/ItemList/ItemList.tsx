@@ -1,4 +1,4 @@
-import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from "@heroui/react"
+import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@heroui/react'
 import { AnimatePresence } from 'framer-motion'
 import { classIcon } from '@/utils/classIcon'
 import { FlameIcon, GroupIcon } from '@/assets/Icons'
@@ -16,7 +16,7 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
         <AnimatePresence>
             {data.slice(0, itemToShow).map((item: StringItems) => (
                 <div
-                    key={`${item.uuid}-${item.title}`}
+                    key={`${item.file_name}-${item.title}`}
                     className="transition-transform duration-300 ease-in-out hover:scale-105"
                 >
                     <Card
@@ -67,7 +67,7 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
                                             item.class.map((className: string, index: number) => (
                                                 <Chip
                                                     avatar={
-                                                        className === 'ALL' ? (
+                                                        className === 'All' ? (
                                                             <GroupIcon />
                                                         ) : (
                                                             <Avatar
