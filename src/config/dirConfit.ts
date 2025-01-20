@@ -61,8 +61,8 @@ export const siteConfig = {
     links: {
         github: 'https://github.com/pentsec/maddonsmanager',
         twitter: 'https://twitter.com/maddonsmanager',
-        discord: 'https://discord.gg/c3NafGk8Dh',
-        sponsor: 'https://patreon.com/',
+        discord: 'https://discord.gg/fUw5C6tcZs',
+        sponsor: 'https://www.paypal.me/Jeffreysfu/1',
         issues: 'https://github.com/PentSec/MasterAddonManager/issues',
         discussions: 'https://github.com/PentSec/MasterAddonManager/discussions',
         personalGithub: 'https://github.com/PentSec',
