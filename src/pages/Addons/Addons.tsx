@@ -101,7 +101,7 @@ const Addon = () => {
                                                     alt={addon.title}
                                                     radius="sm"
                                                     src={addon.logo}
-                                                    className="object-contain w-full h-full"
+                                                    className="object-fill w-full h-full"
                                                 />
                                             </CardBody>
                                             <CardFooter className="absolute bottom-0 z-10 flex items-center justify-between bg-black/70 border-t-1 border-default-600 dark:border-default-100">
