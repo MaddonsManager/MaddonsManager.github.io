@@ -1,4 +1,4 @@
-import { button as buttonStyles, Link, Image, Card, CardBody } from "@heroui/react"
+import { button as buttonStyles, Link, Image, Card, CardBody } from '@heroui/react'
 import { DownloadIcon, GithubIcon } from '@/assets/Icons'
 import { title, subtitle, normal } from '@/utils/primitives'
 import { contentHome } from './contentHome'
@@ -42,19 +42,17 @@ function Home() {
             </div>
             <div className="flex items-center justify-center gap-3">
                 <Link
-                    as="button"
                     className={buttonStyles({
                         color: 'primary',
                         radius: 'full',
                         variant: 'shadow'
                     })}
-                    onPress={() => downloadFile(downloadUrl)}
+                    href="/Addons"
                     color="primary"
                     size="sm"
-                    isDisabled={!!isPending || !!error}
                 >
                     <DownloadIcon size={20} width={20} height={20} />
-                    {isPending ? 'Loading...' : error ? 'Link Error' : 'Download it'}
+                    Download
                 </Link>
                 <Link
                     isExternal
@@ -86,7 +84,7 @@ function Home() {
                                     {card.title}
                                 </h3>
                                 <div className="relative flex flex-col flex-auto w-full h-auto p-3 overflow-y-auto subpixel-antialiased text-left break-words place-content-inherit align-items-inherit">
-                                    <p className="text-base font-normal text-default-500 prose">
+                                    <p className="text-base font-normal prose text-default-500">
                                         {card.description}
                                     </p>
                                 </div>

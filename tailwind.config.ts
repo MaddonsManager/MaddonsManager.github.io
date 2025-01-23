@@ -1,13 +1,13 @@
-import { heroui } from "@heroui/react"
+import { heroui } from '@heroui/react'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import { commonColors } from "@heroui/theme/colors"
+import { commonColors } from '@heroui/theme/colors'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
         './app/**/*.{js,ts,jsx,tsx,mdx}',
         './pages/**/*.{js,ts,jsx,tsx,mdx}',
         './components/**/*.{js,ts,jsx,tsx,mdx}',
-        "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+        './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
 
         // Or if using `src` directory:
         './src/**/*.{js,ts,jsx,tsx,mdx}',
@@ -187,7 +187,7 @@ module.exports = {
                             fontWeight: theme('fontWeight.medium')
                         },
                         'h2 small, h3 small, h4 small': {
-                            fontFamily: theme('fontFamily.mono').join(', '),
+                            fontFamily: theme('fontFamily.mono'),
                             color: theme('colors.slate.500'),
                             fontWeight: 500
                         },
