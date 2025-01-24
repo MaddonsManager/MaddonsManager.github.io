@@ -9,14 +9,15 @@ import {
     Chip,
     Link,
     Image,
-    Avatar
+    Avatar,
+    Spinner
 } from '@heroui/react'
 import ReactMarkdown from 'react-markdown'
 import { classIcon, roleIcon } from '@/utils/classIcon'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { GroupIcon } from '@/assets/Icons'
 interface AddonsDetailsProps {
     addon: any
@@ -25,6 +26,34 @@ interface AddonsDetailsProps {
 }
 
 const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
+    const [markdownContent, setMarkdownContent] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        if (isOpen && addon.md) {
+            setIsLoading(true)
+            fetch(addon.md)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch markdown content.')
+                    }
+                    return response.text()
+                })
+                .then((data) => {
+                    setMarkdownContent(data)
+                })
+                .catch((error) => {
+                    console.error('Error fetching markdown content:', error)
+                    setMarkdownContent('Failed to load content.')
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
+        } else {
+            setMarkdownContent(null)
+        }
+    }, [isOpen, addon.md])
+
     useEffect(() => {
         document.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightElement(block as HTMLElement)
@@ -120,13 +149,17 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
                             <Divider className="my-2" />
                             <h1 className="text-lg font-extrabold">Description</h1>
                             <article className="markdown-body  p-1 !bg-transparent">
-                                <ReactMarkdown
-                                    remarkPlugins={[remarkGfm]}
-                                    rehypePlugins={[rehypeRaw]}
-                                    className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md"
-                                >
-                                    {addon.md}
-                                </ReactMarkdown>
+                                {isLoading ? (
+                                    <Spinner className="items-center justify-center" />
+                                ) : (
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkGfm]}
+                                        rehypePlugins={[rehypeRaw]}
+                                        className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md"
+                                    >
+                                        {markdownContent || 'No content available.'}
+                                    </ReactMarkdown>
+                                )}
                             </article>
                         </DrawerBody>
                         <DrawerFooter>

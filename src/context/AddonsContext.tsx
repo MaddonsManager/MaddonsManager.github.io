@@ -2,6 +2,9 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AddonsDataState } from '@/types'
 
+// const jsonUrl =
+//     'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
+
 const jsonUrl =
     'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
 
@@ -30,14 +33,7 @@ const fetchAddons = async (url: string) => {
             const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.webp`
             const zipUrl = `https://github.com/PentSec/MaddonsManager/raw/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.zip`
 
-            const [md] = await Promise.all([
-                fetch(mdUrl).then((res) => {
-                    if (!res.ok) throw new Error(`Failed to fetch md for ${item.file_name}`)
-                    return res.text()
-                })
-            ])
-
-            return { ...item, md, logo: logoUrl, zip: zipUrl }
+            return { ...item, md: mdUrl, logo: logoUrl, zip: zipUrl }
         })
     )
 }
