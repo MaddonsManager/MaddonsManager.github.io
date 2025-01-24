@@ -2,9 +2,6 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AddonsDataState } from '@/types'
 
-// const jsonUrl =
-//     'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
-
 const jsonUrl =
     'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
 
@@ -29,9 +26,9 @@ const fetchAddons = async (url: string) => {
     const jsonData = await response.json()
     return Promise.all(
         jsonData.map(async (item: AddonsDataState) => {
-            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.file_name}/post.md`
-            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.webp`
-            const zipUrl = `https://github.com/PentSec/MaddonsManager/raw/refs/heads/main/API/Addons/${item.file_name}/${item.file_name}.zip`
+            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/post.md`
+            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/${item.file_name}.webp`
+            const zipUrl = `https://github.com/PentSec/MaddonsManager/raw/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/${item.file_name}.zip`
 
             return { ...item, md: mdUrl, logo: logoUrl, zip: zipUrl }
         })

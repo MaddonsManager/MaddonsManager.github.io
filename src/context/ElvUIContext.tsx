@@ -25,9 +25,9 @@ const fetchElvUIWithContent = async (url: string): Promise<StringItems[]> => {
     const jsonData = await response.json()
     return Promise.all(
         jsonData.map(async (item: StringItems) => {
-            const txtUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/${item.file_name}.txt`
-            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/${item.file_name}.webp`
-            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.file_name}/post.md`
+            const txtUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.expansion}/${item.file_name}/${item.file_name}.txt`
+            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.expansion}/${item.file_name}/${item.file_name}.webp`
+            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/ElvUI/${item.expansion}/${item.file_name}/post.md`
 
             const [content, md] = await Promise.all([
                 fetch(txtUrl).then((res) => {

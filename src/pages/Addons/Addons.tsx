@@ -54,7 +54,7 @@ const Addon = () => {
                 <SelectVersion
                     version={version}
                     setVersion={setVersion}
-                    valueType={['LichKing', 'Cataclysm', 'Pandaria']}
+                    valueType={['LichKing', 'Cataclysm', 'Pandaria', 'Vanilla', 'TBC']}
                 />
                 <Divider orientation="vertical" className="h-auto" />
 
