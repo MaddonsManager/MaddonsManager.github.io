@@ -8,12 +8,10 @@
         padding: 0px !important;
         overflow-x: hidden;
         scroll-padding-top: 64px;
-    }
-
-    :root {
         font-family: 'Poppins', sans-serif;
         line-height: 1.5;
         font-weight: 400;
+
     }
 
     .poppins-thin {
