@@ -2,8 +2,8 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AddonsDataState } from '@/types'
 
-const jsonUrl =
-    'https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Maddons.json'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/Maddons.json'
+const baseUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/Addons'
 
 interface AddonsContextValue {
     data: AddonsDataState[]
@@ -26,9 +26,9 @@ const fetchAddons = async (url: string) => {
     const jsonData = await response.json()
     return Promise.all(
         jsonData.map(async (item: AddonsDataState) => {
-            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/post.md`
-            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/${item.file_name}.webp`
-            const zipUrl = `https://github.com/PentSec/MaddonsManager/raw/refs/heads/main/API/Addons/${item.expansion}/${item.file_name}/${item.file_name}.zip`
+            const mdUrl = `${baseUrl}/${item.expansion}/${item.file_name}/post.md`
+            const logoUrl = `${baseUrl}/${item.expansion}/${item.file_name}/${item.file_name}.webp`
+            const zipUrl = `${baseUrl}/${item.expansion}/${item.file_name}/${item.file_name}.zip`
 
             return { ...item, md: mdUrl, logo: logoUrl, zip: zipUrl }
         })

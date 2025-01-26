@@ -2,7 +2,8 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { StringItems } from '@/types'
 
-const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/WeakAuras.json'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/WeakAuras.json'
+const baseUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/WeakAuras'
 
 interface WeakAurasContextValue {
     data: StringItems[]
@@ -25,15 +26,14 @@ const fetchWeakAurasWithContent = async (url: string): Promise<StringItems[]> =>
     const jsonData = await response.json()
     return Promise.all(
         jsonData.map(async (item: any) => {
-            const txtUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/WeakAuras/${item.expansion}/${item.file_name}/${item.file_name}.txt`
-            const logoUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/WeakAuras/${item.expansion}/${item.file_name}/${item.file_name}.webp`
-            const mdUrl = `https://raw.githubusercontent.com/PentSec/MaddonsManager/main/API/WeakAuras/${item.expansion}/${item.file_name}/post.md`
+            const txtUrl = `${baseUrl}/${item.expansion}/${item.file_name}/${item.file_name}.txt`
+            const logoUrl = `${baseUrl}/${item.expansion}/${item.file_name}/${item.file_name}.webp`
+            const mdUrl = `${baseUrl}/${item.expansion}/${item.file_name}/post.md`
 
-            const [content, md] = await Promise.all([
-                fetch(txtUrl).then((res) => (res.ok ? res.text() : null)),
-                fetch(mdUrl).then((res_1) => (res_1.ok ? res_1.text() : null))
+            const [content] = await Promise.all([
+                fetch(txtUrl).then((res) => (res.ok ? res.text() : null))
             ])
-            return { ...item, content, logo: logoUrl, md }
+            return { ...item, content, logo: logoUrl, md: mdUrl }
         })
     )
 }
