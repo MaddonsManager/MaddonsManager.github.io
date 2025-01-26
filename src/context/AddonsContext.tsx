@@ -2,8 +2,8 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AddonsDataState } from '@/types'
 
-const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/Maddons.json'
-const baseUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/Addons'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/Maddons.json'
+const baseUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/Addons'
 
 interface AddonsContextValue {
     data: AddonsDataState[]

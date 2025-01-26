@@ -2,8 +2,8 @@ import { createContext, useContext, FC, ReactNode } from 'react'
 import { StringItems } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 
-const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/ElvUI.json'
-const baseUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/ElvUI'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/ElvUI.json'
+const baseUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/ElvUI'
 
 interface ElvUIContextValue {
     data: StringItems[]

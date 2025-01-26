@@ -2,8 +2,8 @@ import { createContext, FC, ReactNode, useContext } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { StringItems } from '@/types'
 
-const jsonUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/WeakAuras.json'
-const baseUrl = 'https://raw.githubusercontent.com/PentSec/MaddonsManager/API/API/WeakAuras'
+const jsonUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/WeakAuras.json'
+const baseUrl = 'https://raw.githubusercontent.com/PentSec/API-MADDONS/main/API/WeakAuras'
 
 interface WeakAurasContextValue {
     data: StringItems[]
