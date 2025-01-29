@@ -149,6 +149,14 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
                             <Divider className="my-2" />
                             <h1 className="text-lg font-extrabold">Description</h1>
                             <article className="markdown-body  p-1 !bg-transparent">
+                                <div className="flex justify-center">
+                                    <Image
+                                        isBlurred
+                                        src={addon.logo}
+                                        alt={addon.title}
+                                        className="animate-levitate aspect-video"
+                                    />
+                                </div>
                                 {isLoading ? (
                                     <Spinner className="items-center justify-center" />
                                 ) : (

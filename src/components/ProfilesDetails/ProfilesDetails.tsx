@@ -61,7 +61,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
     }, [data])
 
     return (
-        <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="full">
+        <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
             <DrawerContent>
                 {(onClose) => (
                     <>
@@ -72,7 +72,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                     alt={data.author}
                                     height={60}
                                     radius="sm"
-                                    src="/logo.png"
+                                    src={data.avatar_pr_author}
                                     width={60}
                                     className="object-cover"
                                 />
@@ -134,21 +134,24 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                 </div>
                             </div>
                             <Divider className="my-2" />
-                            <div className="flex items-center justify-between">
-                                <p className=" text-white/60">95.1k Downloads - 141.9k views</p>
-                                <p className="text-sm text-gray-500">Last updated:</p>
-                                <p className="text-sm text-gray-500">version: </p>
-                            </div>
-                            <Divider className="my-2" />
                             <h2 className="text-lg font-extrabold">Description</h2>
-                            <article className="markdown-body  p-1 !bg-transparent">
+                            <article className="markdown-body p-1 !bg-transparent">
+                                <div className="flex justify-center">
+                                    <Image
+                                        isBlurred
+                                        src={data.logo}
+                                        alt={data.title}
+                                        className="animate-levitate aspect-video"
+                                    />
+                                </div>
+
                                 {isLoading ? (
                                     <Spinner className="items-center justify-center" />
                                 ) : (
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
                                         rehypePlugins={[rehypeRaw]}
-                                        className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md"
+                                        className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md dark:prose-invert prose"
                                     >
                                         {markdownContent || 'No content available.'}
                                     </ReactMarkdown>
