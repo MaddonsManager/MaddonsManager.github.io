@@ -24,69 +24,65 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
                         onPress={() => onOpenDetails(item)}
                         isFooterBlurred
                         shadow="sm"
-                        className="md:w-[850px]"
+                        className="md:w-[580px]"
                     >
                         <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap h-[260px] overflow-hidden w-full">
                             <Image
-                                removeWrapper
+                                isBlurred
                                 alt={item.title}
                                 radius="sm"
                                 src={item.logo}
                                 className="w-full h-full flex-none object-cover object-center md:w-72"
                             />
-                            <div className="px-4 py-5 flex-1">
-                                <div className="flex items-center justify-between mb-2">
-                                    <h3 className="text-large font-medium">{item.title}</h3>
-                                    <Tooltip content="Copy to clipboard" color="primary">
-                                        <Button
-                                            color="primary"
-                                            radius="sm"
-                                            size="sm"
-                                            variant="shadow"
-                                            onPress={() =>
-                                                handleCopyToClipboard(
-                                                    item.content || 'Dont have content'
-                                                )
-                                            }
-                                        >
-                                            Copy
-                                        </Button>
-                                    </Tooltip>
+                            <div className="px-4 py-5 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div className="flex items-center justify-between mb-2">
+                                        <h3 className="text-large font-medium">{item.title}</h3>
+                                        <Tooltip content="Copy to clipboard" color="primary">
+                                            <Button
+                                                color="primary"
+                                                radius="sm"
+                                                size="sm"
+                                                variant="shadow"
+                                                onPress={() =>
+                                                    handleCopyToClipboard(
+                                                        item.content || 'Dont have content'
+                                                    )
+                                                }
+                                            >
+                                                Copy
+                                            </Button>
+                                        </Tooltip>
+                                    </div>
+                                    <Divider />
+                                    <h3 className="text-small text-default-400 mt-2">
+                                        By: {item.author}
+                                    </h3>
                                 </div>
-                                <Divider />
-                                <div className="flex flex-wrap gap-3 pt-2 text-small text-default-400">
-                                    <p>
-                                        {item.description.length > 150
-                                            ? `${item.description.substring(0, 200)}...`
-                                            : item.description}
-                                    </p>
-                                </div>
-                                <div className="flex flex-col">
-                                    <div className="flex flex-wrap gap-3 pt-2">
+                                <div className="flex flex-col pt-2 text-small text-default-400">
+                                    <div className="flex flex-wrap">
                                         {item.class.map &&
                                             item.class.map((className: string, index: number) => (
-                                                <Chip
-                                                    avatar={
-                                                        className === 'All' ? (
-                                                            <GroupIcon />
-                                                        ) : (
-                                                            <Avatar
-                                                                name={item.title}
-                                                                src={classIcon[className]}
-                                                            />
-                                                        )
-                                                    }
+                                                <div
                                                     key={index}
-                                                    color="warning"
-                                                    variant="dot"
-                                                    size="sm"
-                                                    className="my-1"
+                                                    className="bg-default-300/20 rounded-md h-auto w-auto gap-2 p-1 m-1 transition-transform duration-300 ease-in-out hover:translate-x-2"
                                                 >
-                                                    {className}
-                                                </Chip>
+                                                    {className === 'All' ? (
+                                                        <GroupIcon
+                                                            className="w-3 h-3 text-tiny"
+                                                            aria-label="All classes"
+                                                        />
+                                                    ) : (
+                                                        <Avatar
+                                                            key={index}
+                                                            name={className}
+                                                            src={classIcon[className]}
+                                                            className="w-5 h-5 text-tiny"
+                                                        />
+                                                    )}
+                                                </div>
                                             ))}
                                     </div>
-
                                     <div className="flex flex-wrap gap-2">
                                         {item.tags.map((tag: string, index: number) => (
                                             <Chip

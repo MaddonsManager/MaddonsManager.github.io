@@ -101,7 +101,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                                         <GroupIcon />
                                                     ) : (
                                                         <Avatar
-                                                            name={data.title}
+                                                            name={className}
                                                             src={classIcon[className]}
                                                         />
                                                     )
@@ -120,12 +120,7 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                         <p className="font-bold">Roles:</p>
                                         {data.roles.map((role: string, index: number) => (
                                             <Chip
-                                                avatar={
-                                                    <Avatar
-                                                        name={data.title}
-                                                        src={roleIcon[role]}
-                                                    />
-                                                }
+                                                avatar={<Avatar name={role} src={roleIcon[role]} />}
                                                 key={index}
                                                 color="warning"
                                                 variant="dot"
