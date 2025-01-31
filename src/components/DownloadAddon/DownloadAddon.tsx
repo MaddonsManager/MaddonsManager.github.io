@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAddonsContext } from '@/context/AddonsContext'
-import { Snippet, Link } from "@heroui/react"
+import { Snippet, Link } from '@heroui/react'
 import { AddonsData } from '@/types'
 
 const DownloadAddon = () => {
@@ -12,11 +12,11 @@ const DownloadAddon = () => {
     useEffect(() => {
         if (data) {
             const allAddons = Object.values(data).flat()
-            const foundAddon = allAddons.find((addon) => addon.name === addonName)
+            const foundAddon = allAddons.find((addon) => addon.title === addonName)
 
             if (foundAddon) {
                 setAddon(foundAddon)
-                const downloadUrl = `${foundAddon.githubRepo}/archive/refs/heads/main.zip`
+                const downloadUrl = `${foundAddon.zip}`
                 window.location.href = downloadUrl
             }
         }
@@ -28,11 +28,10 @@ const DownloadAddon = () => {
         <div className="flex flex-shrink gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md border-small border-primary-200/40 bg-background/60 shadow-medium backdrop-blur-md mb-2">
             <span>
                 Downloading Addon {addonName}... Click this if you are not redirected.{' '}
-                <Link href={addon.githubRepo} isExternal showAnchorIcon>
+                <Link href={addon.zip} isExternal showAnchorIcon>
                     Click here
                 </Link>{' '}
-                or copy this link{' '}
-                <Snippet>{`${addon.githubRepo}/archive/refs/heads/main.zip`}</Snippet>
+                or copy this link <Snippet>{addon.zip}</Snippet>
             </span>
         </div>
     )

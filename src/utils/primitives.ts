@@ -10,6 +10,8 @@ export const title = tv({
             cyan: 'from-[#00b7fa] to-[#01cfea]',
             green: 'from-[#6FEE8D] to-[#17c964]',
             pink: 'from-[#FF72E1] to-[#F54C7A]',
+            brown: 'from-[#F5E0B8] to-[#E6B878]',
+            darkgreen: 'from-[#00B36F] to-[#00A651]',
             foreground: 'dark:from-[#FFFFFF] dark:to-[#4B4B4B]'
         },
         size: {
@@ -26,7 +28,17 @@ export const title = tv({
     },
     compoundVariants: [
         {
-            color: ['violet', 'yellow', 'blue', 'cyan', 'green', 'pink', 'foreground'],
+            color: [
+                'violet',
+                'yellow',
+                'blue',
+                'cyan',
+                'green',
+                'pink',
+                'foreground',
+                'brown',
+                'darkgreen'
+            ],
             class: 'bg-clip-text text-transparent bg-gradient-to-b'
         }
     ]
@@ -42,6 +54,8 @@ export const normal = tv({
             cyan: 'from-[#00b7fa] to-[#01cfea]',
             green: 'from-[#6FEE8D] to-[#17c964]',
             pink: 'from-[#FF72E1] to-[#F54C7A]',
+            brown: 'from-[#F5E0B8] to-[#E6B878]',
+            darkgreen: 'from-[#00B36F] to-[#00A651]',
             foreground: 'dark:from-[#FFFFFF] dark:to-[#4B4B4B]'
         },
         size: {
@@ -52,7 +66,17 @@ export const normal = tv({
     },
     compoundVariants: [
         {
-            color: ['violet', 'yellow', 'blue', 'cyan', 'green', 'pink', 'foreground'],
+            color: [
+                'violet',
+                'yellow',
+                'blue',
+                'cyan',
+                'green',
+                'pink',
+                'foreground',
+                'brown',
+                'darkgreen'
+            ],
             class: 'bg-clip-text text-transparent bg-gradient-to-b'
         }
     ]

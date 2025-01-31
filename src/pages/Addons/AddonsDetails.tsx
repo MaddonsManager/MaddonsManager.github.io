@@ -1,31 +1,31 @@
+import { GroupIcon } from '@/assets/Icons'
+import { classIcon, roleIcon } from '@/utils/classIcon'
 import {
+    Avatar,
+    Button,
+    Chip,
+    Divider,
     Drawer,
     DrawerBody,
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
-    Button,
-    Divider,
-    Chip,
-    Link,
     Image,
-    Avatar,
     Spinner
 } from '@heroui/react'
-import ReactMarkdown from 'react-markdown'
-import { classIcon, roleIcon } from '@/utils/classIcon'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
 import { useEffect, useState } from 'react'
-import { GroupIcon } from '@/assets/Icons'
+import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
 interface AddonsDetailsProps {
     addon: any
     isOpen: boolean
     onOpenChange: (isOpen: boolean) => void
+    handleSharedAddon: (addon: string) => void
 }
 
-const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
+const AddonsDetails = ({ addon, isOpen, onOpenChange, handleSharedAddon }: AddonsDetailsProps) => {
     const [markdownContent, setMarkdownContent] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -171,10 +171,14 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange }: AddonsDetailsProps) => {
                             </article>
                         </DrawerBody>
                         <DrawerFooter>
-                            <Link size="sm" isExternal showAnchorIcon href="">
-                                GitHub Link
-                            </Link>
-                            <Button color="primary" onPress={onClose}>
+                            <Button
+                                size="sm"
+                                color="primary"
+                                onPress={() => handleSharedAddon(addon.title)}
+                            >
+                                Shared Download Link
+                            </Button>
+                            <Button size="sm" color="danger" onPress={onClose}>
                                 Close
                             </Button>
                         </DrawerFooter>

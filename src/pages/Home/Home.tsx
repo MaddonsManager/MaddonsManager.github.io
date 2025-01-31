@@ -1,12 +1,9 @@
-import { button as buttonStyles, Link, Image, Card, CardBody } from '@heroui/react'
 import { DownloadIcon, GithubIcon } from '@/assets/Icons'
-import { title, subtitle, normal } from '@/utils/primitives'
-import { contentHome } from './contentHome'
 import { siteConfig } from '@/config/dirConfit'
+import { normal, subtitle, title } from '@/utils/primitives'
+import { button as buttonStyles, Card, CardBody, Image, Link } from '@heroui/react'
+import { contentHome } from './contentHome'
 import PREVIEW_IMG from '/preview.webp'
-import LK_IMG from '/lk.webp'
-import CAT_IMG from '/cata.webp'
-import PANDA_IMG from '/panda.webp'
 
 function Home() {
     return (
@@ -18,17 +15,33 @@ function Home() {
                 <div className={subtitle()}>
                     <p>{contentHome.maddonsDescriptionWebpage}</p>
                     <strong>
-                        <img src={LK_IMG} alt="Lichking" className="inline w-12 h-6 m-2" />
+                        <img src="/vanilla.webp" alt="Vanilla" className="inline w-12 h-6 m-2" />
+                        <span className={normal({ color: 'brown' })}>Vanilla 1.12</span>
+                    </strong>
+                    ,{' '}
+                    <strong>
+                        <img
+                            src="/tbc.webp"
+                            alt="The burning crusade"
+                            className="inline w-12 h-6 m-2"
+                        />
+                        <span className={normal({ color: 'darkgreen' })}>
+                            Burning Crusade 2.4.3
+                        </span>
+                    </strong>
+                    ,{' '}
+                    <strong>
+                        <img src="/lk.webp" alt="Lichking" className="inline w-12 h-6 m-2" />
                         <span className={normal({ color: 'blue' })}>Lichking 3.3.5</span>
                     </strong>
                     ,{' '}
                     <strong>
-                        <img src={CAT_IMG} alt="Cataclysm" className="inline w-12 h-6 m-2" />
+                        <img src="/cata.webp" alt="Cataclysm" className="inline w-12 h-6 m-2" />
                         <span className={normal({ color: 'yellow' })}>Cataclysm 4.3.4</span>
                     </strong>
                     ,{' '}
                     <strong>
-                        <img src={PANDA_IMG} alt="Pandarian" className="inline w-12 h-6 m-2" />
+                        <img src="/panda.webp" alt="Pandarian" className="inline w-12 h-6 m-2" />
                         <span className={normal({ color: 'green' })}>Pandarian 5.4.8</span>
                     </strong>
                     .

@@ -1,24 +1,24 @@
-import { useElvUIContext } from '@/context/ElvUIContext'
-import useFilteredData from '@/hook/useFilteredData'
 import {
+    Header,
+    ItemList,
+    ProfilesDetails,
     Searcher,
     SelectType,
-    SelectVersion,
-    ProfilesDetails,
-    ItemList,
-    Header
+    SelectVersion
 } from '@/components'
+import { useElvUIContext } from '@/context/ElvUIContext'
+import useFilteredData from '@/hook/useFilteredData'
 
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 import { Divider, Snippet, Spinner, useDisclosure } from '@heroui/react'
 import { ScrollShadow } from '@heroui/scroll-shadow'
-import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const ElvUI = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure()
     const { data, isPending, error } = useElvUIContext()
     const {
         searchTerm,
-        setSearchTerm,
+        handleSearchChange,
         version,
         setVersion,
         selectedType,
@@ -32,8 +32,6 @@ const ElvUI = () => {
     } = useFilteredData(data, onOpen)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
 
-    console.log(data)
-
     return (
         <div className="layer">
             <Header data={data} />
@@ -43,7 +41,7 @@ const ElvUI = () => {
             <div className="bg-inputs">
                 <Searcher
                     searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
+                    setSearchTerm={handleSearchChange}
                     valueName={data.map((item) => item.title)}
                 />
                 <Divider orientation="vertical" className="h-auto" />

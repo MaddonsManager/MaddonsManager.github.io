@@ -1,8 +1,8 @@
-import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
-import { Home, Notes, Addons, WeakAuras, ElvUI, Guides, Post } from '@/pages'
-import { RoutesNotFound, DownloadAddon } from '@/components'
-import { AnimatePresence, motion } from 'framer-motion'
+import { DownloadAddon, RoutesNotFound } from '@/components'
 import { useSEO } from '@/hook/useSEO'
+import { Addons, ElvUI, Guides, Home, Notes, Post, WeakAuras } from '@/pages'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 const AppRoutes = () => {
     useSEO()

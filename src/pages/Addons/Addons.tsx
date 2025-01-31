@@ -1,30 +1,33 @@
+import { DownloadIcon, SharedIcon } from '@/assets/Icons'
+import { Header, Searcher, SelectType, SelectVersion } from '@/components'
 import { useAddonsContext } from '@/context/AddonsContext'
+import useFilterAddons from '@/hook/useFilterAddons'
+import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
+import { expansionIcon } from '@/utils/expansionIcon'
 import {
+    Avatar,
+    Button,
     Card,
     CardBody,
     CardFooter,
-    Button,
-    Image,
-    Tooltip,
-    Spinner,
-    useDisclosure,
+    CardHeader,
+    Chip,
     Divider,
-    Snippet
+    Image,
+    Snippet,
+    Spinner,
+    Tooltip,
+    useDisclosure
 } from '@heroui/react'
 import { ScrollShadow } from '@heroui/scroll-shadow'
 import { AnimatePresence } from 'framer-motion'
-import { DownloadIcon } from '@/assets/Icons'
-import { Searcher, SelectType, SelectVersion, Header } from '@/components'
 import AddonsDetails from './AddonsDetails'
-import useFilterAddons from '@/hook/useFilterAddons'
-import useInfiniteScrollLogic from '@/hook/useInfiniteScrollLogic'
 
 const Addon = () => {
     const { isOpen, onOpenChange } = useDisclosure()
     const { data, isPending, error } = useAddonsContext()
     const {
         searchTerm,
-        setSearchTerm,
         version,
         setVersion,
         selectedType,
@@ -33,29 +36,31 @@ const Addon = () => {
         combinedData,
         addonTypes,
         handleOpenDetails,
-        isSelectAddon
+        handleSharedAddon,
+        isSelectAddon,
+        handleSearchChange
     } = useFilterAddons(data, onOpenChange)
     const { itemToShow, loadRef, scrollerRef, hasMore } = useInfiniteScrollLogic(filteredData)
-    console.log(combinedData)
 
     return (
         <div className="">
             <Header data={data} />
             {isSelectAddon && (
-                <AddonsDetails addon={isSelectAddon} isOpen={isOpen} onOpenChange={onOpenChange} />
+                <AddonsDetails
+                    addon={isSelectAddon}
+                    isOpen={isOpen}
+                    onOpenChange={onOpenChange}
+                    handleSharedAddon={handleSharedAddon}
+                />
             )}
             <div className="bg-inputs">
                 <Searcher
                     searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    valueName={data.map((item) => item.title)}
+                    setSearchTerm={handleSearchChange}
+                    valueName={filteredData.map((item) => item.title)}
                 />
                 <Divider orientation="vertical" className="h-auto" />
-                <SelectVersion
-                    version={version}
-                    setVersion={setVersion}
-                    valueType={['Lichking', 'Cataclysm', 'Pandaria', 'Vanilla', 'TBC']}
-                />
+                <SelectVersion version={version} setVersion={setVersion} valueType={combinedData} />
                 <Divider orientation="vertical" className="h-auto" />
 
                 <SelectType
@@ -93,27 +98,90 @@ const Addon = () => {
                                             onPress={() => handleOpenDetails(addon)}
                                             isFooterBlurred
                                             shadow="sm"
-                                            className="w-[200px] h-[200px]"
+                                            className="md:w-[380px] md:min-h-[446px]"
                                         >
-                                            <CardBody className="p-0 overflow-visible">
+                                            <CardHeader className="relative bg-transparent h-[200px] mb-6">
                                                 <Image
                                                     removeWrapper
                                                     alt={addon.title}
                                                     radius="sm"
                                                     src={addon.logo}
-                                                    className="object-fill w-full h-full"
+                                                    className="absolute inset-0 h-full w-full object-cover object-center"
                                                 />
-                                            </CardBody>
-                                            <CardFooter className="absolute bottom-0 z-10 flex items-center justify-between bg-black/70 border-t-1 border-default-600 dark:border-default-100">
-                                                <div className="flex flex-col items-start flex-grow gap-1">
-                                                    <p className="font-bold md:text-sm xl:text-md">
-                                                        {addon.title}
-                                                    </p>
-                                                    <p className="text-tiny text-white/60">
-                                                        {addon.expansion.join(', ')}
-                                                    </p>
+                                                <Avatar
+                                                    isBordered
+                                                    color="default"
+                                                    alt={addon.pr_author}
+                                                    src={addon.avatar_pr_author}
+                                                    size="lg"
+                                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-16 z-10"
+                                                />
+                                                <Chip
+                                                    className="translate-y-24 z-10"
+                                                    color="warning"
+                                                    variant="faded"
+                                                    radius="sm"
+                                                >
+                                                    @{addon.pr_author}
+                                                </Chip>
+                                            </CardHeader>
+                                            <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap md:h-full">
+                                                <div className="px-4 flex-1">
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <h3 className="text-large font-medium">
+                                                            {addon.title}
+                                                        </h3>
+                                                    </div>
                                                 </div>
-                                                <div className="flex items-end justify-end flex-grow gap-2">
+                                            </CardBody>
+                                            <Divider />
+                                            <CardFooter className="flex justify-between items-center">
+                                                <div className="flex flex-col gap-2">
+                                                    {addon.expansion.map &&
+                                                        addon.expansion.map(
+                                                            (expansion: string, index: number) => (
+                                                                <div
+                                                                    key={index}
+                                                                    className="flex flex-col bg-default-300/20 rounded-md h-auto w-auto gap-2 p-1 m-1 transition-transform duration-300 ease-in-out hover:translate-x-2 content-center items-center justify-center"
+                                                                >
+                                                                    <Image
+                                                                        key={index}
+                                                                        alt={expansion}
+                                                                        src={
+                                                                            expansionIcon[expansion]
+                                                                        }
+                                                                        className="w-8 h-8 text-tiny"
+                                                                    />
+                                                                    <p className="text-tiny text-default-600/60">
+                                                                        <span>{expansion}</span>
+                                                                    </p>
+                                                                </div>
+                                                            )
+                                                        )}
+                                                </div>
+                                                <div className="flex gap-2 justify-center items-center">
+                                                    <Tooltip
+                                                        content="Shared download url"
+                                                        color="primary"
+                                                    >
+                                                        <Button
+                                                            isIconOnly
+                                                            color="primary"
+                                                            radius="full"
+                                                            size="sm"
+                                                            variant="shadow"
+                                                            onPress={() =>
+                                                                handleSharedAddon(addon.title)
+                                                            }
+                                                        >
+                                                            <SharedIcon
+                                                                size={20}
+                                                                width={20}
+                                                                height={20}
+                                                            />
+                                                        </Button>
+                                                    </Tooltip>
+
                                                     <Tooltip content="Download it" color="primary">
                                                         <Button
                                                             isIconOnly

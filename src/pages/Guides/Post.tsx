@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
 import { siteConfig } from '@/config/dirConfit'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
 import hljs from 'highlight.js'
+import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { Link, useParams } from 'react-router-dom'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
 
 const postCache: { [key: string]: string } = {}
 
@@ -36,7 +36,7 @@ const Post = () => {
                 setMarkdown(text)
             })
             .catch((error) => {
-                console.error('Error al cargar el archivo Markdown:', error)
+                console.error('error to fetch post:', error)
                 setError(error.message)
             })
             .finally(() => setIsLoading(false))
@@ -49,11 +49,11 @@ const Post = () => {
     }, [markdown])
 
     if (isPending) {
-        return <div>Cargando...</div>
+        return <div>Loading...</div>
     }
 
     if (error) {
-        return <div>Error al cargar el post: {error}</div>
+        return <div>Error to fetch post: {error}</div>
     }
 
     return (

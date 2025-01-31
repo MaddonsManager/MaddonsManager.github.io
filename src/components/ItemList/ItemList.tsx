@@ -1,13 +1,13 @@
-import { Card, CardBody, Image, Button, Tooltip, Chip, Avatar, Divider } from '@heroui/react'
-import { AnimatePresence } from 'framer-motion'
-import { classIcon } from '@/utils/classIcon'
 import { FlameIcon, GroupIcon } from '@/assets/Icons'
 import { StringItems } from '@/types'
+import { classIcon } from '@/utils/classIcon'
+import { Avatar, Button, Card, CardBody, Chip, Divider, Image, Tooltip } from '@heroui/react'
+import { AnimatePresence } from 'framer-motion'
 
 interface ItemListProps {
     data: StringItems[]
     onOpenDetails: (item: StringItems) => void
-    handleCopyToClipboard: (content: string) => void
+    handleCopyToClipboard: (item: StringItems, content: string) => void
     itemToShow: number
 }
 
@@ -46,7 +46,8 @@ const ItemList = ({ data, onOpenDetails, handleCopyToClipboard, itemToShow }: It
                                                 variant="shadow"
                                                 onPress={() =>
                                                     handleCopyToClipboard(
-                                                        item.content || 'Dont have content'
+                                                        item,
+                                                        item.content || 'No content available'
                                                     )
                                                 }
                                             >

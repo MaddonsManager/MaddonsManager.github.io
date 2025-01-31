@@ -24,6 +24,7 @@ export type AddonsData = {
     avatar_pr_author: string
     roles: string[]
     class: string[]
+    zip: string
 }
 
 export type AddonsDataState = {

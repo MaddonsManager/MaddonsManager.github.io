@@ -1,5 +1,5 @@
-import { Autocomplete, AutocompleteItem } from '@heroui/react'
 import { SearchIcon } from '@/assets/Icons'
+import { Autocomplete, AutocompleteItem } from '@heroui/react'
 
 interface SearcherProps {
     searchTerm: string | null
