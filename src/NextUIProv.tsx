@@ -9,7 +9,7 @@ export function NextUIProv({ children }: { children: ReactNode }) {
 
     return (
         <HeroUIProvider navigate={navigate} useHref={useHref} className="bg-backgrounds-main">
-            <div className="bg-backgrounds-main-shadows" />
+            <div className="dark:bg-backgrounds-main-shadows" />
             <div ref={lightRef} className="light-effect" />
             {children}
         </HeroUIProvider>
