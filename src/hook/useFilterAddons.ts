@@ -37,7 +37,8 @@ const useFilterAddons = (data: AddonsDataState[], onOpen: () => void) => {
     }
 
     const handleSharedAddon = (addon: string) => {
-        const link = `${window.location.origin}/#/download/${addon}`
+        const formattedAddon = encodeURIComponent(addon)
+        const link = `${window.location.origin}/#/download/${formattedAddon}`
         navigator.clipboard.writeText(link)
         toast.success(`Copied ${addon} to clipboard`)
     }
