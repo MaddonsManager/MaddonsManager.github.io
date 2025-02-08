@@ -1,4 +1,3 @@
-import { SearchIcon } from '@/assets/Icons'
 import { Autocomplete, AutocompleteItem } from '@heroui/react'
 
 interface SearcherProps {
@@ -15,7 +14,6 @@ const SearchAddon = ({ searchTerm, setSearchTerm, valueName }: SearcherProps) =>
             selectedKey={searchTerm}
             onSelectionChange={(key) => setSearchTerm(key as string)}
             defaultItems={valueName.map((title) => ({ key: title, title: title }))}
-            startContent={<SearchIcon className="w-4 h-4" />}
             size="md"
             className="w-full font-bold text-default-900"
             variant="underlined"
