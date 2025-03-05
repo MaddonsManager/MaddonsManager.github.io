@@ -9,7 +9,7 @@ import {
     NavbarItem
 } from '@heroui/react'
 
-export default function Resources({ items }: { items: { label: string; href: string }[] }) {
+export default function Macros({ items }: { items: { label: string; href: string }[] }) {
     return (
         <NavbarContent className="hidden sm:flex" justify="center">
             <Dropdown className="bg-inputs mt-3">
@@ -21,11 +21,11 @@ export default function Resources({ items }: { items: { label: string; href: str
                             color="foreground"
                             anchorIcon={<CircleChevronDownIcon className="w-4 h-4 ml-1" />}
                         >
-                            Addons
+                            Macros
                         </Link>
                     </DropdownTrigger>
                 </NavbarItem>
-                <DropdownMenu aria-label="Addons" className="w-auto">
+                <DropdownMenu aria-label="Macros" className="w-auto">
                     {items.map((item, index) => (
                         <DropdownItem
                             key={index}

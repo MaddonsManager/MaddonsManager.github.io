@@ -1,4 +1,5 @@
 import { GroupIcon } from '@/assets/Icons'
+import { Markdown } from '@/components'
 import { classIcon, roleIcon } from '@/utils/classIcon'
 import {
     Avatar,
@@ -13,11 +14,7 @@ import {
     Image,
     Spinner
 } from '@heroui/react'
-import hljs from 'highlight.js'
 import { useEffect, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
-import remarkGfm from 'remark-gfm'
 interface AddonsDetailsProps {
     addon: any
     isOpen: boolean
@@ -54,11 +51,6 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange, handleSharedAddon }: Addon
         }
     }, [isOpen, addon.md])
 
-    useEffect(() => {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block as HTMLElement)
-        })
-    }, [addon])
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
             <DrawerContent>
@@ -148,7 +140,7 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange, handleSharedAddon }: Addon
                             </div>
                             <Divider className="my-2" />
                             <h1 className="text-lg font-extrabold">Description</h1>
-                            <article className="markdown-body  p-1 !bg-transparent">
+                            <div className="markdown-body  p-1 !bg-transparent">
                                 <div className="flex justify-center">
                                     <Image
                                         isBlurred
@@ -160,15 +152,12 @@ const AddonsDetails = ({ addon, isOpen, onOpenChange, handleSharedAddon }: Addon
                                 {isLoading ? (
                                     <Spinner className="items-center justify-center" />
                                 ) : (
-                                    <ReactMarkdown
-                                        remarkPlugins={[remarkGfm]}
-                                        rehypePlugins={[rehypeRaw]}
+                                    <Markdown
+                                        content={markdownContent || 'No content available.'}
                                         className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md"
-                                    >
-                                        {markdownContent || 'No content available.'}
-                                    </ReactMarkdown>
+                                    />
                                 )}
-                            </article>
+                            </div>
                         </DrawerBody>
                         <DrawerFooter>
                             <Button

@@ -1,6 +1,6 @@
 import { DownloadAddon, RoutesNotFound } from '@/components'
 import { useSEO } from '@/hook/useSEO'
-import { Addons, ElvUI, Guides, Home, Notes, Post, WeakAuras } from '@/pages'
+import { Addons, ElvUI, Guides, Home, Notes, Post, Vmacros, WeakAuras } from '@/pages'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
@@ -23,6 +23,8 @@ const AppRoutes = () => {
                     <Route path="/download/:addonName" element={<DownloadAddon />} />
                     <Route path="/WeakAuras" element={<WeakAuras />} />
                     <Route path="/ElvUI" element={<ElvUI />} />
+                    <Route path="/Vmacros" element={<Vmacros />} />
+                    {/* <Route path="/Vmacros/:filePath?" element={<Vmacros />} /> */}
                     <Route path="/Guides" element={<Guides />} />
                     <Route path="/Post/:folder" element={<Post />} />
                     <Route path="/Notes/*" element={<Notes />} />

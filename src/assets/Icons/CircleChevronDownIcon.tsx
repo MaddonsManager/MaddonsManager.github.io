@@ -1,7 +1,7 @@
+import { IconSvgProps } from '@/types'
 import type { Transition } from 'framer-motion'
 import { motion, useAnimation } from 'framer-motion'
 import { FC } from 'react'
-import { IconSvgProps } from '@/types'
 
 const defaultTransition: Transition = {
     times: [0, 0.4, 1],
@@ -13,7 +13,7 @@ const CircleChevronDownIcon: FC<IconSvgProps> = ({ size = 24, width, height, ...
 
     return (
         <div
-            className="cursor-pointer select-none p-2 hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center"
+            className="cursor-pointer select-none hover:bg-accent rounded-md transition-colors duration-200 flex items-center justify-center"
             onMouseEnter={() => controls.start('animate')}
             onMouseLeave={() => controls.start('normal')}
         >

@@ -1,5 +1,11 @@
 import '@/assets/css/main.css'
-import { AddonsProvider, BlogPostProvider, ElvUIProvider, WeakAurasProvider } from '@/context'
+import {
+    AddonsProvider,
+    BlogPostProvider,
+    ElvUIProvider,
+    RepoProvider,
+    WeakAurasProvider
+} from '@/context'
 import Layout from '@/Layout/Layout'
 import { NextUIProv } from '@/NextUIProv'
 import queryClient from '@/utils/QueryClient'
@@ -37,7 +43,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <WeakAurasProvider>
                         <ElvUIProvider>
                             <BlogPostProvider>
-                                <Layout />
+                                <RepoProvider>
+                                    <Layout />
+                                </RepoProvider>
                             </BlogPostProvider>
                         </ElvUIProvider>
                     </WeakAurasProvider>

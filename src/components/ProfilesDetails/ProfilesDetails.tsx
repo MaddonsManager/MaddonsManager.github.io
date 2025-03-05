@@ -1,23 +1,20 @@
+import { GroupIcon } from '@/assets/Icons'
+import { Markdown } from '@/components'
+import { classIcon, roleIcon } from '@/utils/classIcon'
 import {
+    Avatar,
+    Button,
+    Chip,
+    Divider,
     Drawer,
     DrawerBody,
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
-    Button,
-    Divider,
-    Chip,
     Image,
-    Avatar,
     Spinner
 } from '@heroui/react'
-import ReactMarkdown from 'react-markdown'
-import { classIcon, roleIcon } from '@/utils/classIcon'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
-import hljs from 'highlight.js'
 import { useEffect, useState } from 'react'
-import { GroupIcon } from '@/assets/Icons'
 
 interface ProfilesDetailsProps {
     data: any
@@ -53,12 +50,6 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
             setMarkdownContent(null)
         }
     }, [isOpen, data.md])
-
-    useEffect(() => {
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightElement(block as HTMLElement)
-        })
-    }, [data])
 
     return (
         <Drawer isOpen={isOpen} onOpenChange={onOpenChange} size="5xl">
@@ -135,7 +126,9 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                             </div>
                             <Divider className="my-2" />
                             <h2 className="text-lg font-extrabold">Description</h2>
-                            <article className="markdown-body p-1 !bg-transparent">
+                            <div className="markdown-body p-1 !bg-transparent">
+                                {' '}
+                                {/* Usamos un div en lugar de article */}
                                 <div className="flex justify-center">
                                     <Image
                                         isBlurred
@@ -144,19 +137,15 @@ const ProfilesDetails = ({ data, isOpen, onOpenChange }: ProfilesDetailsProps) =
                                         className="animate-levitate aspect-video"
                                     />
                                 </div>
-
                                 {isLoading ? (
                                     <Spinner className="items-center justify-center" />
                                 ) : (
-                                    <ReactMarkdown
-                                        remarkPlugins={[remarkGfm]}
-                                        rehypePlugins={[rehypeRaw]}
+                                    <Markdown
+                                        content={markdownContent || 'No content available.'}
                                         className="text-default-900 gap-4 w-auto p-4 mx-auto flex-col lg:flex-row rounded-md dark:prose-invert prose"
-                                    >
-                                        {markdownContent || 'No content available.'}
-                                    </ReactMarkdown>
+                                    />
                                 )}
-                            </article>
+                            </div>
                         </DrawerBody>
                         <DrawerFooter>
                             <Button color="primary" onPress={onClose}>

@@ -1,8 +1,10 @@
 import { heroui } from '@heroui/react'
-import defaultTheme from 'tailwindcss/defaultTheme'
 import { commonColors } from '@heroui/theme/colors'
+import typography from '@tailwindcss/typography'
+import scrollbar from 'tailwind-scrollbar'
+import defaultTheme from 'tailwindcss/defaultTheme'
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: [
         './app/**/*.{js,ts,jsx,tsx,mdx}',
         './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -355,5 +357,5 @@ module.exports = {
             })
         }
     },
-    plugins: [heroui(), require('@tailwindcss/typography')]
+    plugins: [heroui(), typography(), scrollbar()]
 }

@@ -1,22 +1,23 @@
-import { useState } from 'react'
 import {
+    Avatar,
+    Chip,
+    Divider,
+    Link,
     Navbar,
     NavbarBrand,
     NavbarContent,
     NavbarItem,
-    NavbarMenuToggle,
     NavbarMenu,
     NavbarMenuItem,
-    Link,
-    Chip,
-    Divider,
-    Avatar
-} from "@heroui/react"
+    NavbarMenuToggle
+} from '@heroui/react'
+import { useState } from 'react'
 
 import { DiscordIcon, GithubIcon, TwitterIcon } from '@/assets/Icons'
-import { useLocation } from 'react-router-dom'
-import { siteConfig } from '@/config/dirConfit'
 import { ThemeSwitch } from '@/components'
+import { siteConfig } from '@/config/dirConfit'
+import { useLocation } from 'react-router-dom'
+import Macros from './Macros'
 import Resources from './Resources'
 
 export default function AppNavbar() {
@@ -81,6 +82,7 @@ export default function AppNavbar() {
                         </NavbarItem>
                     ))}
                     <Resources items={siteConfig.navItemsAccord} />
+                    <Macros items={siteConfig.navMacrosAccord} />
                     <Link
                         href="https://maddonsmanager.featurebase.app/"
                         isExternal

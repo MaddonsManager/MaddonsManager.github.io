@@ -22,6 +22,12 @@ export const siteConfig = {
             href: '/Guides'
         }
     ],
+    navMacrosAccord: [
+        {
+            label: 'Vanilla Macros',
+            href: '/Vmacros'
+        }
+    ],
     navItems: [
         {
             label: 'Home',
