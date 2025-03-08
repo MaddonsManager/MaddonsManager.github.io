@@ -1,14 +1,9 @@
+import { RepoItem } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 import { createContext, FC, ReactNode, useContext } from 'react'
 
 const GITHUB_API_URL =
     'https://api.github.com/repos/MaddonsManager/Vanilla-Macros/git/trees/master?recursive=1'
-
-interface RepoItem {
-    path: string
-    type: 'blob' | 'tree'
-    mdContent: string | null
-}
 
 interface RepoContextValue {
     repoTree: RepoItem[]

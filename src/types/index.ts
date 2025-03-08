@@ -78,3 +78,9 @@ export type StringItems = {
     class: string[]
     content: string
 }
+
+export type RepoItem = {
+    path: string
+    type: 'blob' | 'tree'
+    mdContent: string | null
+}
