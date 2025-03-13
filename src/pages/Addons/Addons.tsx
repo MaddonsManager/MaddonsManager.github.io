@@ -90,7 +90,7 @@ const Addon = () => {
                             <AnimatePresence>
                                 {filteredData.slice(0, itemToShow).map((addon) => (
                                     <div
-                                        key={`${addon.title}-${addon.file_name}`}
+                                    key={`${addon.title}-${addon.file_name}-${addon.expansion.join('-')}`}
                                         className="transition-transform duration-300 ease-in-out hover:scale-105"
                                     >
                                         <Card
