@@ -51,7 +51,7 @@ export const RepoProvider: FC<{ children: ReactNode }> = ({ children }) => {
         queryFn: () => fetchRepoTree(GITHUB_API_URL),
         refetchOnWindowFocus: false
     })
-    console.log(data)
+
     return (
         <RepoContext.Provider
             value={{ repoTree: data ?? [], isPending, error: error?.message || null }}
